@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CtgVO {
-    private int ctgId;
+public class CategoryVO {
+    private Long ctgId;
     private String ctgName;
 
 }
