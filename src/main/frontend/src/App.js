@@ -1,15 +1,20 @@
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          안녕하시렵니까
-        </p>
-      </header>
-    </div>
-  );
+    const [msg, setMsg] = useState([]);
+    useEffect(() => {
+        fetch("/api/hello")
+            .then((res) => {return res.json();})
+            .then((data) => {setMsg(data);})
+    }, []);
+    return (
+        <div className="App">
+            <header className="App-header">
+                <ul>
+                    {msg.map((content, idx) => <li key={`${idx} - ${content}`}>{content}</li>)}
+                </ul>
+            </header>
+        </div>
+    );
 }
-
 export default App;
