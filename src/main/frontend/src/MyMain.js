@@ -6,10 +6,10 @@ const MyMain = () => {
     <div>
       <MyHeader />
       <div className="main_img1_box">
-        <img src="/image/mainimg1.png" />
+        <img src="/assets/mainimg1.png" />
       </div>
       <div className="main_img2_box">
-        <img src="/image/mainimg2.png" />
+        <img src="/assets/mainimg2.png" />
       </div>
       <MyFooter />
     </div>
