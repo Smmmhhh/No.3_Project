@@ -5,5 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface AddressMapper {
-    Long getAddressId(AddressVO addressvo);
+    Long getAddressId(AddressVO addressVO);
+
 }

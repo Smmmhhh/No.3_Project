@@ -1,14 +1,11 @@
 package com.treemarket.tree.controller;
 
-import com.treemarket.tree.domain.AddressVO;
 import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.service.AddressService;
 import com.treemarket.tree.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,17 +20,10 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody UserVO userVO) {
 
-        // 사용자에게 입력받은 주소 문자열 저장
         String inputAddress = userVO.getUserAddress();
 
-        // 입력 주소 문자열 파싱해서 AddressVO로 변환
-        AddressVO addressVO = parseAddress(inputAddress);
-        if(addressVO == null){
-            return ResponseEntity.badRequest().body("잘못된 주소 형식");
-        }
+        Long addressId = addressService.getAddressId(inputAddress);
 
-        //주소Id 검색
-        Long addressId = addressService.getAddressId(addressVO);
         if(addressId == null){
             return ResponseEntity.badRequest().body("주소를 찾을 수 없음");
         }
@@ -56,38 +46,44 @@ public class UserController {
         }
     }
 
-    // 주소 파싱 메소드
-    private AddressVO parseAddress(String inputAddress){
-
-        AddressVO addressVO = new AddressVO();
-
-        // 공백으로 주소 분리
-        String[] addressParts = inputAddress.split(" ");
-
-        if(addressParts.length == 3){
-            addressVO.setSido(addressParts[0]);
-            addressVO.setSigungu(addressParts[1]);
-            addressVO.setTown(addressParts[2]);
-        } else if(addressParts.length == 4){
-            addressVO.setSido(addressParts[0]);
-            addressVO.setSigungu(addressParts[1] + " " + addressParts[2]);
-            addressVO.setTown(addressParts[3]);
-        } else{
-            return null;
-        }
-
-        return addressVO;
-    }
-
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody UserVO userVO, HttpSession session) {    //로그인 페이지
 
-        Long id = userService.login(userVO.getUserId(), userVO.getUserPw());
+        UserVO user = userService.login(userVO.getUserId(), userVO.getUserPw());
 
-        if (id == null) {
+        if (user == null) {
             return ResponseEntity.badRequest().body("로그인 실패");
         }
-        session.setAttribute("userId", id);
+        session.setAttribute("userInfo", user);
+
         return ResponseEntity.ok().body("로그인 성공");
     }
+
+    @PutMapping("/mypage/users/{userNo}")
+    public ResponseEntity<Object> editUser(@PathVariable Long userNo, @RequestBody UserVO userVO){
+        UserVO user = userService.getUserNo(userNo);
+
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        String inputAddress = userVO.getUserAddress();
+
+        Long addressId = addressService.getAddressId(inputAddress);
+        if(addressId == null){
+            return ResponseEntity.badRequest().body("주소를 찾을 수 없음");
+        }
+        user.setUserAddress(String.valueOf(addressId));
+
+        user.setUserPw(userVO.getUserPw());
+        user.setUserName(userVO.getUserName());
+        user.setUserNickname(userVO.getUserNickname());
+        user.setUserPhoneno(userVO.getUserPhoneno());
+
+        userService.editUser(user);
+
+        return ResponseEntity.ok("사용자 정보 업데이트 성공");
+
+    }
+
 }
