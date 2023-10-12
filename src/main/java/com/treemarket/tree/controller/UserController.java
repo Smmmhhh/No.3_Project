@@ -59,4 +59,31 @@ public class UserController {
         return ResponseEntity.ok().body("로그인 성공");
     }
 
+    @PutMapping("/mypage/users/{userNo}")
+    public ResponseEntity<Object> editUser(@PathVariable Long userNo, @RequestBody UserVO userVO){
+        UserVO user = userService.getUserNo(userNo);
+
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        String inputAddress = userVO.getUserAddress();
+
+        Long addressId = addressService.getAddressId(inputAddress);
+        if(addressId == null){
+            return ResponseEntity.badRequest().body("주소를 찾을 수 없음");
+        }
+        user.setUserAddress(String.valueOf(addressId));
+
+        user.setUserPw(userVO.getUserPw());
+        user.setUserName(userVO.getUserName());
+        user.setUserNickname(userVO.getUserNickname());
+        user.setUserPhoneno(userVO.getUserPhoneno());
+
+        userService.editUser(user);
+
+        return ResponseEntity.ok("사용자 정보 업데이트 성공");
+
+    }
+
 }
