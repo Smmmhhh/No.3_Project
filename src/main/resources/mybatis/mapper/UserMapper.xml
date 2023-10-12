@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.treemarket.tree.mapper.UserMapper">
+
+    <select id="getUserId" resultType="com.treemarket.tree.domain.UserVO">
+        SELECT * FROM usertbl WHERE userid = #{userId}
+    </select>
+
+    <select id="getUserNickname" resultType="com.treemarket.tree.domain.UserVO">
+        SELECT * FROM usertbl WHERE usernickname = #{userNickname}
+    </select>
+
+    <select id="saveUser" parameterType="com.treemarket.tree.domain.UserVO">
+        INSERT INTO usertbl VALUES
+            (USERTBL_SEQ.NEXTVAL, #{userId}, #{userAddress}, #{userPw}, #{userName},
+             #{userNickname},#{userPhoneno}, 1)
+    </select>
+
+</mapper>
