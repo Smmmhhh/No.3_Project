@@ -7,7 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
     UserVO getUserId(String userId);
     UserVO getUserNickname(String userNickname);
-    void saveUser(UserVO uservo);
+    void saveUser(UserVO userVO);
+
+    UserVO getUserNo(Long userNo);
+    void editUser(UserVO userVO);
 
 
 }

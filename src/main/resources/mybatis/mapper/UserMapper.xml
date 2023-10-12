@@ -6,17 +6,27 @@
 <mapper namespace="com.treemarket.tree.mapper.UserMapper">
 
     <select id="getUserId" resultType="com.treemarket.tree.domain.UserVO">
-        SELECT * FROM usertbl WHERE userid = #{userId}
+        SELECT * FROM usertbl WHERE userid = #{userId} AND uservalidity = 1
     </select>
 
     <select id="getUserNickname" resultType="com.treemarket.tree.domain.UserVO">
-        SELECT * FROM usertbl WHERE usernickname = #{userNickname}
+        SELECT * FROM usertbl WHERE usernickname = #{userNickname} AND uservalidity = 1
     </select>
 
-    <select id="saveUser" parameterType="com.treemarket.tree.domain.UserVO">
+    <insert id="saveUser" parameterType="com.treemarket.tree.domain.UserVO">
         INSERT INTO usertbl VALUES
             (USERTBL_SEQ.NEXTVAL, #{userId}, #{userAddress}, #{userPw}, #{userName},
              #{userNickname},#{userPhoneno}, 1)
+    </insert>
+
+    <select id="getUserNo" resultType="com.treemarket.tree.domain.UserVO">
+        SELECT * FROM usertbl WHERE userno = #{userNo} AND uservalidity = 1
     </select>
+
+    <update id="editUser" parameterType="com.treemarket.tree.domain.UserVO">
+        UPDATE usertbl SET useraddress = #{userAdress}, userpw = #{userPw}, username = #{userName},
+                           usernickname = #{userNickname}, userphoneno = #{userPhoneno}
+        WHERE userid = #{userId}
+    </update>
 
 </mapper>

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.treemarket.tree.mapper.AddressMapper">
 
-    <select id="getAddresId" parameterType="com.treemarket.tree.domain.AddressVO" resultType="long">
+    <select id="getAddressId" parameterType="com.treemarket.tree.domain.AddressVO" resultType="long">
         SELECT addressid FROM addresstbl WHERE sido = #{sido} AND sigungu = #{sigungu} AND town = #{town}
     </select>
 
