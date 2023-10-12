@@ -3,21 +3,23 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 const Login = () => {
   return (
-    <login>
-      <img src="/assets/logo.png" />
+    <div className="login">
+      <img className="login_main_img" src="/assets/logo.png" />
       <div className="login_form">
         <div className="login_left">
-          <img src="/assets/loginpanda.png" />
+          <img className="login_left_img" src="/assets/loginpanda.png" />
         </div>
         <div className="login_right">
           <h1>SIGN IN</h1>
           <input type="text" placeholder="아이디" />
           <input type="password" placeholder="비밀번호" />
-          <Link to="/register">아직 회원이 아니신가요?</Link>
+          <Link to="/register">
+            <p>아직 회원이 아니신가요?</p>
+          </Link>
           <button>LOGIN</button>
         </div>
       </div>
-    </login>
+    </div>
   );
 };
 export default Login;
