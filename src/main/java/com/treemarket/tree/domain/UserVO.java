@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 public class UserVO {
     private Long userNo;
     private String userId;
-    //private Long userAddressId;
     private String userAddress;
     private String userPw;
     private String userName;
