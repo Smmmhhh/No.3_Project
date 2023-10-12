@@ -1,8 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import "./Login.css";
-import Login from "./Login";
-import Register from "./Components/Register/Register";
+import Login from "./Login/Login";
+import Register from "./Register/Register";
 import Product from "./Product";
 import MyMain from "./MyMain";
 
