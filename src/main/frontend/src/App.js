@@ -1,21 +1,20 @@
-import './App.css';
-import React, {useState, useEffect} from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Login from "./Login";
+import Register from "./Register";
+import Product from "./Product";
+import MyMain from "./MyMain";
 
 function App() {
-    const [msg, setMsg] = useState([]);
-    useEffect(() => {
-        fetch("/api/hello")
-            .then((res) => {return res.json();})
-            .then((data) => {setMsg(data);})
-    }, []);
-    return (
-        <div className="App">
-            <header className="App-header">
-                <ul>
-                    {msg.map((content, idx) => <li key={`${idx} - ${content}`}>{content}</li>)}
-                </ul>
-            </header>
-        </div>
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MyMain />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/product" element={<Product />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 export default App;
