@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "NPSfontBold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SUITE-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2")
+    format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
 header {
   display: flex;
   flex-direction: row;
@@ -20,13 +34,16 @@ header {
   text-align: center;
   margin-left: 10%;
 }
+
 .category {
+  font-family: "NPSfontBold";
   text-align: center;
   width: 100%;
   color: black;
   font-size: 150%;
   text-decoration-line: none;
   padding-top: 32%;
+  margin-top: 22px;
 }
 /* 검색창과 검색 버튼 */
 .search {
@@ -56,6 +73,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  font-family: "SUITE-Regular";
 }
 /* 메인페이지 이미지 */
 .main_img1_box {
