@@ -9,22 +9,33 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService{
 
     @Autowired
-    private UserMapper usermapper;
+    private UserMapper userMapper;
 
     @Override
-    public boolean checkId(String userId) {
-        UserVO checkUser = usermapper.checkId(userId);
+    public boolean getUserId(String userId) {
+        UserVO checkUser = userMapper.getUserId(userId);
         return checkUser == null;
     }
 
     @Override
-    public boolean checkNickname(String userNickname) {
-        UserVO checkNickname = usermapper.checkNickname(userNickname);
+    public boolean getUserNickname(String userNickname) {
+        UserVO checkNickname = userMapper.getUserNickname(userNickname);
         return checkNickname == null;
     }
 
     @Override
     public void saveUser(UserVO uservo) {
-        usermapper.saveUser(uservo);
+        userMapper.saveUser(uservo);
+    }
+
+    @Override
+    public Long login(String id, String passWord) {
+        UserVO userVO = userMapper.getUserId(id);
+        if(userVO == null){
+            return null;
+        }
+        if(userVO.getUserPw().equals(passWord))
+            return userVO.getUserNo();
+        return null;
     }
 }

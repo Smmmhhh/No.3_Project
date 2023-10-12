@@ -5,11 +5,11 @@
 
 <mapper namespace="com.treemarket.tree.mapper.UserMapper">
 
-    <select id="checkId" resultType="com.treemarket.tree.domain.UserVO">
+    <select id="getUserId" resultType="com.treemarket.tree.domain.UserVO">
         SELECT * FROM usertbl WHERE userid = #{userId}
     </select>
 
-    <select id="checkNickname" resultType="com.treemarket.tree.domain.UserVO">
+    <select id="getUserNickname" resultType="com.treemarket.tree.domain.UserVO">
         SELECT * FROM usertbl WHERE usernickname = #{userNickname}
     </select>
 
