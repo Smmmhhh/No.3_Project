@@ -13,10 +13,10 @@
         SELECT * FROM usertbl WHERE usernickname = #{userNickname}
     </select>
 
-    <select id="saveUser" parameterType="com.treemarket.tree.domain.UserVO">
+    <insert id="saveUser" parameterType="com.treemarket.tree.domain.UserVO">
         INSERT INTO usertbl VALUES
             (USERTBL_SEQ.NEXTVAL, #{userId}, #{userAddress}, #{userPw}, #{userName},
              #{userNickname},#{userPhoneno}, 1)
-    </select>
+    </insert>
 
 </mapper>
