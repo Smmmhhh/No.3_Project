@@ -68,7 +68,6 @@ public class UserController {
         }
 
         String inputAddress = userVO.getUserAddress();
-
         Long addressId = addressService.getAddressId(inputAddress);
         if(addressId == null){
             return ResponseEntity.badRequest().body("주소를 찾을 수 없음");

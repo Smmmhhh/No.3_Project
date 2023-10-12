@@ -15,6 +15,6 @@ public class ProductpostVO {
     private String title;
     private Long price;
     private String details;
-    private String imgage;
+    private String image;
     private Long productstatus;
 }
