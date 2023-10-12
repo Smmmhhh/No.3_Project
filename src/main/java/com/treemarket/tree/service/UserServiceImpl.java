@@ -24,18 +24,28 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void saveUser(UserVO uservo) {
-        userMapper.saveUser(uservo);
+    public void saveUser(UserVO userVO) {
+        userMapper.saveUser(userVO);
     }
 
     @Override
-    public Long login(String id, String passWord) {
+    public UserVO login(String id, String passWord) {
         UserVO userVO = userMapper.getUserId(id);
         if(userVO == null){
             return null;
         }
         if(userVO.getUserPw().equals(passWord))
-            return userVO.getUserNo();
+            return userVO;
         return null;
+    }
+
+    @Override
+    public UserVO getUserNo(Long userNo) {
+        return userMapper.getUserNo(userNo);
+    }
+
+    @Override
+    public void editUser(UserVO userVO) {
+        userMapper.editUser(userVO);
     }
 }
