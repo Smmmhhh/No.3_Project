@@ -1,0 +1,72 @@
+.mypage {
+  text-align: center;
+  width: 100%;
+}
+hr {
+  width: 80%;
+  color: #e8e8e8;
+}
+.first_section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.first_section_left {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 30%;
+  justify-content: start;
+  margin-left: 100px;
+}
+.first_section_left h2 {
+  margin: auto;
+  margin-left: -6%;
+}
+.profile {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+.grade {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  margin-left: -5%;
+}
+.first_section_right {
+  width: 20%;
+  margin-right: 100px;
+}
+.first_section_right p {
+  font-size: large;
+  color: black;
+  margin: auto;
+  margin-top: 33px;
+}
+.second_section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 70%;
+  margin: auto;
+}
+.mypage_img {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 100px;
+  margin: auto;
+  background-color: #d9f3bc;
+}
+.second_section img {
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  margin-top: 11px;
+}
+.second_section button {
+  margin: 15px 0;
+  border: none;
+  background-color: white;
+}
