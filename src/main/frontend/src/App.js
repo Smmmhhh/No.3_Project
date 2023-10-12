@@ -1,14 +1,20 @@
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Login from "./Login";
+import Register from "./Register";
+import Product from "./Product";
+import MyMain from "./MyMain";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          안녕하시렵니까
-        </p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MyMain />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/product" element={<Product />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
