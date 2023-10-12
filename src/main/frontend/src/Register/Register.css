@@ -1,11 +1,135 @@
+/* FONT */
+@font-face {
+  font-family: "NPSfontBold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SUITE-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SUITE-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
 .register {
+  font-family: "SUITE-Regular";
 }
 
 /* logo image */
 .top_logo {
   text-align: center;
+  margin-bottom: 20px;
 }
 .top_logo img {
   width: 17%;
 }
-/* 회원가입 창 */
+
+/* 회원가입 창 register_inputs */
+.register_inputs {
+  text-align: center;
+  display: flex;
+  width: 80%;
+  margin: auto;
+}
+
+/* 회원 정보 입력 창 register_left */
+.register_left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #afd485;
+  width: 50%;
+  height: 700px;
+  border-radius: 20px 0 0 20px;
+  margin: auto;
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* 회원가입 글씨 title */
+.title {
+  font-family: "SUITE-Bold";
+  font-size: 35px;
+  letter-spacing: 20px;
+  margin-top: 10px;
+  margin-bottom: 35px;
+}
+
+.register_left button {
+  cursor: pointer;
+  width: 80%;
+  height: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: #47ad49;
+  color: white;
+  font-size: 20px;
+}
+
+/* 회원 정보 입력 요소 item */
+.item {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.item label {
+  font-size: 16px;
+  text-align: start;
+  margin-bottom: 8px;
+}
+
+.item input {
+  border: none;
+  border-radius: 7px;
+  background-color: #d9f3bc;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.info_section {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 35px;
+}
+
+/* 주소 검색 address */
+#address {
+  cursor: pointer;
+  margin-bottom: 10px;
+  background-color: #47ad49;
+  color: white;
+  border-radius: 20px;
+  width: 45%;
+}
+
+/* 회원 가입 로고 register_right*/
+.register_right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  background-color: #5c925e;
+  width: 50%;
+  height: 700px;
+  border-radius: 0 20px 20px 0;
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+}
