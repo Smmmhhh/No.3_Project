@@ -17,10 +17,11 @@ const Register = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    console.log({ ...formData });
   };
+
   // JOIN 버튼 클릭
   const handleRegister = () => {
+    console.log({ ...formData });
     fetch("/register", {
       method: "POST",
       headers: {
@@ -31,6 +32,7 @@ const Register = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data); // 서버 응답 확인
+
         // 원하는 동작 수행 (예: 리다이렉트, 메시지 표시)
       })
       .catch((error) => {
@@ -48,7 +50,7 @@ const Register = () => {
       <div className="register_inputs">
         <section className="register_left">
           <p className="title">회원가입</p>
-          <form className="register_form">
+          <form className="register_form" method="post">
             <div className="info_section">
               <div className="item">
                 <label htmlFor="userId">아이디</label>
