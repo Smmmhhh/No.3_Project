@@ -12,5 +12,6 @@ public interface UserMapper {
     UserVO getUserNo(Long userNo);
     void editUser(UserVO userVO);
 
+    void removeUser(Long userNo);
 
 }
