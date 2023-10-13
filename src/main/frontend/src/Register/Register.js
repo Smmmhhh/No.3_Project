@@ -1,10 +1,17 @@
+import React, { useState } from "react";
 import "./Register.css";
+import { Link } from "react-router-dom";
+import PostCode from "../Components/PostCode";
 
 const Register = () => {
+  // 글자 수 제한
+
   return (
     <div className="register">
       <div className="top_logo">
-        <img src="/assets/logo.png" />
+        <Link to={"/"}>
+          <img src="/assets/logo.png" />
+        </Link>
       </div>
       <div className="register_inputs">
         <section className="register_left">
@@ -18,10 +25,11 @@ const Register = () => {
                   name="id"
                   id="id"
                   placeholder="5~20자"
-                  minLength={5}
-                  maxLength={20}
+                  onChange={() => {}}
                   required
                 />
+
+                <p className="check_id_txt">이미 존재하는 아이디입니다.</p>
               </div>
 
               <div className="item">
@@ -55,6 +63,9 @@ const Register = () => {
                   placeholder="2~10자"
                   required
                 />
+                <p className="check_nickname_txt">
+                  이미 존재하는 닉네임입니다.
+                </p>
               </div>
             </div>
             <div className="info_section">
@@ -67,6 +78,7 @@ const Register = () => {
                   placeholder="5~20자"
                   required
                 />
+                <p className="check_pwd_txt">비밀번호가 일치하지 않습니다.</p>
               </div>
               <div className="item">
                 <label for="phone">전화번호</label>
@@ -83,13 +95,7 @@ const Register = () => {
             <div className="info_section">
               <div className="item">
                 <label for="mytown">동네 설정</label>
-                <input
-                  id="address"
-                  type="button"
-                  onClick={() => {}}
-                  value={"주소 검색"}
-                />
-                <input type="text" placeholder="나무시 죽순구 새싹동" />
+                <PostCode />
               </div>
               <div className="item">
                 <input type="hidden"></input>

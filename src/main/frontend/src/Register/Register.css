@@ -62,10 +62,10 @@
   font-family: "SUITE-Bold";
   font-size: 35px;
   letter-spacing: 20px;
-  margin-top: 10px;
   margin-bottom: 35px;
 }
 
+/* 회원가입 버튼 */
 .register_left button {
   cursor: pointer;
   width: 80%;
@@ -92,6 +92,10 @@
   margin-bottom: 8px;
 }
 
+.item p {
+  color: red;
+}
+
 .item input {
   border: none;
   border-radius: 7px;
@@ -108,7 +112,7 @@
 .info_section {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 35px;
+  margin-bottom: 15px;
 }
 
 /* 주소 검색 address */
@@ -121,7 +125,7 @@
   width: 45%;
 }
 
-/* 회원 가입 로고 register_right*/
+/* 회원 가입 오른쪽 화면 register_right*/
 .register_right {
   display: flex;
   flex-direction: column;
@@ -132,4 +136,16 @@
   height: 700px;
   border-radius: 0 20px 20px 0;
   box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* 중복 확인 및 비밀번호 확인 텍스트  */
+.check_id_txt {
+  /* display: none; */
+}
+
+.check_nickname_txt {
+  display: none;
+}
+.check_pwd_txt {
+  display: none;
 }
