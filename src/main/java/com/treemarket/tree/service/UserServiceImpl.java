@@ -1,6 +1,7 @@
 package com.treemarket.tree.service;
 
 import com.treemarket.tree.domain.UserVO;
+import com.treemarket.tree.dto.User.EditResponse;
 import com.treemarket.tree.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,25 +13,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public boolean getUserId(String userId) {
-        UserVO checkUser = userMapper.getUserId(userId);
-        return checkUser == null;
-    }
-
-    @Override
-    public boolean getUserNickname(String userNickname) {
-        UserVO checkNickname = userMapper.getUserNickname(userNickname);
-        return checkNickname == null;
-    }
-
-    @Override
-    public void saveUser(UserVO userVO) {
-        userMapper.saveUser(userVO);
-    }
-
-    @Override
     public UserVO login(String id, String passWord) {
-        UserVO userVO = userMapper.getUserId(id);
+        UserVO userVO = userMapper.findUserByUserId(id);
         if (userVO == null) {
             return null;
         }
@@ -40,13 +24,36 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVO getUserNo(Long userNo) {
-        return userMapper.getUserNo(userNo);
+    public boolean checkId(String userId) {
+        UserVO userVO = userMapper.findUserByUserId(userId);
+        return userVO == null;
     }
 
     @Override
-    public void editUser(UserVO userVO) {
-        userMapper.editUser(userVO);
+    public boolean checkNickname(String userId) {
+        UserVO userVO = userMapper.findUserByUserNickname(userId);
+        return userVO == null;
+    }
+
+    @Override
+    public UserVO findUserByUserId(String userId) {
+        return userMapper.findUserByUserId(userId);
+    }
+
+    @Override
+    public UserVO findUserByUserNo(Long userNo) {
+        return userMapper.findUserByUserNo(userNo);
+    }
+
+
+    @Override
+    public void saveUser(UserVO userVO) {
+        userMapper.saveUser(userVO);
+    }
+
+    @Override
+    public void editUser(EditResponse editResponse) {
+        userMapper.editUser(editResponse);
     }
 
     @Override
