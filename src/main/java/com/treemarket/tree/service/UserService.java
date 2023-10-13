@@ -10,4 +10,6 @@ public interface UserService {
     UserVO login(String id, String passWord);
     UserVO getUserNo(Long userNo);
     void editUser(UserVO userVO);
+    void removeUser(Long userNo);
+
 }

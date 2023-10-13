@@ -17,6 +17,7 @@ public class TreeApplication {
 		SpringApplication.run(TreeApplication.class, args);
 	}
 
+
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
@@ -27,5 +28,6 @@ public class TreeApplication {
 
 		return sessionFactory.getObject();
 	}
-
+		//.xml 형태의 모든 파일을 받기때문에 배열로 받는다.
+		// 만약 한가지만 받으면 배열로[] 받을 필요가 없다.
 }

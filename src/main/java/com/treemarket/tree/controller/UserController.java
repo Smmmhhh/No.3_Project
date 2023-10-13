@@ -85,4 +85,9 @@ public class UserController {
 
     }
 
+    @DeleteMapping("/mypage/users/{userNo}")
+    public ResponseEntity<Object> removeUser(@PathVariable Long userNo){
+        userService.removeUser(userNo);
+        return ResponseEntity.ok("사용자 탈퇴 완료");
+    }
 }

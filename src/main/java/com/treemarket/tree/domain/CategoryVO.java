@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class CategoryVO {
     private Long ctgId;
     private String ctgName;
-
 }
