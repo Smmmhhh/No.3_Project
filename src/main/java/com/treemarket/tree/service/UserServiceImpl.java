@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -31,10 +31,10 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserVO login(String id, String passWord) {
         UserVO userVO = userMapper.getUserId(id);
-        if(userVO == null){
+        if (userVO == null) {
             return null;
         }
-        if(userVO.getUserPw().equals(passWord))
+        if (userVO.getUserPw().equals(passWord))
             return userVO;
         return null;
     }
@@ -47,5 +47,10 @@ public class UserServiceImpl implements UserService{
     @Override
     public void editUser(UserVO userVO) {
         userMapper.editUser(userVO);
+    }
+
+    @Override
+    public void removeUser(Long userNo) {
+        userMapper.removeUser(userNo);
     }
 }

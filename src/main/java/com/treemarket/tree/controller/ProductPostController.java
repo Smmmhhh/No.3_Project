@@ -2,17 +2,14 @@ package com.treemarket.tree.controller;
 
 import com.treemarket.tree.domain.ProductpostVO;
 import com.treemarket.tree.service.AddressService;
+
 import com.treemarket.tree.service.CategoryService;
 import com.treemarket.tree.service.ProductPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/mypage/*")
 public class ProductPostController {
 
     @Autowired
@@ -20,17 +17,31 @@ public class ProductPostController {
     @Autowired
     private AddressService addressService;
     @Autowired
-    private CategoryService categoryService;
+    CategoryService categoryService;
 
-    @PostMapping("/products")
+/*    @GetMapping("/ctg/{ctgName}")
+    public ResponseEntity<String> ctgTest (@PathVariable String ctgName) {
+        String name = "전자기기";
+
+        System.out.println(categoryService.getCtgId(name));
+*//*        System.out.println("찾아" + categoryService.getCtgId(ctgName).getCtgId());*//*
+        return ResponseEntity.ok(ctgName);
+    }*/
+
+
+    @PostMapping("/mypage/products")
     public ResponseEntity<ProductpostVO> createPost(@RequestBody ProductpostVO productpostVO) {
-        long cthId = categoryService.getCtgId(String.valueOf(productpostVO.getCtgId()));
-        productpostVO.setCtgId(cthId);  //카테고리를 키값으로 수정
 
-        long addressId = 0;
+        int ctg = categoryService.getCtgId(productpostVO.getCtgId());
+
+/*        System.out.println("찾자" + ctg.getCtgName());
+        System.out.println("찾자" + ctg.getCtgId());*/
+
+        String inputAddress = productpostVO.getAddressId();
+        Long addressId = addressService.getAddressId(inputAddress);
+        productpostVO.setAddressId(String.valueOf(addressId));  //주소를 키값으로 수정
 
         productPostService.savePost(productpostVO);
         return ResponseEntity.ok(productpostVO);
     }
-
 }

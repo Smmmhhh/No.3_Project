@@ -1,6 +1,5 @@
 package com.treemarket.tree.service;
 
-import com.treemarket.tree.domain.CategoryVO;
 import com.treemarket.tree.domain.ProductpostVO;
 import com.treemarket.tree.mapper.ProductPostMapper;
 import org.springframework.beans.factory.annotation.Autowired;

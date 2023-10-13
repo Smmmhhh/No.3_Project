@@ -29,4 +29,9 @@
         WHERE userid = #{userId}
     </update>
 
+    <update id="removeUser" parameterType="Long">
+        UPDATE usertbl SET uservalidity = 0 WHERE userno = #{userNo}
+    </update>
+
+
 </mapper>

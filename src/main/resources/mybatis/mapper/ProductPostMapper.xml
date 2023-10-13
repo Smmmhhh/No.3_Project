@@ -7,9 +7,7 @@
 
     <insert id="savePost" parameterType="com.treemarket.tree.domain.ProductpostVO">
         INSERT INTO productPosttbl VALUES
-            (productPosttbl_SEQ.NEXTVAL, #{ctgID}, #{userNo}, #{addressID}, #{title},
-             #{price},#{details},#{image}, 1)
+            (productPosttbl_seq.NEXTVAL, #{ctgId}, #{userNo}, #{addressId}, #{title}, #{price},#{details},#{image}, 1)
     </insert>
-
 
 </mapper>

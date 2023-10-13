@@ -3,6 +3,7 @@ package com.treemarket.tree.mapper;
 import com.treemarket.tree.domain.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 
+
 @Mapper
 public interface UserMapper {
     UserVO getUserId(String userId);
@@ -12,5 +13,6 @@ public interface UserMapper {
     UserVO getUserNo(Long userNo);
     void editUser(UserVO userVO);
 
+    void removeUser(Long userNo);
 
 }
