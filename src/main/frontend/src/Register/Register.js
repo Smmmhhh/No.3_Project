@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import "./Register.css";
-import DaumPostcode from "react-daum-postcode";
-
-// $ npm install react-daum-postcode
+import { Link } from "react-router-dom";
+import PostCode from "../Components/PostCode";
 
 const Register = () => {
-  const [openPostcode, setOpenPostCode] = useState(false);
-  const handlePostCodeBtn = {
-    // 버튼 클릭 이벤트
-  };
+  // 글자 수 제한
 
   return (
     <div className="register">
       <div className="top_logo">
-        <img src="/assets/logo.png" />
+        <Link to={"/"}>
+          <img src="/assets/logo.png" />
+        </Link>
       </div>
       <div className="register_inputs">
         <section className="register_left">
@@ -27,10 +25,10 @@ const Register = () => {
                   name="id"
                   id="id"
                   placeholder="5~20자"
-                  minLength={5}
-                  maxLength={20}
+                  onChange={() => {}}
                   required
                 />
+
                 <p className="check_id_txt">이미 존재하는 아이디입니다.</p>
               </div>
 
@@ -97,13 +95,7 @@ const Register = () => {
             <div className="info_section">
               <div className="item">
                 <label for="mytown">동네 설정</label>
-                <input
-                  id="address"
-                  type="button"
-                  onClick={() => {}}
-                  value={"주소 검색"}
-                />
-                <input type="text" placeholder="나무시 죽순구 새싹동" />
+                <PostCode />
               </div>
               <div className="item">
                 <input type="hidden"></input>
