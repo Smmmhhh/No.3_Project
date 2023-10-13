@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductpostVO {
     private Long postId;
-    private Long ctgId;
+    private String ctgId;
     private Long userNo;
-    private Long addressId;
+    private String addressId;
     private String title;
     private Long price;
     private String details;
