@@ -4,7 +4,39 @@ import { Link } from "react-router-dom";
 import PostCode from "../Components/PostCode";
 
 const Register = () => {
-  // 글자 수 제한
+  //input 데이터
+  const [formData, setFormData] = useState({
+    userId: "",
+    userPw: "",
+    userName: "",
+    userNickname: "",
+    userPhoneno: "",
+    userAddress: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    console.log({ ...formData });
+  };
+  // JOIN 버튼 클릭
+  const handleRegister = () => {
+    fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data); // 서버 응답 확인
+        // 원하는 동작 수행 (예: 리다이렉트, 메시지 표시)
+      })
+      .catch((error) => {
+        console.error(error); // 오류 처리
+      });
+  };
 
   return (
     <div className="register">
@@ -19,13 +51,13 @@ const Register = () => {
           <form className="register_form">
             <div className="info_section">
               <div className="item">
-                <label for="id">아이디</label>
+                <label htmlFor="userId">아이디</label>
                 <input
                   type="text"
-                  name="id"
-                  id="id"
+                  name="userId"
+                  id="userId"
                   placeholder="5~20자"
-                  onChange={() => {}}
+                  onChange={handleInputChange}
                   required
                 />
 
@@ -33,33 +65,36 @@ const Register = () => {
               </div>
 
               <div className="item">
-                <label for="name">이름</label>
+                <label htmlFor="userName">이름</label>
                 <input
                   type="text"
-                  name="name"
-                  id="name"
+                  name="userName"
+                  id="userName"
                   placeholder="2~10자"
+                  onChange={handleInputChange}
                   required
                 />
               </div>
             </div>
             <div className="info_section">
               <div className="item">
-                <label for="pwd">비밀번호</label>
+                <label htmlFor="userPw">비밀번호</label>
                 <input
                   type="password"
-                  name="pwd"
-                  id="pwd"
+                  name="userPw"
+                  id="userPw"
+                  onChange={handleInputChange}
                   placeholder="5~20자"
                   required
                 />
               </div>
               <div className="item">
-                <label for="nickname">닉네임</label>
+                <label htmlFor="userNickname">닉네임</label>
                 <input
                   type="text"
-                  name="nickname"
-                  id="nickname"
+                  name="userNickname"
+                  id="userNickname"
+                  onChange={handleInputChange}
                   placeholder="2~10자"
                   required
                 />
@@ -70,7 +105,7 @@ const Register = () => {
             </div>
             <div className="info_section">
               <div className="item">
-                <label for="checkpwd">비밀번호 확인</label>
+                <label htmlFor="checkpwd">비밀번호 확인</label>
                 <input
                   type="password"
                   name="checkpwd"
@@ -81,11 +116,12 @@ const Register = () => {
                 <p className="check_pwd_txt">비밀번호가 일치하지 않습니다.</p>
               </div>
               <div className="item">
-                <label for="phone">전화번호</label>
+                <label htmlFor="userPhoneno">전화번호</label>
                 <input
                   type="text"
-                  name="phone"
-                  id="phone"
+                  name="userPhoneno"
+                  id="userPhoneno"
+                  onChange={handleInputChange}
                   placeholder="010-xxxx-xxxx"
                   required
                 />
@@ -94,14 +130,14 @@ const Register = () => {
 
             <div className="info_section">
               <div className="item">
-                <label for="mytown">동네 설정</label>
-                <PostCode />
+                <label htmlFor="mytown">동네 설정</label>
+                <PostCode handleInputChange={handleInputChange} />
               </div>
               <div className="item">
                 <input type="hidden"></input>
               </div>
             </div>
-            <button>JOIN</button>
+            <button onClick={handleRegister}>JOIN</button>
           </form>
         </section>
         <section className="register_right">

@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useState } from "react";
 import DaumPostCode from "react-daum-postcode";
 import Modal from "react-modal";
@@ -6,7 +5,7 @@ import Modal from "react-modal";
 // $ npm install react-daum-postcode
 // $ npm install react-madal
 
-const PostCode = () => {
+const PostCode = (props) => {
   const [jibunAddress, setJibunAddress] = useState(""); // 주소 정보 문자열
   const [isOpen, setIsOpen] = useState(false); // 모달창
 
@@ -42,6 +41,7 @@ const PostCode = () => {
       <input
         type="text"
         value={jibunAddress}
+        onChange={props.handleInputChange}
         placeholder="나무시 죽순구 새싹동"
         disabled
       />
