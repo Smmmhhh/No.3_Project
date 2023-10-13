@@ -140,7 +140,7 @@
 
 /* 중복 확인 및 비밀번호 확인 텍스트  */
 .check_id_txt {
-  /* display: none; */
+  display: none;
 }
 
 .check_nickname_txt {
