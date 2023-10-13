@@ -1,8 +1,8 @@
 package com.treemarket.tree.service;
 
-import com.treemarket.tree.domain.ProductpostVO;
+import com.treemarket.tree.domain.ProductPostVO;
 
 public interface ProductPostService {
 
-    void savePost(ProductpostVO productpostVO);
+    void savePost(ProductPostVO productpostVO);
 }

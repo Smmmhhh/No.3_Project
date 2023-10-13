@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductpostVO {
+public class ProductPostVO {
     private Long postId;
-    private String ctgId;
+    private Long ctgId;
     private Long userNo;
-    private String addressId;
+    private Long addressId;
     private String title;
     private Long price;
     private String details;
     private String image;
-    private Long productstatus;
+    private Long productStatus;
 }

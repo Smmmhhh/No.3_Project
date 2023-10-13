@@ -1,6 +1,6 @@
 package com.treemarket.tree.service;
 
-import com.treemarket.tree.domain.ProductpostVO;
+import com.treemarket.tree.domain.ProductPostVO;
 import com.treemarket.tree.mapper.ProductPostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ public class ProductPostServiceImpl implements ProductPostService{
 
 
     @Override
-    public void savePost(ProductpostVO productpostVO) {
+    public void savePost(ProductPostVO productpostVO) {
         productPostMapper.savePost(productpostVO);
     }
 

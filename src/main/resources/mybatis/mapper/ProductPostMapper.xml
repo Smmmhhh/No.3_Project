@@ -5,7 +5,7 @@
 
 <mapper namespace="com.treemarket.tree.mapper.ProductPostMapper">
 
-    <insert id="savePost" parameterType="com.treemarket.tree.domain.ProductpostVO">
+    <insert id="savePost" parameterType="com.treemarket.tree.domain.ProductPostVO">
         INSERT INTO productPosttbl VALUES
             (productPosttbl_seq.NEXTVAL, #{ctgId}, #{userNo}, #{addressId}, #{title}, #{price},#{details},#{image}, 1)
     </insert>
