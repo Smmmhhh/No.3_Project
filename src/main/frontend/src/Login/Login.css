@@ -1,4 +1,30 @@
+/* FONT */
+@font-face {
+  font-family: "NPSfontBold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SUITE-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SUITE-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
 .login {
+  font-family: "SUITE-Regular";
   height: 100%;
   text-align: center;
 }
@@ -16,45 +42,67 @@
   margin: auto;
 }
 .login_left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
   background-color: #5c925e;
   width: 50%;
   height: 700px;
   border-radius: 20px 0 0 20px;
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
 }
-.login_left_img {
-  width: 65%;
-  margin-top: 115px;
-}
+
 .login_right {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  text-align: center;
+  justify-content: center;
   width: 50%;
   height: 700px;
   background-color: #afd485;
   border-radius: 0 20px 20px 0;
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
 }
 .login_right input {
   width: 70%;
   height: 30px;
-  margin: auto;
+  margin: 20px auto 20px auto;
+
+  border: none;
+  border-radius: 7px;
   background-color: #d9f3bc;
+
   border: none;
   padding: 10px;
+
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.1);
+
+  font-size: 15px;
 }
 
 .login_right p {
   text-align: start;
   margin: 80px 0 0 80px;
-  font-size: 12px;
+  font-size: 15px;
   color: black;
 }
+
+.login_right h1 {
+  font-family: "SUITE-Bold";
+  font-weight: bold;
+  font-size: 35px;
+  letter-spacing: 18px;
+}
 .login_right button {
+  cursor: pointer;
   width: 80%;
   height: 50px;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
   margin-bottom: 30px;
-  margin: auto;
+
   border: none;
   border-radius: 10px;
   background-color: #47ad49;
