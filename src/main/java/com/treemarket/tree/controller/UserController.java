@@ -35,6 +35,7 @@ public class UserController {
     }
 
     @PostMapping ("/register")
+    @RequestMapping(consumes = "application/json")
     public ResponseEntity<ApiResponse> register(@RequestBody RegisterRequest registerRequest) {
 
         String inputAddress = registerRequest.getUserAddress();
