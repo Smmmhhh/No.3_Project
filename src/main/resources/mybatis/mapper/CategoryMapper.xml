@@ -5,8 +5,8 @@
 
 <mapper namespace="com.treemarket.tree.mapper.CategoryMapper">
 
-    <select id="getCtgId" resultType="int">
-        SELECT count(*) FROM ctgtbl
+    <select id="getCtgId" resultType="Long">
+        SELECT ctgid FROM ctgtbl WHERE ctgName = #{ctgName}
     </select>
 
 

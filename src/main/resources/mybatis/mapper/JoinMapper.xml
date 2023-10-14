@@ -32,5 +32,31 @@
         LEFT JOIN purchasecomptbl c ON p.postid = c.postid
         WHERE p.userno = #{userNo} AND c.postId IS NULL
     </select>
+    
+    <select id="getAllBoards" resultType="com.treemarket.tree.dto.Productpost.res.AdminProductPostList">
+        select P.postId
+             , C.ctgName
+             , U.userId
+             , A.sido
+             , A.sigungu
+             , A.town
+             , P.title
+             , P.price
+             , P.details
+             , P.image
+             , P.creationDate
+             , P.productStatus
+        from productposttbl P
+                 LEFT OUTER JOIN usertbl U
+                                 ON P.userno = U.userno
+                 LEFT OUTER JOIN addresstbl A
+                                 ON P.addressId = A.addressId
+                 LEFT OUTER JOIN ctgtbl C
+                                 ON P.ctgid = C.ctgid
+        WHERE P.productStatus = 1
+    </select>
+
+
+
 
 </mapper>

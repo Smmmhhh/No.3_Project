@@ -1,7 +1,7 @@
 package com.treemarket.tree.service;
 
 import com.treemarket.tree.dto.Productpost.ProductMypageResponse;
-
+import com.treemarket.tree.dto.Productpost.res.AdminProductPostList;
 import java.util.List;
 
 public interface JoinService {
@@ -9,4 +9,6 @@ public interface JoinService {
     List<ProductMypageResponse> findPurchasePostByUserNo(Long userNo);
     List<ProductMypageResponse> findSalesPostByUserNo(Long userNo);
     List<ProductMypageResponse> findRegisterPostByUserNo(Long userNo);
+    
+    List<AdminProductPostList> getAllBoards();    
 }

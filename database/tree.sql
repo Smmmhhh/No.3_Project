@@ -1,48 +1,55 @@
-/* Ω√µµ ≈◊¿Ã∫Ì */
-CREATE TABLE sidotbl
+/*SELECT  'DROP TABLE ' || object_name || ' CASCADE CONSTRAINTS;'
+FROM    user_objects
+WHERE   object_type = 'TABLE';
+
+ */
+
+/*DROP TABLE MESSAGETBL CASCADE CONSTRAINTS;
+DROP TABLE CHATROOMTBL CASCADE CONSTRAINTS;
+DROP TABLE LIKETBL CASCADE CONSTRAINTS;
+DROP TABLE PURCHASECOMPTBL CASCADE CONSTRAINTS;
+DROP TABLE PRODUCTPOSTTBL CASCADE CONSTRAINTS;
+DROP TABLE CTGTBL CASCADE CONSTRAINTS;
+DROP TABLE USERTBL CASCADE CONSTRAINTS;
+DROP TABLE ADDRESSTBL CASCADE CONSTRAINTS;*/
+
+/*
+SELECT  'DROP SEQUENCE ' || object_name || ';'
+FROM    user_objects
+WHERE   object_type = 'SEQUENCE';
+*/
+
+/*DROP SEQUENCE MESSAGETBL_SEQ;
+DROP SEQUENCE CHATROOMTBL_SEQ;
+DROP SEQUENCE LIKETBL_SEQ;
+DROP SEQUENCE PURCHASECOMPTBL_SEQ;
+DROP SEQUENCE PRODUCTPOSTTBL_SEQ;
+DROP SEQUENCE CTGTBL_SEQ;
+DROP SEQUENCE USERTBL_SEQ;
+DROP SEQUENCE ADDRESSTBL_SEQ;*/
+
+/* Ï£ºÏÜå ÌÖåÏù¥Î∏î */
+CREATE TABLE addresstbl
 (
-    sidoID number PRIMARY KEY,
-    sidoName varchar2(20) NOT NULL
+    addressID number PRIMARY KEY,
+    sido varchar(40) NOT NULL,
+    sigungu varchar(40) NOT NULL,
+    town varchar(40) NOT NULL,
+    latitude number,
+    longitude number
 );
 
-CREATE SEQUENCE sidotbl_seq
-START WITH 1
-INCREMENT BY 1
-NOMAXVALUE;
+CREATE SEQUENCE addresstbl_seq
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
 
-/* Ω√±∫ ≈◊¿Ã∫Ì */
-CREATE TABLE sigungutbl
-(
-    siggID number PRIMARY KEY,
-    sidoID number REFERENCES sidotbl (sidoID) NOT NULL,
-    siggName varchar2(20) NOT NULL
-);
-
-CREATE SEQUENCE sigungutbl_seq
-START WITH 1
-INCREMENT BY 1
-NOMAXVALUE;
-
-/* µµΩ√ ≈◊¿Ã∫Ì */
-CREATE TABLE towntbl
-(
-    townID number PRIMARY KEY,
-    siggID number REFERENCES sigungutbl (siggID) NOT NULL,
-    townName varchar2(20) NOT NULL,
-    townTarget number NOT NULL
-);
-
-CREATE SEQUENCE towntbl_seq
-START WITH 1
-INCREMENT BY 1
-NOMAXVALUE;
-
-/* »∏ø¯ ≈◊¿Ã∫Ì */
+/* ÌöåÏõê ÌÖåÏù¥Î∏î */
 CREATE TABLE usertbl
 (
     userNo number PRIMARY KEY,
     userID varchar2(20) UNIQUE NOT NULL,
-    userAddress number REFERENCES towntbl(townID) NOT NULL,
+    userAddress number REFERENCES addresstbl(addressID) NOT NULL,
     userPW varchar2(20) NOT NULL,
     userName varchar2(10) NOT NULL,
     userNickname varchar2(20) NOT NULL,
@@ -51,11 +58,11 @@ CREATE TABLE usertbl
 );
 
 CREATE SEQUENCE usertbl_seq
-START WITH 1
-INCREMENT BY 1
-NOMAXVALUE;
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
 
-/* ƒ´≈◊∞Ì∏Æ ≈◊¿Ã∫Ì */
+/* Ïπ¥ÌÖåÍ≥†Î¶¨ ÌÖåÏù¥Î∏î */
 CREATE TABLE ctgtbl
 (
     ctgID number PRIMARY KEY,
@@ -63,30 +70,31 @@ CREATE TABLE ctgtbl
 );
 
 CREATE SEQUENCE ctgtbl_seq
-START WITH 1
-INCREMENT BY 1
-NOMAXVALUE;
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
 
-/* ªÛ«∞ ∞‘Ω√±€ ≈◊¿Ã∫Ì */
+/* ÏÉÅÌíà Í≤åÏãúÍ∏Ä ÌÖåÏù¥Î∏î */
 CREATE TABLE productPosttbl
 (
     postID number PRIMARY KEY,
     ctgID number REFERENCES ctgtbl(ctgID) NOT NULL,
     userNo number REFERENCES usertbl(userNo) NOT NULL,
-    townID number REFERENCES towntbl(townID) NOT NULL,
+    addressID number REFERENCES addresstbl(addressID) NOT NULL,
     title varchar2(20) NOT NULL,
     price number NOT NULL,
     details varchar2(200) NOT NULL,
     image varchar2(30),
+    creationDate date default sysdate,
     productStatus number NOT NULL
 );
 
 CREATE SEQUENCE productPosttbl_seq
-START WITH 1
-INCREMENT BY 1
-NOMAXVALUE;
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
 
-/* ∞≈∑°øœ∑· ≈◊¿Ã∫Ì */
+/* Í±∞ÎûòÏôÑÎ£å ÌÖåÏù¥Î∏î */
 CREATE TABLE purchaseComptbl
 (
     purchaseCompID number PRIMARY KEY,
@@ -96,11 +104,11 @@ CREATE TABLE purchaseComptbl
 );
 
 CREATE SEQUENCE purchaseComptbl_seq
-START WITH 1
-INCREMENT BY 1
-NOMAXVALUE;
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
 
-/* ¬Ú ≈◊¿Ã∫Ì */
+/* Ï∞ú ÌÖåÏù¥Î∏î */
 CREATE TABLE liketbl
 (
     likeID number PRIMARY KEY,
@@ -109,12 +117,12 @@ CREATE TABLE liketbl
 );
 
 CREATE SEQUENCE liketbl_seq
-START WITH 1
-INCREMENT BY 1
-NOMAXVALUE;
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
 
 
-/* √§∆√πÊ ≈◊¿Ã∫Ì */
+/* Ï±ÑÌåÖÎ∞© ÌÖåÏù¥Î∏î */
 CREATE TABLE chatroomtbl
 (
     roomID number PRIMARY KEY,
@@ -125,11 +133,11 @@ CREATE TABLE chatroomtbl
 );
 
 CREATE SEQUENCE chatroomtbl_seq
-START WITH 1
-INCREMENT BY 1
-NOMAXVALUE;
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
 
-/* ∏ﬁΩ√¡ˆ ≈◊¿Ã∫Ì */
+/* Î©îÏãúÏßÄ ÌÖåÏù¥Î∏î */
 CREATE TABLE messagetbl
 (
     messageID number PRIMARY KEY,
@@ -142,6 +150,8 @@ CREATE TABLE messagetbl
 );
 
 CREATE SEQUENCE messagetbl_seq
-START WITH 1
-INCREMENT BY 1
-NOMAXVALUE;
+    START WITH 1
+    INCREMENT BY 1
+    NOMAXVALUE;
+
+commit;
