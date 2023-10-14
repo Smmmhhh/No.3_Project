@@ -95,13 +95,13 @@ public class MyPageController {
     }
 
     @GetMapping("/register/{userNo}")
-    public ResponseEntity<ApiResponse> getRegisterPost(@PathVariable Long userNo){
+    public ResponseEntity<ApiResponse> getRegisterPost(@PathVariable Long userNo) {
         List<ProductMypageResponse> registerPosts = joinService.findRegisterPostByUserNo(userNo);
-        if(registerPosts.isEmpty()){
+        if (registerPosts.isEmpty()) {
             return ResponseEntity.ok().body(new ApiResponse(200, "물품 등록 내역 0개", registerPosts));
         }
         return ResponseEntity.ok().body(new ApiResponse(200, "물품 등록 내역 성공", registerPosts));
-
+    }
 
     @GetMapping("/productsedit/{postId}")
     public ResponseEntity<ApiResponse> getPostDetails(@PathVariable Long postId) {
@@ -153,8 +153,6 @@ public class MyPageController {
             return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("쿼리문 오류").build());
         }
     }
-
-
 
     @DeleteMapping("/products/delete/{postId}")
     public ResponseEntity<ApiResponse> deletePost(@PathVariable Long postId) {
