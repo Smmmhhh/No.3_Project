@@ -2,19 +2,18 @@ package com.treemarket.tree.controller;
 
 import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.ProductPostVO;
-import com.treemarket.tree.dto.Productpost.ProductModifyRequest;
+import com.treemarket.tree.dto.Productpost.req.ProductModifyRequest;
 import com.treemarket.tree.service.AddressService;
 import com.treemarket.tree.service.CategoryService;
 import com.treemarket.tree.service.ProductPostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/mypage/*")
-public class MypageController {
+public class MyPageController {
 
     private final ProductPostService productPostService;
     private final CategoryService categoryService;

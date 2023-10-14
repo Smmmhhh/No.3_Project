@@ -4,12 +4,15 @@ package com.treemarket.tree.controller;
 import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.AddressVO;
 import com.treemarket.tree.domain.ProductPostVO;
-import com.treemarket.tree.dto.Productpost.ProductsPostRequest;
-import com.treemarket.tree.dto.Productpost.ProductsPostResponse;
-
+import com.treemarket.tree.dto.Productpost.req.ProductsPostRequest;
+import com.treemarket.tree.dto.Productpost.res.ProductsPostResponse;
+import com.treemarket.tree.service.AddressService;
+import com.treemarket.tree.service.CategoryService;
+import com.treemarket.tree.service.ProductPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -74,6 +77,7 @@ public class ProductPostController {
         return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productPostVOList).build());
     }
 
+
     @GetMapping("/region/{sido}/{sigungu}/{town}")
     public ResponseEntity<ApiResponse> findBoardsByLocation(@PathVariable String sido,
                                                             @PathVariable String sigungu,
@@ -105,4 +109,6 @@ public class ProductPostController {
             return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("실패").build());
         return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productPostVO).build());
     }
+
+
 }
