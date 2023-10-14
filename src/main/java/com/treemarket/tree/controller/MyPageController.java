@@ -101,6 +101,7 @@ public class MyPageController {
             return ResponseEntity.ok().body(new ApiResponse(200, "물품 등록 내역 0개", registerPosts));
         }
         return ResponseEntity.ok().body(new ApiResponse(200, "물품 등록 내역 성공", registerPosts));
+
     }
 
     @GetMapping("/productsedit/{postId}")
@@ -153,6 +154,8 @@ public class MyPageController {
             return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("쿼리문 오류").build());
         }
     }
+
+
 
     @DeleteMapping("/products/delete/{postId}")
     public ResponseEntity<ApiResponse> deletePost(@PathVariable Long postId) {
