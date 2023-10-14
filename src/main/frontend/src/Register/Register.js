@@ -60,20 +60,10 @@ const Register = () => {
     fetch("/register", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("formData changed 응답확인란:", formData);
-        console.log(data); // 서버 응답 확인
-        // 원하는 동작 수행 (예: 리다이렉트, 메시지 표시)
-      })
-      .catch((error) => {
-        console.log("formData changed2 오류 란:", formData);
-        console.error(error); // 오류 처리
-      });
+    });
   };
 
   useEffect(() => {
