@@ -1,4 +1,4 @@
-package com.treemarket.tree.dto.Productpost;
+package com.treemarket.tree.dto.Productpost.res;
 import lombok.*;
 
 @Getter

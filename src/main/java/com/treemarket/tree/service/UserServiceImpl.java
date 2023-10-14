@@ -3,14 +3,15 @@ package com.treemarket.tree.service;
 import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.dto.User.EditResponse;
 import com.treemarket.tree.mapper.UserMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Override
     public UserVO login(String id, String passWord) {
