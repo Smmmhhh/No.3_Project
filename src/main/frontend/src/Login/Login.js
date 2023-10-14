@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
+
 import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
   const [logIn, setLogIn] = useState(false);
@@ -9,11 +10,13 @@ const Login = () => {
 
   const handleLogin = async () => {
     const response = await fetch("/login", {
+
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ userId, userPw }),
+
     });
 
     if (response.ok) {
@@ -21,6 +24,7 @@ const Login = () => {
       setLogIn(true);
       navigate(-1);
       alert("로그인 성공");
+
     } else {
       // 로그인 실패 시
       alert("아이디와 비밀번호를 다시 확인해주세요.");
@@ -44,6 +48,7 @@ const Login = () => {
               placeholder="아이디"
               value={userId}
               onChange={(e) => setuserId(e.target.value)}
+
             />
           </div>
           <div className="login_pw">
@@ -54,6 +59,7 @@ const Login = () => {
               placeholder="비밀번호"
               value={userPw}
               onChange={(e) => setuserPw(e.target.value)}
+
             />
           </div>
           <Link to="/register">
