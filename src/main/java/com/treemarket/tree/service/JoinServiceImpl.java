@@ -37,4 +37,5 @@ public class JoinServiceImpl implements JoinService{
     @Override
     public List<AdminProductPostList> getAllBoards() {
         return joinMapper.getAllBoards();
+    }
 }
