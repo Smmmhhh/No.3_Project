@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.treemarket.tree.mapper.ProductPostMapper">
+
+    <insert id="savePost" parameterType="com.treemarket.tree.domain.ProductPostVO">
+        INSERT INTO productPosttbl
+        VALUES
+            (productPosttbl_seq.NEXTVAL,
+             #{ctgId},
+             #{userNo},
+             #{addressId},
+             #{title},
+             #{price},
+             #{details},
+             #{image},
+             #{productStatus})
+    </insert>
+    
+    <select id="getAllBoards" resultType="com.treemarket.tree.domain.ProductPostVO">
+        SELECT * FROM productPosttbl WHERE productStatus = 1
+    </select>
+
+    <select id="findBoardsByLocation" resultType="com.treemarket.tree.domain.ProductPostVO">
+        SELECT * FROM productPosttbl WHERE addressId = #{addressId} AND productStatus = 1
+    </select>
+
+    <select id="getPostDetails" resultType="com.treemarket.tree.domain.ProductPostVO">
+        SELECT * FROM productPosttbl WHERE postid = #{postId}
+    </select>
+
+    <update id="modifyPost" parameterType="com.treemarket.tree.domain.ProductPostVO">
+    <!-- 쿼리문 작성 해야함 -->
+        UPDATE productPosttbl SET
+        ctgid=#{ctgId},
+        addressId=#{addressId},
+        title=#{title},
+        price=#{price},
+        details=#{details},
+        image=#{image}
+        WHERE postId = #{postId} AND productStatus=1
+    </update>
+
+    <update id="deletePost" parameterType="long" >
+        UPDATE productPosttbl SET productStatus = 0 WHERE postId = #{postId}
+    </update>
+
+
+</mapper>
