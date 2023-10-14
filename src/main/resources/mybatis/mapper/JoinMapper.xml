@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.treemarket.tree.mapper.JoinMapper">
+
+    <select id="findLikePostByUserNo" resultType="com.treemarket.tree.dto.Productpost.ProductMypageResponse">
+        SELECT p.postid, p.title, p.price, p.image
+        FROM productposttbl p
+        JOIN liketbl l ON p.postid = l.postid
+        WHERE l.userno = #{userNo} AND p.productstatus = 0
+    </select>
+    
+    <select id="findPurchasePostByUserNo" resultType="com.treemarket.tree.dto.Productpost.ProductMypageResponse">
+        SELECT p.postid, p.title, p.price, p.image
+        FROM productposttbl p
+        JOIN purchasecomptbl c ON p.postid = c.postid
+        WHERE c.buyerno = #{userNo}
+    </select>
+
+    <select id="findSalesPostByUserNo" resultType="com.treemarket.tree.dto.Productpost.ProductMypageResponse">
+        SELECT p.postid, p.title, p.price, p.image
+        FROM productposttbl p
+        JOIN purchasecomptbl c ON p.postid = c.postid
+        WHERE p.userno = #{userNo}
+    </select>
+
+    <select id="findRegisterPostByUserNo" resultType="com.treemarket.tree.dto.Productpost.ProductMypageResponse">
+        SELECT p.postid, p.title, p.price, p.image
+        FROM productposttbl p
+        LEFT JOIN purchasecomptbl c ON p.postid = c.postid
+        WHERE p.userno = #{userNo} AND c.postId IS NULL
+    </select>
+
+</mapper>
