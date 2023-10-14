@@ -1,3 +1,4 @@
+/*
 package com.treemarket.tree.controller;
 
 import com.treemarket.tree.domain.UserVO;
@@ -90,4 +91,4 @@ public class UserController {
         userService.removeUser(userNo);
         return ResponseEntity.ok("사용자 탈퇴 완료");
     }
-}
+}*/
