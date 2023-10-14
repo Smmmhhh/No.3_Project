@@ -110,6 +110,5 @@ public class UserController {
         return ResponseEntity.ok().body(new ApiResponse(200, "회원 탈퇴 성공", null));
     }
 
-
-
 }
+
