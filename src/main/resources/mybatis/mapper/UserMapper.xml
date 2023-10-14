@@ -5,33 +5,31 @@
 
 <mapper namespace="com.treemarket.tree.mapper.UserMapper">
 
-    <select id="getUserId" resultType="com.treemarket.tree.domain.UserVO">
+    <select id="findUserByUserId" resultType="com.treemarket.tree.domain.UserVO">
         SELECT * FROM usertbl WHERE userid = #{userId} AND uservalidity = 1
     </select>
 
-    <select id="getUserNickname" resultType="com.treemarket.tree.domain.UserVO">
+    <select id="findUserByUserNickname" resultType="com.treemarket.tree.domain.UserVO">
         SELECT * FROM usertbl WHERE usernickname = #{userNickname} AND uservalidity = 1
+    </select>
+
+    <select id="findUserByUserNo" resultType="com.treemarket.tree.domain.UserVO">
+        SELECT * FROM usertbl WHERE userno = #{userNo} AND uservalidity = 1
     </select>
 
     <insert id="saveUser" parameterType="com.treemarket.tree.domain.UserVO">
         INSERT INTO usertbl VALUES
             (USERTBL_SEQ.NEXTVAL, #{userId}, #{userAddress}, #{userPw}, #{userName},
-             #{userNickname},#{userPhoneno}, 1)
+             #{userNickname},#{userPhoneno}, #{userValidity})
     </insert>
 
-    <select id="getUserNo" resultType="com.treemarket.tree.domain.UserVO">
-        SELECT * FROM usertbl WHERE userno = #{userNo} AND uservalidity = 1
-    </select>
-
-    <update id="editUser" parameterType="com.treemarket.tree.domain.UserVO">
-        UPDATE usertbl SET useraddress = #{userAddress}, userpw = #{userPw}, username = #{userName},
+    <update id="editUser" parameterType="com.treemarket.tree.dto.User.EditResponse">
+        UPDATE usertbl SET useraddress = #{userAddress}, userpw = #{userPw},
                            usernickname = #{userNickname}, userphoneno = #{userPhoneno}
-        WHERE userid = #{userId}
+        WHERE userno = #{userNo}
     </update>
 
-    <update id="removeUser" parameterType="Long">
+    <delete id="removeUser" parameterType="Long">
         UPDATE usertbl SET uservalidity = 0 WHERE userno = #{userNo}
-    </update>
-
-
+    </delete>
 </mapper>
