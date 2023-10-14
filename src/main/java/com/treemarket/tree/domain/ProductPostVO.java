@@ -13,11 +13,13 @@ public class ProductPostVO {
     private Long price;
     private String details;
     private String image;
+    private String creationDate;
     private Long productStatus;
 
     @Builder
-    public ProductPostVO(Long postId, Long ctgId, Long userNo, Long addressId, String title,
-                         Long price, String details, String image, Long productStatus) {
+    public ProductPostVO(Long postId, Long ctgId, Long userNo,
+                         Long addressId, String title, Long price, String details,
+                         String image, String creationDate, Long productStatus) {
         this.postId = postId;
         this.ctgId = ctgId;
         this.userNo = userNo;
@@ -26,6 +28,7 @@ public class ProductPostVO {
         this.price = price;
         this.details = details;
         this.image = image;
+        this.creationDate = creationDate;
         this.productStatus = productStatus;
     }
 
@@ -40,6 +43,7 @@ public class ProductPostVO {
                 ", price=" + price +
                 ", details='" + details + '\'' +
                 ", image='" + image + '\'' +
+                ", creationDate='" + creationDate + '\'' +
                 ", productStatus=" + productStatus +
                 '}';
     }
