@@ -80,6 +80,7 @@ const Register = () => {
       <div className="register_inputs">
         <section className="register_left">
           <p className="title">회원가입</p>
+
           <form className="register_form" method="post">
             <div className="info_section">
               <div className="item">
@@ -90,6 +91,7 @@ const Register = () => {
                   id="userId"
                   placeholder="5~20자"
                   onChange={handleInputChange}
+
                   required
                 />
 
@@ -97,6 +99,7 @@ const Register = () => {
               </div>
 
               <div className="item">
+
                 <label htmlFor="userName">이름</label>
                 <input
                   type="text"
@@ -121,6 +124,7 @@ const Register = () => {
                 />
               </div>
               <div className="item">
+
                 <label htmlFor="userNickname">닉네임</label>
                 <input
                   type="text"
@@ -137,6 +141,7 @@ const Register = () => {
             </div>
             <div className="info_section">
               <div className="item">
+
                 <label htmlFor="checkpwd">비밀번호 확인</label>
                 <input
                   type="password"
@@ -148,17 +153,20 @@ const Register = () => {
                 <p className="check_pwd_txt">비밀번호가 일치하지 않습니다.</p>
               </div>
               <div className="item">
+
                 <label htmlFor="userPhoneno">전화번호</label>
                 <input
                   type="text"
                   name="userPhoneno"
                   id="userPhoneno"
                   onChange={handleInputChange}
+
                   placeholder="010-xxxx-xxxx"
                   required
                 />
               </div>
             </div>
+
 
             <div className="info_section" onClick={toggle}>
               <div className="item">
@@ -193,7 +201,9 @@ const Register = () => {
                 <input type="hidden"></input>
               </div>
             </div>
+
             <button onClick={handleRegister}>JOIN</button>
+
           </form>
         </section>
         <section className="register_right">

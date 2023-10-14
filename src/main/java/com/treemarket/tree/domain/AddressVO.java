@@ -1,11 +1,9 @@
 package com.treemarket.tree.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
+@Setter
+@Getter
 @NoArgsConstructor
 public class AddressVO {
     private Long addressId;
@@ -14,4 +12,14 @@ public class AddressVO {
     private String town;
     private Long latitude;
     private Long longitude;
+
+    @Builder
+    public AddressVO(Long addresId, String sido, String sigungu, String town, Long latitude, Long longitude) {
+        this.addresId = addresId;
+        this.sido = sido;
+        this.sigungu = sigungu;
+        this.town = town;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }

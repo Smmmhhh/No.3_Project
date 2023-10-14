@@ -1,5 +1,5 @@
-
 import { useState, useEffect } from "react";
+
 
 import DaumPostCode from "react-daum-postcode";
 import Modal from "react-modal";
@@ -12,6 +12,7 @@ const PostCode = (props) => {
   const [isOpen, setIsOpen] = useState(false); // 모달창
 
   // 모달창의 정보 가져오기
+
   const completeHandler = (data) => {
     const formattedAddress = `${data.sido} ${data.sigungu} ${data.bname}`;
     setJibunAddress(formattedAddress);
@@ -28,6 +29,7 @@ const PostCode = (props) => {
     // });
     props.setFormData((info) => ({ ...info, userAddress: jibunAddress }));
   }, [props.formData.userAddress]);
+
 
   // Modal 스타일
   const customStyles = {
@@ -53,6 +55,7 @@ const PostCode = (props) => {
     <div className="post_code" onClick={toggle}>
       <input id="address" type="button" onClick={toggle} value={"주소 검색"} />
       <input
+
         name="userAddress"
         id="userAddress"
         type="text"
@@ -61,6 +64,7 @@ const PostCode = (props) => {
         onChange={handleInputAddressChange}
         placeholder="나무시 죽순구 새싹동"
         required
+
         disabled
       />
       <div className="post_code_modal">

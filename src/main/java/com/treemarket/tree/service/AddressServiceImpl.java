@@ -13,12 +13,17 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public Long getAddressId(String inputAddress) {
+
         AddressVO addressVO = parseAddress(inputAddress);
 
         if (addressVO == null) {
             return null; // 잘못된 주소 형식
         }
+        return addressMapper.getAddressId(addressVO);
+    }
 
+    @Override
+    public Long getAddressId(AddressVO addressVO) {
         return addressMapper.getAddressId(addressVO);
     }
 

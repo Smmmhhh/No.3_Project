@@ -1,23 +1,30 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
   const [logIn, setLogIn] = useState(false);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [userId, setuserId] = useState("");
+  const [userPw, setuserPw] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const response = await fetch("/api/login", {
+    const response = await fetch("/login", {
+
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ userId, userPw }),
+
     });
 
     if (response.ok) {
       // 로그인 성공 시
       setLogIn(true);
+      navigate(-1);
+      alert("로그인 성공");
+
     } else {
       // 로그인 실패 시
       alert("아이디와 비밀번호를 다시 확인해주세요.");
@@ -36,17 +43,23 @@ const Login = () => {
           <div className="login_id">
             <input
               type="text"
+              id="userId"
+              name="userId"
               placeholder="아이디"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={userId}
+              onChange={(e) => setuserId(e.target.value)}
+
             />
           </div>
           <div className="login_pw">
             <input
               type="password"
+              id="userPw"
+              name="userPw"
               placeholder="비밀번호"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={userPw}
+              onChange={(e) => setuserPw(e.target.value)}
+
             />
           </div>
           <Link to="/register">
