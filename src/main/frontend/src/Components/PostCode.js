@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { useState } from "react";
 import DaumPostCode from "react-daum-postcode";
 import Modal from "react-modal";
