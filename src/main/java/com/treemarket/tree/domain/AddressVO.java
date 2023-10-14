@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 public class AddressVO {
-    private Long addresId;
+    private Long addressId;
     private String sido;
     private String sigungu;
     private String town;
