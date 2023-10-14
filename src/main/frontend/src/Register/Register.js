@@ -1,10 +1,74 @@
-import React, { useState } from "react";
-import "./Register.css";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import PostCode from "../Components/PostCode";
+
+import "./Register.css";
+
+import DaumPostCode from "react-daum-postcode";
+import Modal from "react-modal";
 
 const Register = () => {
-  // 글자 수 제한
+  const [jibunAddress, setJibunAddress] = useState(""); // 주소 정보 문자열
+  const [isOpen, setIsOpen] = useState(false); // 모달창
+
+  //input 데이터
+  const [formData, setFormData] = useState({
+    userId: "",
+    userPw: "",
+    userName: "",
+    userNickname: "",
+    userPhoneno: "",
+    userAddress: "",
+  });
+
+  // 모달창의 정보 가져오기
+  const completeHandler = (data) => {
+    const formattedAddress = `${data.sido} ${data.sigungu} ${data.bname}`;
+    setJibunAddress(formattedAddress);
+    setFormData({ ...formData, userAddress: formattedAddress });
+    setIsOpen(false);
+  };
+
+  // Modal 스타일
+  const customStyles = {
+    overlay: {
+      backgroundColor: "rgba(0,0,0,0.5)",
+    },
+    content: {
+      left: "0",
+      margin: "auto",
+      width: "650px",
+      height: "400px",
+      padding: "0",
+      overflow: "hidden",
+    },
+  };
+
+  // 검색 클릭
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // JOIN 버튼 클릭
+  const handleRegister = () => {
+    console.log("formData changed2:", formData);
+
+    fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(formData),
+    });
+  };
+
+  useEffect(() => {
+    console.log({ ...formData });
+  }, [formData]);
 
   return (
     <div className="register">
@@ -16,16 +80,16 @@ const Register = () => {
       <div className="register_inputs">
         <section className="register_left">
           <p className="title">회원가입</p>
-          <form className="register_form">
+          <form className="register_form" method="post">
             <div className="info_section">
               <div className="item">
-                <label for="id">아이디</label>
+                <label htmlFor="userId">아이디</label>
                 <input
                   type="text"
-                  name="id"
-                  id="id"
+                  name="userId"
+                  id="userId"
                   placeholder="5~20자"
-                  onChange={() => {}}
+                  onChange={handleInputChange}
                   required
                 />
 
@@ -33,33 +97,36 @@ const Register = () => {
               </div>
 
               <div className="item">
-                <label for="name">이름</label>
+                <label htmlFor="userName">이름</label>
                 <input
                   type="text"
-                  name="name"
-                  id="name"
+                  name="userName"
+                  id="userName"
                   placeholder="2~10자"
+                  onChange={handleInputChange}
                   required
                 />
               </div>
             </div>
             <div className="info_section">
               <div className="item">
-                <label for="pwd">비밀번호</label>
+                <label htmlFor="userPw">비밀번호</label>
                 <input
                   type="password"
-                  name="pwd"
-                  id="pwd"
+                  name="userPw"
+                  id="userPw"
+                  onChange={handleInputChange}
                   placeholder="5~20자"
                   required
                 />
               </div>
               <div className="item">
-                <label for="nickname">닉네임</label>
+                <label htmlFor="userNickname">닉네임</label>
                 <input
                   type="text"
-                  name="nickname"
-                  id="nickname"
+                  name="userNickname"
+                  id="userNickname"
+                  onChange={handleInputChange}
                   placeholder="2~10자"
                   required
                 />
@@ -70,7 +137,7 @@ const Register = () => {
             </div>
             <div className="info_section">
               <div className="item">
-                <label for="checkpwd">비밀번호 확인</label>
+                <label htmlFor="checkpwd">비밀번호 확인</label>
                 <input
                   type="password"
                   name="checkpwd"
@@ -81,27 +148,52 @@ const Register = () => {
                 <p className="check_pwd_txt">비밀번호가 일치하지 않습니다.</p>
               </div>
               <div className="item">
-                <label for="phone">전화번호</label>
+                <label htmlFor="userPhoneno">전화번호</label>
                 <input
                   type="text"
-                  name="phone"
-                  id="phone"
+                  name="userPhoneno"
+                  id="userPhoneno"
+                  onChange={handleInputChange}
                   placeholder="010-xxxx-xxxx"
                   required
                 />
               </div>
             </div>
 
-            <div className="info_section">
+            <div className="info_section" onClick={toggle}>
               <div className="item">
-                <label for="mytown">동네 설정</label>
-                <PostCode />
+                <label htmlFor="mytown">동네 설정</label>
+                <input
+                  id="address"
+                  type="button"
+                  onClick={toggle}
+                  value={"주소 검색"}
+                />
+                <input
+                  name="userAddress"
+                  id="userAddress"
+                  type="text"
+                  value={jibunAddress}
+                  onChange={handleInputChange}
+                  placeholder="나무시 죽순구 새싹동"
+                  required
+                  disabled
+                />
+                <div className="post_code_modal">
+                  <Modal
+                    isOpen={isOpen}
+                    ariaHideApp={false}
+                    style={customStyles}
+                  >
+                    <DaumPostCode onComplete={completeHandler} />
+                  </Modal>
+                </div>
               </div>
               <div className="item">
                 <input type="hidden"></input>
               </div>
             </div>
-            <button>JOIN</button>
+            <button onClick={handleRegister}>JOIN</button>
           </form>
         </section>
         <section className="register_right">
