@@ -6,7 +6,8 @@
 <mapper namespace="com.treemarket.tree.mapper.ProductPostMapper">
 
     <insert id="savePost" parameterType="com.treemarket.tree.domain.ProductPostVO">
-        INSERT INTO productPosttbl
+        INSERT INTO productPosttbl (#{postId}, #{ctgId},  #{userNo}, #{addressId}, #{title}, #{price},
+                                    #{details}, #{image}, #{productStatus})
         VALUES
             (productPosttbl_seq.NEXTVAL,
              #{ctgId},
@@ -45,6 +46,10 @@
 
     <update id="deletePost" parameterType="long" >
         UPDATE productPosttbl SET productStatus = 0 WHERE postId = #{postId}
+    </update>
+
+    <update id="updatePostStatus" parameterType="com.treemarket.tree.dto.Productpost.req.AdminPostUpdateReq" >
+        UPDATE productPosttbl SET productStatus = #{productPostStatus} WHERE postId = #{postId}
     </update>
 
 
