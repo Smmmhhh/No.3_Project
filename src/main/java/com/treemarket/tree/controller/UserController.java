@@ -59,6 +59,7 @@ public class UserController {
                     .userNickname(registerRequest.getUserNickname())
                     .userAddress(addressId)
                     .userPhoneno(registerRequest.getUserPhoneno())
+                    .userGrade("C")
                     .userValidity("1")
                     .build();
 
@@ -71,9 +72,4 @@ public class UserController {
             return ResponseEntity.ok().body(new ApiResponse(200, "회원가입 성공", saveUser));
         }
     }
-
-
-
-
-
 }
