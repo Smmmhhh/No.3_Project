@@ -1,11 +1,8 @@
 package com.treemarket.tree.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
 @NoArgsConstructor
 public class UserVO {
     private Long userNo;
@@ -15,12 +12,13 @@ public class UserVO {
     private String userName;
     private String userNickname;
     private String userPhoneno;
+    private String userGrade;
     private String userValidity;
 
     @Builder
-
     public UserVO(Long userNo, String userId, Long userAddress, String userPw,
-                  String userName, String userNickname, String userPhoneno, String userValidity) {
+                  String userName, String userNickname,
+                  String userPhoneno, String userGrade, String userValidity) {
         this.userNo = userNo;
         this.userId = userId;
         this.userAddress = userAddress;
@@ -28,6 +26,7 @@ public class UserVO {
         this.userName = userName;
         this.userNickname = userNickname;
         this.userPhoneno = userPhoneno;
+        this.userGrade = userGrade;
         this.userValidity = userValidity;
     }
 }
