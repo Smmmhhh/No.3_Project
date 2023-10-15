@@ -20,18 +20,36 @@ public class UserController {
     private final UserService userService;
     private final AddressService addressService;
 
+
     @PostMapping("/login")
     public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest loginRequest, HttpSession session) {    //로그인 페이지
 
         UserVO user = userService.login(loginRequest.getUserId(), loginRequest.getUserPw());
 
         if (user == null) {
-            return ResponseEntity.badRequest().body(new ApiResponse(409, "로그인 실패", null));        }
+            return ResponseEntity.badRequest().body(new ApiResponse(409, "로그인 실패", null));
+        }
+
         session.setAttribute("userInfo", user);
         System.out.println("로그인 성공");
 
+        UserVO uservo = (UserVO) session.getAttribute("userInfo");
+        System.out.println(uservo.getUserName());
+
         return ResponseEntity.ok().body(new ApiResponse(200, "로그인 성공", user));
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<ApiResponse> logout(HttpSession session) {
+        session.removeAttribute("userInfo");
+        // 세션 무효화 (옵션)
+        // session.invalidate();
+
+        System.out.println("로그아웃 성공");
+
+        return ResponseEntity.ok().body(new ApiResponse(200, "로그아웃 성공", null));
+    }
+
 
     @PostMapping ("/register")
     public ResponseEntity<ApiResponse> register(@RequestBody RegisterRequest registerRequest) {
@@ -65,15 +83,11 @@ public class UserController {
             userService.saveUser(userVO);
             UserVO saveUser = userService.findUserByUserId(userVO.getUserId());
             if(saveUser.getUserNo() == null){
-                return ResponseEntity.ok().body(new ApiResponse(409, "userNo 생성 오류", null));
+                return ResponseEntity.badRequest().body(new ApiResponse(409, "userNo 생성 오류", null));
             }
 
             return ResponseEntity.ok().body(new ApiResponse(200, "회원가입 성공", saveUser));
         }
     }
-
-
-
-
 
 }
