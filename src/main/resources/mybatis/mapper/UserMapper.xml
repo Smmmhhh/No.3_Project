@@ -20,7 +20,7 @@
     <insert id="saveUser" parameterType="com.treemarket.tree.domain.UserVO">
         INSERT INTO usertbl VALUES
             (USERTBL_SEQ.NEXTVAL, #{userId}, #{userAddress}, #{userPw}, #{userName},
-             #{userNickname},#{userPhoneno}, #{userValidity})
+             #{userNickname},#{userPhoneno}, #{userGrade}, #{userValidity})
     </insert>
 
     <update id="editUser" parameterType="com.treemarket.tree.dto.User.EditResponse">

@@ -59,6 +59,7 @@ public class UserController {
                     .userNickname(registerRequest.getUserNickname())
                     .userAddress(addressId)
                     .userPhoneno(registerRequest.getUserPhoneno())
+                    .userGrade("C")
                     .userValidity("1")
                     .build();
 
