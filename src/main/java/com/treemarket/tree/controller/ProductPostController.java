@@ -7,14 +7,13 @@ import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.dto.Productpost.req.ProductsPostRequest;
 import com.treemarket.tree.dto.Productpost.res.ProductAllBoardResponse;
 import com.treemarket.tree.dto.Productpost.res.ProductsPostResponse;
-import com.treemarket.tree.service.AddressService;
-import com.treemarket.tree.service.CategoryService;
-import com.treemarket.tree.service.ProductPostService;
-import com.treemarket.tree.service.UserService;
+import com.treemarket.tree.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,17 +27,22 @@ public class ProductPostController {
     private final AddressService addressService;
     private final CategoryService categoryService;
     private final UserService userService;
+    private final AwsS3ServiceImpl awsS3Service;
 
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse> createPost(@RequestBody ProductsPostRequest productsPostRequest) {
+    public ResponseEntity<ApiResponse> createPost(
+            @RequestPart("multipartFiles") List<MultipartFile> multipartFiles,
+            @RequestPart("productsPostRequest") ProductsPostRequest productsPostRequest) throws IOException {
 
 
         Long ctgId = categoryService.getCtgId(productsPostRequest.getCtgName());    //Category key값 찾기
         Long addressId = addressService.getAddressId(productsPostRequest.getAddressName()); //Address Key값 찾기
 
         if (ctgId != null && addressId != null) {    //key가 있을 때
+            List<String> filesUrl = awsS3Service.uploadFile(multipartFiles);
+
             //리스트 형태로 받은 url 합치기
-            //String url = productPostService.joinUrls(productsPostRequest.getImage());
+            String url = productPostService.joinUrls(filesUrl);
 
             // ProductPostVO 객체 생성
             ProductPostVO productpostVO = ProductPostVO.builder()
@@ -48,7 +52,7 @@ public class ProductPostController {
                     .title(productsPostRequest.getTitle())
                     .price(productsPostRequest.getPrice())
                     .details(productsPostRequest.getDetails())
-               //     .image(url)
+                    .image(url)
                     .productStatus((long) 1)
                     .build();
 
@@ -57,13 +61,13 @@ public class ProductPostController {
 
             //ProductsPostResponse 객체 생성
             ProductsPostResponse productsPostResponse = ProductsPostResponse.builder()
-                    .userNo(productsPostRequest.getUserNo())
+                    .userNickname(userService.getUserNickname(productsPostRequest.getUserNo()))
                     .title(productsPostRequest.getTitle())
                     .price(productsPostRequest.getPrice())
-                    .ctgId(ctgId)
+                    .ctgName(productsPostRequest.getCtgName())
                     .details(productsPostRequest.getDetails())
-                    .addressId(addressId)
-                  //  .image(productsPostRequest.getImage())
+                    .addressName(productsPostRequest.getAddressName())
+                    .image(filesUrl)
                     .build();
 
             //ApiResponse 반환
@@ -93,7 +97,8 @@ public class ProductPostController {
                     .title(productPostVOList.get(i).getTitle())
                     .price(productPostVOList.get(i).getPrice())
                     .addressName(addressService.getAddressName(productPostVOList.get(i).getAddressId()))
-                    .image(productPostService.parseAddress(productPostVOList.get(i).getImage()))
+                    // 첫번쨰 url 값 가져오기(대표 이미지)
+                    .image(productPostService.parseAddress(productPostVOList.get(i).getImage()).get(0))
                     .productStatus(productPostVOList.get(i).getProductStatus())
                     .build();
             productAllBoardResponseList.add(productAllBoardResponse);
@@ -134,7 +139,8 @@ public class ProductPostController {
                     .title(productPostVOList.get(i).getTitle())
                     .price(productPostVOList.get(i).getPrice())
                     .addressName(addressService.getAddressName(productPostVOList.get(i).getAddressId()))
-                    .image(productPostService.parseAddress(productPostVOList.get(i).getImage()))
+                    // 첫번쨰 url 값 가져오기(대표 이미지)
+                    .image(productPostService.parseAddress(productPostVOList.get(i).getImage()).get(0))
                     .productStatus(productPostVOList.get(i).getProductStatus())
                     .build();
             productAllBoardResponseList.add(productAllBoardResponse);
@@ -149,11 +155,25 @@ public class ProductPostController {
 
     @GetMapping("/detail/{postId}")
     public ResponseEntity<ApiResponse> getPostDetails(@PathVariable Long postId) {
-
+        // 요청한 게시물 객체 가져오기
         ProductPostVO productPostVO = productPostService.getPostDetails(postId);
+
+        //ProductsPostResponse 객체 생성
+        List<String> filesUrl = productPostService.parseAddress(productPostVO.getImage());
+
+        ProductsPostResponse productsPostResponse = ProductsPostResponse.builder()
+                .userNickname(userService.getUserNickname(productPostVO.getUserNo()))
+                .title(productPostVO.getTitle())
+                .price(productPostVO.getPrice())
+                .ctgName(categoryService.getCtgName(productPostVO.getCtgId()))
+                .details(productPostVO.getDetails())
+                .addressName(addressService.getAddressName(productPostVO.getAddressId()))
+                .image(filesUrl)
+                .build();
+
         if (productPostVO == null)
             return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("실패").build());
-        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productPostVO).build());
+        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productsPostResponse).build());
     }
 
 
