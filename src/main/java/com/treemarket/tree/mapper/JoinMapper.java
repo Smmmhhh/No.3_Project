@@ -1,5 +1,6 @@
 package com.treemarket.tree.mapper;
 
+import com.treemarket.tree.domain.PurchaseCompVO;
 import com.treemarket.tree.dto.Productpost.ProductMypageResponse;
 import com.treemarket.tree.dto.Productpost.res.AdminProductPostList;
 import com.treemarket.tree.dto.User.AdminUserList;
@@ -17,5 +18,9 @@ public interface JoinMapper {
     List<AdminProductPostList> getAllBoards();
 
     List<AdminUserList> getAllUsers();
+
+    void savePurchaseComp(Long roomId);
+    Long getSellerNo(Long roomId);
+    PurchaseCompVO getCompInfo(Long roomId);
 
 }

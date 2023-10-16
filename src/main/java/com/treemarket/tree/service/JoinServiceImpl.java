@@ -1,5 +1,6 @@
 package com.treemarket.tree.service;
 
+import com.treemarket.tree.domain.PurchaseCompVO;
 import com.treemarket.tree.dto.Productpost.ProductMypageResponse;
 import com.treemarket.tree.dto.Productpost.res.AdminProductPostList;
 import com.treemarket.tree.dto.User.AdminUserList;
@@ -43,5 +44,20 @@ public class JoinServiceImpl implements JoinService{
     @Override
     public List<AdminUserList> getAllUsers() {
         return joinMapper.getAllUsers();
+    }
+
+    @Override
+    public void savePurchaseComp(Long roomId) {
+        joinMapper.savePurchaseComp(roomId);
+    }
+
+    @Override
+    public Long getSellerNo(Long roomId) {
+        return joinMapper.getSellerNo(roomId);
+    }
+
+    @Override
+    public PurchaseCompVO getCompInfo(Long roomId) {
+        return joinMapper.getCompInfo(roomId);
     }
 }

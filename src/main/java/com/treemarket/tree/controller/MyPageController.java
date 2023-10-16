@@ -43,7 +43,7 @@ public class MyPageController {
         if(!userService.findUserByUserNo(userNo).getUserNickname().equals(editRequest.getUserNickname())){
             boolean isNicknameUnique  = userService.checkNickname(editRequest.getUserNickname());
             if (!isNicknameUnique) {
-                return ResponseEntity.badRequest().body(new ApiResponse(409, "닉네임 중복",null));
+                return ResponseEntity.badRequest().body(new ApiResponse(412, "닉네임 중복",null));
             }
         }
 
