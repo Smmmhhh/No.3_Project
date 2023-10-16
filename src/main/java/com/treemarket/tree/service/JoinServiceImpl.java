@@ -2,6 +2,7 @@ package com.treemarket.tree.service;
 
 import com.treemarket.tree.dto.Productpost.res.ProductMypageResponse;
 import com.treemarket.tree.dto.Productpost.res.AdminProductPostList;
+import com.treemarket.tree.dto.User.AdminUserList;
 import com.treemarket.tree.mapper.JoinMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,10 @@ public class JoinServiceImpl implements JoinService{
     @Override
     public List<AdminProductPostList> getAllBoards() {
         return joinMapper.getAllBoards();
+    }
+
+    @Override
+    public List<AdminUserList> getAllUsers() {
+        return joinMapper.getAllUsers();
     }
 }

@@ -2,6 +2,7 @@ package com.treemarket.tree.mapper;
 
 import com.treemarket.tree.dto.Productpost.res.ProductMypageResponse;
 import com.treemarket.tree.dto.Productpost.res.AdminProductPostList;
+import com.treemarket.tree.dto.User.AdminUserList;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface JoinMapper {
     List<ProductMypageResponse> findRegisterPostByUserNo(Long userNo); // 판매중 목록
 
     List<AdminProductPostList> getAllBoards();
+
+    List<AdminUserList> getAllUsers();
 
 }
