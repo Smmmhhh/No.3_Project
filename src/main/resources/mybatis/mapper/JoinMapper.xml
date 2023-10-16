@@ -56,7 +56,21 @@
         WHERE P.productStatus = 1
     </select>
 
-
-
+    <select id="getAllUsers" resultType="com.treemarket.tree.dto.User.AdminUserList">
+        SELECT u.userNo, u.userNickname, u.userName, u.userId, u.userPhoneNo,
+               (
+                   (SELECT COUNT(*) FROM purchaseComptbl WHERE postID IN (SELECT postID FROM productPosttbl WHERE userNo = u.userNo))
+                   +
+                   (SELECT COUNT(*) FROM purchaseComptbl WHERE buyerNo = u.userNo)
+                ) AS transactionCount,
+               u.userGrade,
+               (SELECT COUNT(*) FROM productPosttbl WHERE userNo = u.userNo) AS postCount,
+               CASE
+                   WHEN u.userValidity = 1 THEN 'O'
+                   WHEN u.userValidity = 0 THEN 'X'
+                   ELSE NULL
+               END AS userValidity
+        FROM usertbl u
+    </select>
 
 </mapper>

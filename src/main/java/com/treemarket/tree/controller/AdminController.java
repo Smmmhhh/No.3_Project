@@ -4,6 +4,7 @@ import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.ProductPostVO;
 import com.treemarket.tree.dto.Productpost.req.AdminPostUpdateReq;
 import com.treemarket.tree.dto.Productpost.res.AdminProductPostList;
+import com.treemarket.tree.dto.User.AdminUserList;
 import com.treemarket.tree.service.JoinService;
 import com.treemarket.tree.service.ProductPostService;
 import com.treemarket.tree.service.UserService;
@@ -24,11 +25,17 @@ public class AdminController {
 
     @GetMapping("/user")
     public ResponseEntity<ApiResponse> getAllUsers() {
-        List<ProductPostVO> productPostVOList = productPostService.getAllBoards();
+//        List<ProductPostVO> productPostVOList = productPostService.getAllBoards();
+//        // 리스트가 비어있을 경우
+//        if (productPostVOList.isEmpty())
+//            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("리스트없음").build());
+//        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productPostVOList).build());
+        List<AdminUserList> adminUserList = joinService.getAllUsers();
+
         // 리스트가 비어있을 경우
-        if (productPostVOList.isEmpty())
+        if (adminUserList.isEmpty())
             return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("리스트없음").build());
-        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productPostVOList).build());
+        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(adminUserList).build());
     }
 
     @GetMapping("/post")
