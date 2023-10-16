@@ -84,7 +84,7 @@ const Register = () => {
     <div className="register">
       <div className="top_logo">
         <Link to={"/"}>
-          <img src="/assets/logo.png" />
+          <img src="/assets/logo.png" alt="logoImage" />
         </Link>
       </div>
       <div className="register_inputs">
@@ -209,7 +209,7 @@ const Register = () => {
           </div>
         </section>
         <section className="register_right">
-          <img src="assets/loginpanda.png" />
+          <img src="assets/loginpanda.png" alt="logoPandaImage" />
         </section>
       </div>
     </div>
