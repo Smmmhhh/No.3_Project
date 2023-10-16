@@ -1,6 +1,6 @@
 package com.treemarket.tree.service;
 
-import com.treemarket.tree.dto.Productpost.ProductMypageResponse;
+import com.treemarket.tree.dto.Productpost.res.ProductMypageResponse;
 import com.treemarket.tree.dto.Productpost.res.AdminProductPostList;
 import java.util.List;
 

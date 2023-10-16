@@ -3,7 +3,7 @@ package com.treemarket.tree.controller;
 import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.domain.ProductPostVO;
-import com.treemarket.tree.dto.Productpost.ProductMypageResponse;
+import com.treemarket.tree.dto.Productpost.res.ProductMypageResponse;
 import com.treemarket.tree.dto.User.EditRequest;
 import com.treemarket.tree.dto.User.EditResponse;
 import com.treemarket.tree.dto.Productpost.req.ProductModifyRequest;

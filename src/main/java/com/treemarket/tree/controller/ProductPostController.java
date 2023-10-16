@@ -27,6 +27,7 @@ public class ProductPostController {
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> createPost(@RequestBody ProductsPostRequest productsPostRequest) {
 
+
         Long ctgId = categoryService.getCtgId(productsPostRequest.getCtgName());    //Category key값 찾기
         Long addressId = addressService.getAddressId(productsPostRequest.getAddressName()); //Address Key값 찾기
 
