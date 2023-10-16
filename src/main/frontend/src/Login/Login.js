@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Login.css";
-
 import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
   const [logIn, setLogIn] = useState(false);
@@ -14,14 +13,19 @@ const Login = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId, userPw }),
+      body: JSON.stringify({
+        userId,
+        userPw,
+      }),
     });
 
     if (response.ok) {
-      // 로그인 성공 시
+      const userData = await response.json(); // 응답 데이터를 JSON으로 파싱
       setLogIn(true);
+      sessionStorage.setItem("userData", JSON.stringify(userData));
       navigate(-1);
       alert("로그인 성공");
+      console.log(userData);
     } else {
       // 로그인 실패 시
       alert("아이디와 비밀번호를 다시 확인해주세요.");

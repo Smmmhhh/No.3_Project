@@ -1,20 +1,16 @@
 package com.treemarket.tree.dto.Productpost;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class ProductsPostRequest {
-
-    private Long userNo;
+@AllArgsConstructor
+public class ProductMypageResponse {
+    private Long postId;
     private String title;
     private Long price;
-    private String ctgName;
-    private String Details;
-    private String addressName;
-    private String img;
-
+    private String image;
 }
