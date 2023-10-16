@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -26,10 +27,14 @@ public class ProductPostController {
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> createPost(@RequestBody ProductsPostRequest productsPostRequest) {
 
+
         Long ctgId = categoryService.getCtgId(productsPostRequest.getCtgName());    //Category key값 찾기
         Long addressId = addressService.getAddressId(productsPostRequest.getAddressName()); //Address Key값 찾기
 
         if (ctgId != null && addressId != null) {    //key가 있을 때
+            //리스트 형태로 받은 url 합치기
+            String url = productPostService.joinUrls(productsPostRequest.getImg());
+
             // ProductPostVO 객체 생성
             ProductPostVO productpostVO = ProductPostVO.builder()
                     .ctgId(ctgId)
@@ -38,7 +43,7 @@ public class ProductPostController {
                     .title(productsPostRequest.getTitle())
                     .price(productsPostRequest.getPrice())
                     .details(productsPostRequest.getDetails())
-                    .image(productsPostRequest.getImg())
+                    .image(url)
                     .productStatus((long) 1)
                     .build();
 

@@ -16,6 +16,7 @@ public class ProductPostServiceImpl implements ProductPostService {
 
     @Override
     public void savePost(ProductPostVO productpostVO) {
+        System.out.println(productpostVO.toString());
         productPostMapper.savePost(productpostVO);
     }
 
@@ -47,6 +48,16 @@ public class ProductPostServiceImpl implements ProductPostService {
     @Override
     public void updatePostStatus(AdminPostUpdateReq adminPostUpdateReq) {
         productPostMapper.updatePostStatus(adminPostUpdateReq);
+    }
+
+    @Override
+    public String joinUrls(String[] urls) {
+        StringBuilder joinUrl = new StringBuilder();
+        for(int i = 0; i < urls.length; i++) {
+            joinUrl.append(urls[i]);
+            if(i+1 < urls.length) joinUrl.append(",");
+        }
+        return joinUrl.toString();
     }
 
 }

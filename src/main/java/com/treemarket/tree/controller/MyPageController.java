@@ -3,7 +3,7 @@ package com.treemarket.tree.controller;
 import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.domain.ProductPostVO;
-import com.treemarket.tree.dto.Productpost.ProductMypageResponse;
+import com.treemarket.tree.dto.Productpost.res.ProductMypageResponse;
 import com.treemarket.tree.dto.User.EditRequest;
 import com.treemarket.tree.dto.User.EditResponse;
 import com.treemarket.tree.dto.Productpost.req.ProductModifyRequest;
@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class MyPageController {
 
 
     @PutMapping("/users/{userNo}")
-    public ResponseEntity<ApiResponse> editUser(@PathVariable Long userNo, @RequestBody EditRequest editRequest){
+    public ResponseEntity<ApiResponse> editUser(@PathVariable Long userNo, @RequestBody EditRequest editRequest, HttpSession session){
 
         String inputAddress = editRequest.getUserAddress();
         Long addressId = addressService.getAddressId(inputAddress);
@@ -57,8 +58,9 @@ public class MyPageController {
         userService.editUser(editResponse);
 
         UserVO edituser = userService.findUserByUserNo(userNo);
-        return ResponseEntity.ok().body(new ApiResponse(200, "회원 정보 저장 성공", edituser));
 
+        session.setAttribute("userData", edituser);
+        return ResponseEntity.ok().body(new ApiResponse(200, "회원 정보 저장 성공", edituser));
     }
 
     @DeleteMapping("/users/{userNo}")
