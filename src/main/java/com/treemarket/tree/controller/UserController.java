@@ -41,13 +41,16 @@ public class UserController {
 
     @PostMapping("/logout")
     public ResponseEntity<ApiResponse> logout(HttpSession session) {
-        session.removeAttribute("userInfo");
-        // 세션 무효화 (옵션)
-        // session.invalidate();
-
-        System.out.println("로그아웃 성공");
-
-        return ResponseEntity.ok().body(new ApiResponse(200, "로그아웃 성공", null));
+        try{
+            session.removeAttribute("userInfo");
+            // 세션 무효화 (옵션)
+            // session.invalidate();
+            System.out.println("로그아웃 성공");
+            return ResponseEntity.ok().body(new ApiResponse(200, "로그아웃 성공", null));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().body(new ApiResponse(409, "로그아웃 실패", null));
+        }
     }
 
 
