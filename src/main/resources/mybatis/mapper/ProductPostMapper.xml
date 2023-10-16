@@ -56,5 +56,9 @@
         UPDATE productPosttbl SET productStatus = #{productPostStatus} WHERE postId = #{postId}
     </update>
 
+    <select id="getAllPostsForApp" resultType="com.treemarket.tree.dto.Productpost.res.ProductsAppResponse">
+        SELECT title, price, image From productPosttbl
+    </select>
+
 
 </mapper>

@@ -3,6 +3,7 @@ package com.treemarket.tree.service;
 import com.treemarket.tree.domain.ProductPostVO;
 import com.treemarket.tree.dto.Productpost.req.AdminPostUpdateReq;
 import com.treemarket.tree.dto.Productpost.res.ProductAllBoardResponse;
+import com.treemarket.tree.dto.Productpost.res.ProductsAppResponse;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface ProductPostService {
     String joinUrls(String[] urls);
     List<ProductAllBoardResponse> replaceAllBoardResponse(List<ProductPostVO> productPostVOList);
     String parseAddress(String joinUrl);
+
+    List<ProductsAppResponse> getAllPostsForApp();
 }

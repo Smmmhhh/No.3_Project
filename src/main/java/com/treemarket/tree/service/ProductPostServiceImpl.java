@@ -3,6 +3,7 @@ package com.treemarket.tree.service;
 import com.treemarket.tree.domain.ProductPostVO;
 import com.treemarket.tree.dto.Productpost.req.AdminPostUpdateReq;
 import com.treemarket.tree.dto.Productpost.res.ProductAllBoardResponse;
+import com.treemarket.tree.dto.Productpost.res.ProductsAppResponse;
 import com.treemarket.tree.mapper.ProductPostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,5 +74,8 @@ public class ProductPostServiceImpl implements ProductPostService {
         return parseUrls[0];
     }
 
-
+    @Override
+    public List<ProductsAppResponse> getAllPostsForApp() {
+        return productPostMapper.getAllPostsForApp();
+    }
 }
