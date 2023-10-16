@@ -4,6 +4,7 @@ import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.domain.ProductPostVO;
 import com.treemarket.tree.dto.Productpost.res.ProductMypageResponse;
+import com.treemarket.tree.dto.Productpost.res.ProductsPostResponse;
 import com.treemarket.tree.dto.User.EditRequest;
 import com.treemarket.tree.dto.User.EditResponse;
 import com.treemarket.tree.dto.Productpost.req.ProductModifyRequest;
@@ -108,11 +109,25 @@ public class MyPageController {
 
     @GetMapping("/productsedit/{postId}")
     public ResponseEntity<ApiResponse> getPostDetails(@PathVariable Long postId) {
-
+        // 요청한 게시물 객체 가져오기
         ProductPostVO productPostVO = productPostService.getPostDetails(postId);
+
+        //ProductsPostResponse 객체 생성
+        List<String> filesUrl = productPostService.parseAddress(productPostVO.getImage());
+
+        ProductsPostResponse productsPostResponse = ProductsPostResponse.builder()
+                .userNickname(userService.getUserNickname(productPostVO.getUserNo()))
+                .title(productPostVO.getTitle())
+                .price(productPostVO.getPrice())
+                .ctgName(categoryService.getCtgName(productPostVO.getCtgId()))
+                .details(productPostVO.getDetails())
+                .addressName(addressService.getAddressName(productPostVO.getAddressId()))
+                .image(filesUrl)
+                .build();
+
         if (productPostVO == null)
             return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("실패").build());
-        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productPostVO).build());
+        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productsPostResponse).build());
     }
 
     @PutMapping("/productsedit/{postId}")

@@ -84,7 +84,7 @@ CREATE TABLE productPosttbl
     title varchar2(20) NOT NULL,
     price number NOT NULL,
     details varchar2(200) NOT NULL,
-    image varchar2(30),
+    image varchar2(600),
     creationDate date default sysdate,
     productStatus number NOT NULL
 );

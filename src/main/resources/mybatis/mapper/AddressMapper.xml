@@ -13,6 +13,4 @@
         SELECT sido, sigungu, town FROM addresstbl WHERE addressid =#{addressId}
     </select>
 
-
-
 </mapper>

@@ -1,26 +1,30 @@
 package com.treemarket.tree.dto.Productpost.res;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 public class ProductsPostResponse {
 
-    private Long userNo;
+    private String userNickname;
     private String title;
     private Long price;
-    private Long ctgId;
+    private String ctgName;
     private String details;
-    private Long addressId;
-    private String[] image;
+    private String addressName;
+    private List<String> image;
 
     @Builder
-    public ProductsPostResponse(Long userNo, String title, Long price, Long ctgId, String details, Long addressId, String[] image) {
-        this.userNo = userNo;
+    public ProductsPostResponse(String userNickname, String title, Long price,
+                                String ctgName, String details,
+                                String addressName, List<String> image) {
+        this.userNickname = userNickname;
         this.title = title;
         this.price = price;
-        this.ctgId = ctgId;
+        this.ctgName = ctgName;
         this.details = details;
-        this.addressId = addressId;
+        this.addressName = addressName;
         this.image = image;
     }
 }
