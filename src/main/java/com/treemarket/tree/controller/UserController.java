@@ -39,7 +39,7 @@ public class UserController {
         return ResponseEntity.ok().body(new ApiResponse(200, "로그인 성공", user));
     }
 
-    @PostMapping("/logout")
+    @GetMapping ("/logout")
     public ResponseEntity<ApiResponse> logout(HttpSession session) {
         try{
             session.removeAttribute("userInfo");
