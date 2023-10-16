@@ -28,7 +28,6 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.badRequest().body(new ApiResponse(409, "로그인 실패", null));        }
         session.setAttribute("userInfo", user);
-        System.out.println("로그인 성공");
 
         return ResponseEntity.ok().body(new ApiResponse(200, "로그인 성공", user));
     }

@@ -19,6 +19,10 @@
         #{productStatus})
     </insert>
 
+    <select id="parseAddress" resultType="String">
+        SELECT image FROM productPosttbl WHERE image = #{joinUrl}
+    </select>
+
     
     <select id="getAllBoards" resultType="com.treemarket.tree.domain.ProductPostVO">
         SELECT * FROM productPosttbl WHERE productStatus = 1

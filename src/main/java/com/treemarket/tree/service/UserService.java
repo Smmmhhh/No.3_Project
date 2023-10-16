@@ -12,5 +12,6 @@ public interface UserService {
     void saveUser(UserVO userVO);
     void editUser(EditResponse editResponse);
     void removeUser(Long userNo);
+    String getUserNickname(Long userId);
 
 }
