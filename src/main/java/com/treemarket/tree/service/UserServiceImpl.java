@@ -61,4 +61,9 @@ public class UserServiceImpl implements UserService {
     public void removeUser(Long userNo) {
         userMapper.removeUser(userNo);
     }
+
+    @Override
+    public String getUserNickname(Long userId) {
+        return userMapper.getUserNickname(userId);
+    }
 }

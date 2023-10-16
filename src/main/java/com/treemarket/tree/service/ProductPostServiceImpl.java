@@ -2,6 +2,7 @@ package com.treemarket.tree.service;
 
 import com.treemarket.tree.domain.ProductPostVO;
 import com.treemarket.tree.dto.Productpost.req.AdminPostUpdateReq;
+import com.treemarket.tree.dto.Productpost.res.ProductAllBoardResponse;
 import com.treemarket.tree.mapper.ProductPostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +60,18 @@ public class ProductPostServiceImpl implements ProductPostService {
         }
         return joinUrl.toString();
     }
+
+    @Override
+    public List<ProductAllBoardResponse> replaceAllBoardResponse(List<ProductPostVO> productPostVOList) {
+        return null;
+    }
+
+    @Override
+    public String parseAddress(String joinUrl) {
+        String[] parseUrls = productPostMapper.parseAddress(joinUrl).split(",");
+        //첫번째 url 주소를 반환해야함(대표 이미지)
+        return parseUrls[0];
+    }
+
 
 }

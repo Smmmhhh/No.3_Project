@@ -29,10 +29,8 @@ public class UserController {
         if (user == null) {
             return ResponseEntity.badRequest().body(new ApiResponse(409, "로그인 실패", null));
         }
-
         session.setAttribute("userData", user);
         System.out.println("로그인 성공");
-
         UserVO uservo = (UserVO) session.getAttribute("userData");
         System.out.println(uservo.getUserName());
 

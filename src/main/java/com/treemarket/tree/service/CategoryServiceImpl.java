@@ -14,4 +14,9 @@ public class CategoryServiceImpl implements CategoryService{
     public Long getCtgId(String ctgName) {
         return categoryMapper.getCtgId(ctgName);
     }
+
+    @Override
+    public String getCtgName(Long ctgId) {
+        return categoryMapper.getCtgName(ctgId);
+    }
 }

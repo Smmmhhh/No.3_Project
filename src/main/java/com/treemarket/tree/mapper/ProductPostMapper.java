@@ -16,4 +16,5 @@ public interface ProductPostMapper {
     void modifyPost(ProductPostVO productpostVO);
     void deletePost(Long postId);
     void updatePostStatus(AdminPostUpdateReq adminPostUpdateReq);
+    String parseAddress(String joinUrl);
 }
