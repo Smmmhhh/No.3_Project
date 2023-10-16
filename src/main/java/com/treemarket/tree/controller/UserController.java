@@ -46,7 +46,6 @@ public class UserController {
         boolean isIdUnique = userService.checkId(registerRequest.getUserId());
         boolean isNicknameUnique  = userService.checkNickname(registerRequest.getUserNickname());
 
-        System.out.println(registerRequest.toString());
         if (!isIdUnique && !isNicknameUnique) {
             return ResponseEntity.badRequest().body(new ApiResponse(409, "ID와 닉네임 중복",null));
         } else if (!isIdUnique) {
