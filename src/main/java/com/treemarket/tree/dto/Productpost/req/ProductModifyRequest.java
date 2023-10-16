@@ -1,4 +1,4 @@
-package com.treemarket.tree.dto.Productpost;
+package com.treemarket.tree.dto.Productpost.req;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -15,7 +15,7 @@ public class AddressVO {
 
     @Builder
     public AddressVO(Long addresId, String sido, String sigungu, String town, Long latitude, Long longitude) {
-        this.addresId = addresId;
+        this.addressId = addresId;
         this.sido = sido;
         this.sigungu = sigungu;
         this.town = town;
