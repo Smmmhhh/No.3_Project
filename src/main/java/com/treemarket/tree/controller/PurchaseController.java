@@ -19,11 +19,13 @@ public class PurchaseController {
 
     @GetMapping("/chat/complete/{roomId}")
     public ResponseEntity<ApiResponse> savePurchaseComp(@PathVariable Long roomId){
+
         try{
             joinService.savePurchaseComp(roomId);
         } catch (Exception e){
             return ResponseEntity.ok().body(new ApiResponse(409, "DB 저장 실패", null));
         }
+
         Long sellerNo;
         try{
             sellerNo = joinService.getSellerNo(roomId);
@@ -31,7 +33,7 @@ public class PurchaseController {
             return ResponseEntity.ok().body(new ApiResponse(410, "sellerNo 가져오기 실패", null));
         }
 
-        PurchaseCompVO purchaseCompVO = new PurchaseCompVO();
+        PurchaseCompVO purchaseCompVO;
         try{
             purchaseCompVO = joinService.getCompInfo(roomId);
         } catch (Exception e){

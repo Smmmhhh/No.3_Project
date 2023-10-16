@@ -27,7 +27,7 @@
              #{userNickname},#{userPhoneno}, #{userGrade}, #{userValidity})
     </insert>
 
-    <update id="editUser" parameterType="com.treemarket.tree.dto.User.EditResponse">
+    <update id="editUser" parameterType="com.treemarket.tree.dto.User.UserModifyResponse">
         UPDATE usertbl SET useraddress = #{userAddress}, userpw = #{userPw},
                            usernickname = #{userNickname}, userphoneno = #{userPhoneno}
         WHERE userno = #{userNo}
