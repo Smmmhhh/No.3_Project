@@ -1,6 +1,8 @@
 package com.treemarket.tree.service;
 
 import com.treemarket.tree.domain.ProductPostVO;
+import com.treemarket.tree.dto.Productpost.req.AdminPostUpdateReq;
+
 import java.util.List;
 
 public interface ProductPostService {
@@ -11,4 +13,5 @@ public interface ProductPostService {
     ProductPostVO getPostDetails(Long postId);
     void modifyPost(ProductPostVO productpostVO);
     void deletePost(Long postId);
+    void updatePostStatus(AdminPostUpdateReq adminPostUpdateReq);
 }

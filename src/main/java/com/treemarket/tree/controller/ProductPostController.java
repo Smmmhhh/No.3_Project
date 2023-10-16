@@ -1,6 +1,5 @@
 package com.treemarket.tree.controller;
 
-
 import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.AddressVO;
 import com.treemarket.tree.domain.ProductPostVO;
@@ -68,7 +67,7 @@ public class ProductPostController {
         }
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<ApiResponse> getAllBoards() {
         List<ProductPostVO> productPostVOList = productPostService.getAllBoards();
         // 리스트가 비어있을 경우

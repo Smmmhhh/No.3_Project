@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class MyPageController {
 
 
     @PutMapping("/users/{userNo}")
-    public ResponseEntity<ApiResponse> editUser(@PathVariable Long userNo, @RequestBody EditRequest editRequest){
+    public ResponseEntity<ApiResponse> editUser(@PathVariable Long userNo, @RequestBody EditRequest editRequest, HttpSession session){
 
         String inputAddress = editRequest.getUserAddress();
         Long addressId = addressService.getAddressId(inputAddress);
@@ -57,8 +58,9 @@ public class MyPageController {
         userService.editUser(editResponse);
 
         UserVO edituser = userService.findUserByUserNo(userNo);
-        return ResponseEntity.ok().body(new ApiResponse(200, "회원 정보 저장 성공", edituser));
 
+        session.setAttribute("userData", edituser);
+        return ResponseEntity.ok().body(new ApiResponse(200, "회원 정보 저장 성공", edituser));
     }
 
     @DeleteMapping("/users/{userNo}")
@@ -154,8 +156,6 @@ public class MyPageController {
             return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("쿼리문 오류").build());
         }
     }
-
-
 
     @DeleteMapping("/products/delete/{postId}")
     public ResponseEntity<ApiResponse> deletePost(@PathVariable Long postId) {
