@@ -3,15 +3,20 @@ package com.treemarket.tree.controller;
 import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.AddressVO;
 import com.treemarket.tree.domain.ProductPostVO;
+import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.dto.Productpost.req.ProductsPostRequest;
+import com.treemarket.tree.dto.Productpost.res.ProductAllBoardResponse;
 import com.treemarket.tree.dto.Productpost.res.ProductsPostResponse;
 import com.treemarket.tree.service.AddressService;
 import com.treemarket.tree.service.CategoryService;
 import com.treemarket.tree.service.ProductPostService;
+import com.treemarket.tree.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -22,14 +27,19 @@ public class ProductPostController {
     private final ProductPostService productPostService;
     private final AddressService addressService;
     private final CategoryService categoryService;
+    private final UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> createPost(@RequestBody ProductsPostRequest productsPostRequest) {
+
 
         Long ctgId = categoryService.getCtgId(productsPostRequest.getCtgName());    //Category key값 찾기
         Long addressId = addressService.getAddressId(productsPostRequest.getAddressName()); //Address Key값 찾기
 
         if (ctgId != null && addressId != null) {    //key가 있을 때
+            //리스트 형태로 받은 url 합치기
+            String url = productPostService.joinUrls(productsPostRequest.getImage());
+
             // ProductPostVO 객체 생성
             ProductPostVO productpostVO = ProductPostVO.builder()
                     .ctgId(ctgId)
@@ -38,7 +48,7 @@ public class ProductPostController {
                     .title(productsPostRequest.getTitle())
                     .price(productsPostRequest.getPrice())
                     .details(productsPostRequest.getDetails())
-                    .image(productsPostRequest.getImg())
+                    .image(url)
                     .productStatus((long) 1)
                     .build();
 
@@ -53,7 +63,7 @@ public class ProductPostController {
                     .ctgId(ctgId)
                     .details(productsPostRequest.getDetails())
                     .addressId(addressId)
-                    .image(productsPostRequest.getImg())
+                    .image(productsPostRequest.getImage())
                     .build();
 
             //ApiResponse 반환
@@ -70,10 +80,30 @@ public class ProductPostController {
     @GetMapping
     public ResponseEntity<ApiResponse> getAllBoards() {
         List<ProductPostVO> productPostVOList = productPostService.getAllBoards();
+
+        //Response 리스트 객체 생성
+        List<ProductAllBoardResponse> productAllBoardResponseList = new ArrayList<>();
+
+        //productPostVOList를 productAllBoardResponse 객체로 변환해주기
+        for(int i = 0; i < productPostVOList.size(); i++) {
+            ProductAllBoardResponse productAllBoardResponse = ProductAllBoardResponse.builder()
+                    .postId(productPostVOList.get(i).getPostId())
+                    .ctgName(categoryService.getCtgName(productPostVOList.get(i).getCtgId()))
+                    .userNickname(userService.getUserNickname(productPostVOList.get(i).getUserNo()))
+                    .title(productPostVOList.get(i).getTitle())
+                    .price(productPostVOList.get(i).getPrice())
+                    .addressName(addressService.getAddressName(productPostVOList.get(i).getAddressId()))
+                    .image(productPostService.parseAddress(productPostVOList.get(i).getImage()))
+                    .productStatus(productPostVOList.get(i).getProductStatus())
+                    .build();
+
+            productAllBoardResponseList.add(productAllBoardResponse);
+        }
+
         // 리스트가 비어있을 경우
-        if (productPostVOList.isEmpty())
+        if (productAllBoardResponseList.isEmpty())
             return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("리스트없음").build());
-        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productPostVOList).build());
+        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productAllBoardResponseList).build());
     }
 
 

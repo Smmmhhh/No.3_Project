@@ -6,19 +6,23 @@
 <mapper namespace="com.treemarket.tree.mapper.ProductPostMapper">
 
     <insert id="savePost" parameterType="com.treemarket.tree.domain.ProductPostVO">
-        INSERT INTO productPosttbl (#{postId}, #{ctgId},  #{userNo}, #{addressId}, #{title}, #{price},
-                                    #{details}, #{image}, #{productStatus})
+        INSERT INTO productPosttbl (postId, ctgId, userNo, addressId, title, price, details, image, productStatus)
         VALUES
-            (productPosttbl_seq.NEXTVAL,
-             #{ctgId},
-             #{userNo},
-             #{addressId},
-             #{title},
-             #{price},
-             #{details},
-             #{image},
-             #{productStatus})
+        (productPosttbl_seq.NEXTVAL,
+        #{ctgId},
+        #{userNo},
+        #{addressId},
+        #{title},
+        #{price},
+        #{details},
+        #{image},
+        #{productStatus})
     </insert>
+
+    <select id="parseAddress" resultType="String">
+        SELECT image FROM productPosttbl WHERE image = #{joinUrl}
+    </select>
+
     
     <select id="getAllBoards" resultType="com.treemarket.tree.domain.ProductPostVO">
         SELECT * FROM productPosttbl WHERE productStatus = 1

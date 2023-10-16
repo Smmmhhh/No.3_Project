@@ -1,11 +1,8 @@
 package com.treemarket.tree.dto.Productpost.req;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
+@Getter
 @NoArgsConstructor
 public class ProductsPostRequest {
 
@@ -13,8 +10,21 @@ public class ProductsPostRequest {
     private String title;
     private Long price;
     private String ctgName;
-    private String Details;
+    private String details;
     private String addressName;
-    private String img;
+    private String[] image;
 
+    @Builder
+    public ProductsPostRequest(Long userNo, String title,
+                               Long price, String ctgName,
+                               String details, String addressName,
+                               String[] image) {
+        this.userNo = userNo;
+        this.title = title;
+        this.price = price;
+        this.ctgName = ctgName;
+        this.details = details;
+        this.addressName = addressName;
+        this.image = image;
+    }
 }
