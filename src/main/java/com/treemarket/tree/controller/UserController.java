@@ -42,7 +42,7 @@ public class UserController {
     @GetMapping ("/logout")
     public ResponseEntity<ApiResponse> logout(HttpSession session) {
         try{
-            session.removeAttribute("userInfo");
+            session.removeAttribute("userData");
 
             session.invalidate();// 세션 무효화 (옵션)
 
