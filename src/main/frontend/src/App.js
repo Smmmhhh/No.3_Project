@@ -10,8 +10,8 @@ import TransActionComplete from "./TransActionComplete/TransactionComplete";
 import Admin from "./Admin/Admin";
 import AdminProduct from "./Admin/AdminProduct";
 import AdminUser from "./Admin/AdminUser";
-import ProductsCreate from "./Products/ProductsCreate";
 import ProductsEdit from "./Products/ProductsEdit";
+import ProductsRegister from "./Products/ProductsRegister";
 function App() {
   return (
     <BrowserRouter>
@@ -26,7 +26,7 @@ function App() {
         <Route path="/admin/" element={<Admin />} />
         <Route path="/adminproduct" element={<AdminProduct />} />
         <Route path="/adminuser" element={<AdminUser />} />
-        <Route path="/productscreate" element={<ProductsCreate />} />
+        <Route path="/products/register" element={<ProductsRegister />} />
         <Route path="/mypage/productsedit" element={<ProductsEdit />} />
       </Routes>
     </BrowserRouter>
