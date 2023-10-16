@@ -38,7 +38,7 @@ public class ProductPostController {
 
         if (ctgId != null && addressId != null) {    //key가 있을 때
             //리스트 형태로 받은 url 합치기
-            String url = productPostService.joinUrls(productsPostRequest.getImage());
+            //String url = productPostService.joinUrls(productsPostRequest.getImage());
 
             // ProductPostVO 객체 생성
             ProductPostVO productpostVO = ProductPostVO.builder()
@@ -48,7 +48,7 @@ public class ProductPostController {
                     .title(productsPostRequest.getTitle())
                     .price(productsPostRequest.getPrice())
                     .details(productsPostRequest.getDetails())
-                    .image(url)
+               //     .image(url)
                     .productStatus((long) 1)
                     .build();
 
@@ -63,7 +63,7 @@ public class ProductPostController {
                     .ctgId(ctgId)
                     .details(productsPostRequest.getDetails())
                     .addressId(addressId)
-                    .image(productsPostRequest.getImage())
+                  //  .image(productsPostRequest.getImage())
                     .build();
 
             //ApiResponse 반환
@@ -96,7 +96,6 @@ public class ProductPostController {
                     .image(productPostService.parseAddress(productPostVOList.get(i).getImage()))
                     .productStatus(productPostVOList.get(i).getProductStatus())
                     .build();
-
             productAllBoardResponseList.add(productAllBoardResponse);
         }
 
@@ -111,6 +110,8 @@ public class ProductPostController {
     public ResponseEntity<ApiResponse> findBoardsByLocation(@PathVariable String sido,
                                                             @PathVariable String sigungu,
                                                             @PathVariable String town) {
+
+        System.out.println(sido);
         // Address id 찾기
         AddressVO addressVO = AddressVO.builder()
                 .sido(sido)
@@ -119,15 +120,31 @@ public class ProductPostController {
                 .build();
 
         Long addressId = addressService.getAddressId(addressVO);
-        System.out.println("컨트롤러" + addressId);
-
 
         List<ProductPostVO> productPostVOList = productPostService.findBoardsByLocation(addressId);
+
+        //Response 리스트 객체 생성
+        List<ProductAllBoardResponse> productAllBoardResponseList = new ArrayList<>();
+        //productPostVOList를 productAllBoardResponse 객체로 변환해주기
+        for(int i = 0; i < productPostVOList.size(); i++) {
+            ProductAllBoardResponse productAllBoardResponse = ProductAllBoardResponse.builder()
+                    .postId(productPostVOList.get(i).getPostId())
+                    .ctgName(categoryService.getCtgName(productPostVOList.get(i).getCtgId()))
+                    .userNickname(userService.getUserNickname(productPostVOList.get(i).getUserNo()))
+                    .title(productPostVOList.get(i).getTitle())
+                    .price(productPostVOList.get(i).getPrice())
+                    .addressName(addressService.getAddressName(productPostVOList.get(i).getAddressId()))
+                    .image(productPostService.parseAddress(productPostVOList.get(i).getImage()))
+                    .productStatus(productPostVOList.get(i).getProductStatus())
+                    .build();
+            productAllBoardResponseList.add(productAllBoardResponse);
+        }
+
         // 리스트가 비어있을 경우
         if (productPostVOList.isEmpty())
             return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("리스트없음").build());
 
-        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productPostVOList).build());
+        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productAllBoardResponseList).build());
     }
 
     @GetMapping("/detail/{postId}")
