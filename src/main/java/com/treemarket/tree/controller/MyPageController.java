@@ -155,8 +155,6 @@ public class MyPageController {
         }
     }
 
-
-
     @DeleteMapping("/products/delete/{postId}")
     public ResponseEntity<ApiResponse> deletePost(@PathVariable Long postId) {
         try {

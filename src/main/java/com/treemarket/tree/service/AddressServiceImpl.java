@@ -15,7 +15,6 @@ public class AddressServiceImpl implements AddressService {
     public Long getAddressId(String inputAddress) {
 
         AddressVO addressVO = parseAddress(inputAddress);
-
         if (addressVO == null) {
             return null; // 잘못된 주소 형식
         }
