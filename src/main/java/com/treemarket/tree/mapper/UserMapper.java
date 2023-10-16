@@ -4,6 +4,8 @@ import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.dto.User.EditResponse;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 
 @Mapper
 public interface UserMapper {
@@ -13,6 +15,5 @@ public interface UserMapper {
     void saveUser(UserVO userVO);
     void editUser(EditResponse editResponse);
     void removeUser(Long userNo);
-
 
 }

@@ -66,18 +66,13 @@ const Register = () => {
       body: JSON.stringify(formData),
     });
     const responseData = await response.json();
-    console.log(response.ok);
-    console.log(responseData);
-
-    alert("회원가입중");
 
     if (response.ok) {
-      alert("회원 가입 성공");
+      alert(responseData.message);
       navigate("/login");
     } else {
       alert("회원가입 실패");
       console.error("Request failed:", response.status, response.statusText);
-      navigate(-1);
     }
   };
 
@@ -89,7 +84,7 @@ const Register = () => {
     <div className="register">
       <div className="top_logo">
         <Link to={"/"}>
-          <img src="/assets/logo.png" />
+          <img src="/assets/logo.png" alt="logoImage" />
         </Link>
       </div>
       <div className="register_inputs">
@@ -137,6 +132,19 @@ const Register = () => {
                 />
               </div>
               <div className="item">
+                <label htmlFor="checkpwd">비밀번호 확인</label>
+                <input
+                  type="password"
+                  name="checkpwd"
+                  id="checkpwd"
+                  placeholder="5~20자"
+                  required
+                />
+                <p className="check_pwd_txt">비밀번호가 일치하지 않습니다.</p>
+              </div>
+            </div>
+            <div className="info_section">
+              <div className="item">
                 <label htmlFor="userNickname">닉네임</label>
                 <input
                   type="text"
@@ -149,19 +157,6 @@ const Register = () => {
                 <p className="check_nickname_txt">
                   이미 존재하는 닉네임입니다.
                 </p>
-              </div>
-            </div>
-            <div className="info_section">
-              <div className="item">
-                <label htmlFor="checkpwd">비밀번호 확인</label>
-                <input
-                  type="password"
-                  name="checkpwd"
-                  id="checkpwd"
-                  placeholder="5~20자"
-                  required
-                />
-                <p className="check_pwd_txt">비밀번호가 일치하지 않습니다.</p>
               </div>
               <div className="item">
                 <label htmlFor="userPhoneno">전화번호</label>
@@ -206,7 +201,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="item">
-                <input type="hidden"></input> w
+                <input type="hidden"></input>
               </div>
             </div>
 
@@ -214,7 +209,7 @@ const Register = () => {
           </div>
         </section>
         <section className="register_right">
-          <img src="assets/loginpanda.png" />
+          <img src="assets/loginpanda.png" alt="logoPandaImage" />
         </section>
       </div>
     </div>
