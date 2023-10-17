@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./Register.css";
 
@@ -9,6 +9,7 @@ import Modal from "react-modal";
 const Register = () => {
   const [jibunAddress, setJibunAddress] = useState(""); // 주소 정보 문자열
   const [isOpen, setIsOpen] = useState(false); // 모달창
+  const navigate = useNavigate();
 
   //input 데이터
   const [formData, setFormData] = useState({
@@ -54,16 +55,25 @@ const Register = () => {
   };
 
   // JOIN 버튼 클릭
-  const handleRegister = () => {
+  const handleRegister = async () => {
     console.log("formData changed2:", formData);
 
-    fetch("/register", {
+    const response = await fetch("/register", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json;charset=utf-8",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     });
+    const responseData = await response.json();
+
+    if (response.ok) {
+      alert(responseData.message);
+      navigate("/login");
+    } else {
+      alert("회원가입 실패");
+      console.error("Request failed:", response.status, response.statusText);
+    }
   };
 
   useEffect(() => {
@@ -74,14 +84,14 @@ const Register = () => {
     <div className="register">
       <div className="top_logo">
         <Link to={"/"}>
-          <img src="/assets/logo.png" />
+          <img src="/assets/logo.png" alt="logoImage" />
         </Link>
       </div>
       <div className="register_inputs">
         <section className="register_left">
           <p className="title">회원가입</p>
 
-          <form className="register_form" method="post">
+          <div className="register_form">
             <div className="info_section">
               <div className="item">
                 <label htmlFor="userId">아이디</label>
@@ -91,7 +101,6 @@ const Register = () => {
                   id="userId"
                   placeholder="5~20자"
                   onChange={handleInputChange}
-
                   required
                 />
 
@@ -99,7 +108,6 @@ const Register = () => {
               </div>
 
               <div className="item">
-
                 <label htmlFor="userName">이름</label>
                 <input
                   type="text"
@@ -124,7 +132,19 @@ const Register = () => {
                 />
               </div>
               <div className="item">
-
+                <label htmlFor="checkpwd">비밀번호 확인</label>
+                <input
+                  type="password"
+                  name="checkpwd"
+                  id="checkpwd"
+                  placeholder="5~20자"
+                  required
+                />
+                <p className="check_pwd_txt">비밀번호가 일치하지 않습니다.</p>
+              </div>
+            </div>
+            <div className="info_section">
+              <div className="item">
                 <label htmlFor="userNickname">닉네임</label>
                 <input
                   type="text"
@@ -138,35 +158,18 @@ const Register = () => {
                   이미 존재하는 닉네임입니다.
                 </p>
               </div>
-            </div>
-            <div className="info_section">
               <div className="item">
-
-                <label htmlFor="checkpwd">비밀번호 확인</label>
-                <input
-                  type="password"
-                  name="checkpwd"
-                  id="checkpwd"
-                  placeholder="5~20자"
-                  required
-                />
-                <p className="check_pwd_txt">비밀번호가 일치하지 않습니다.</p>
-              </div>
-              <div className="item">
-
                 <label htmlFor="userPhoneno">전화번호</label>
                 <input
                   type="text"
                   name="userPhoneno"
                   id="userPhoneno"
                   onChange={handleInputChange}
-
                   placeholder="010-xxxx-xxxx"
                   required
                 />
               </div>
             </div>
-
 
             <div className="info_section" onClick={toggle}>
               <div className="item">
@@ -203,11 +206,10 @@ const Register = () => {
             </div>
 
             <button onClick={handleRegister}>JOIN</button>
-
-          </form>
+          </div>
         </section>
         <section className="register_right">
-          <img src="assets/loginpanda.png" />
+          <img src="assets/loginpanda.png" alt="logoPandaImage" />
         </section>
       </div>
     </div>
