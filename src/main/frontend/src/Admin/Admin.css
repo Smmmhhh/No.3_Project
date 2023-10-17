@@ -71,6 +71,30 @@
 }
 .admin_product_nav p {
   text-align: center;
+  margin: auto;
+}
+.post_value {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+}
+.post_value p {
+  width: 12.5%;
+  margin: auto;
+}
+.post_value img {
+  width: 12%;
+}
+.post_select {
+  width: 12.5%;
+}
+.post_select_form {
+  margin: auto;
+  width: 12.5%;
+}
+.post_select {
+  margin: auto;
 }
 /* admin user */
 .admin_h2 {

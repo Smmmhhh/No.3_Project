@@ -48,20 +48,22 @@ public class AdminController {
         return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(adminProductPostList).build());
     }
 
-    @PutMapping("/post/{postId}")
-    public ResponseEntity<ApiResponse> updatePostStatus(@RequestBody AdminPostUpdateReq adminPostUpdateReq,
-                                                        @PathVariable Long postId) {
+    @PutMapping("/post")
+    public ResponseEntity<ApiResponse> updatePostStatus(@RequestBody AdminPostUpdateReq adminPostUpdateReq) {
+        System.out.println("start");
         // AdminPostUpdateReq 객체 생성 후 상태수정 메서드 실행
         AdminPostUpdateReq adminPostUpdate = AdminPostUpdateReq.builder()
-                .postId(postId)
-                .productPostStatus(adminPostUpdateReq.getProductPostStatus())
+                .postId(adminPostUpdateReq.getPostId())
+                .productStatus(adminPostUpdateReq.getProductStatus())
                 .build();
+        System.out.println("바꾸기전");
 
         try {
             // 게시글 상태 수정 메서드
             productPostService.updatePostStatus(adminPostUpdate);
+            System.out.println("db바꿈");
             // 수정한 게시글 정보 가져오는 메서드
-            ProductPostVO productPostVO = productPostService.getPostDetails(postId);
+            ProductPostVO productPostVO = productPostService.getPostDetails(adminPostUpdateReq.getPostId());
 
             return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("게시글 상태 수정 성공").data(productPostVO).build());
         }catch (Exception e) {
