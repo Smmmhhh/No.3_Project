@@ -16,9 +16,11 @@ public interface ProductPostService {
     void modifyPost(ProductPostVO productpostVO);
     void deletePost(Long postId);
     void updatePostStatus(AdminPostUpdateReq adminPostUpdateReq);
-    String joinUrls(String[] urls);
+    String joinUrls(List<String> urls);
     List<ProductAllBoardResponse> replaceAllBoardResponse(List<ProductPostVO> productPostVOList);
-    String parseAddress(String joinUrl);
 
     List<ProductsAppResponse> getAllPostsForApp();
+
+    List<String> parseAddress(String joinUrl);
+
 }

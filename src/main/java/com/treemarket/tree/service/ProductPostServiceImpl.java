@@ -8,6 +8,8 @@ import com.treemarket.tree.mapper.ProductPostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -53,11 +55,11 @@ public class ProductPostServiceImpl implements ProductPostService {
     }
 
     @Override
-    public String joinUrls(String[] urls) {
+    public String joinUrls(List<String> urls) {
         StringBuilder joinUrl = new StringBuilder();
-        for(int i = 0; i < urls.length; i++) {
-            joinUrl.append(urls[i]);
-            if(i+1 < urls.length) joinUrl.append(",");
+        for(int i = 0; i < urls.size(); i++) {
+            joinUrl.append(urls.get(i));
+            if(i+1 < urls.size()) joinUrl.append(",");
         }
         return joinUrl.toString();
     }
@@ -68,10 +70,15 @@ public class ProductPostServiceImpl implements ProductPostService {
     }
 
     @Override
-    public String parseAddress(String joinUrl) {
-        String[] parseUrls = productPostMapper.parseAddress(joinUrl).split(",");
-        //첫번째 url 주소를 반환해야함(대표 이미지)
-        return parseUrls[0];
+    public List<String> parseAddress(String joinUrl) {
+        String[] parseUrlsArr = productPostMapper.parseAddress(joinUrl).split(",");
+        List<String> parseUrlsList = new ArrayList<>();
+        for(int i = 0; i < parseUrlsArr.length; i++) {
+            parseUrlsList.add(parseUrlsArr[i]);
+        }
+
+        //url List 반환하기
+        return parseUrlsList;
     }
 
     @Override
