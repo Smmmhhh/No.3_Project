@@ -66,8 +66,8 @@
                u.userGrade,
                (SELECT COUNT(*) FROM productPosttbl WHERE userNo = u.userNo) AS postCount,
                CASE
-                   WHEN u.userValidity = 1 THEN 'O'
-                   WHEN u.userValidity = 0 THEN 'X'
+                   WHEN u.userValidity = 1 THEN 'X'
+                   WHEN u.userValidity = 0 THEN 'O'
                    ELSE NULL
                END AS userValidity
         FROM usertbl u
