@@ -19,6 +19,10 @@
         #{productStatus})
     </insert>
 
+    <select id="parseAddress" resultType="String">
+        SELECT image FROM productPosttbl WHERE image = #{joinUrl}
+    </select>
+
     
     <select id="getAllBoards" resultType="com.treemarket.tree.domain.ProductPostVO">
         SELECT * FROM productPosttbl WHERE productStatus = 1
@@ -51,6 +55,10 @@
     <update id="updatePostStatus" parameterType="com.treemarket.tree.dto.Productpost.req.AdminPostUpdateReq" >
         UPDATE productPosttbl SET productStatus = #{productPostStatus} WHERE postId = #{postId}
     </update>
+
+    <select id="getAllPostsForApp" resultType="com.treemarket.tree.dto.Productpost.res.ProductsAppResponse">
+        SELECT title, price, image From productPosttbl
+    </select>
 
 
 </mapper>

@@ -17,13 +17,17 @@
         SELECT * FROM usertbl WHERE userno = #{userNo} AND uservalidity = 1
     </select>
 
+    <select id="getUserNickname" resultType="String">
+        SELECT userNickname FROM usertbl WHERE userno = #{userNo} AND uservalidity = 1
+    </select>
+
     <insert id="saveUser" parameterType="com.treemarket.tree.domain.UserVO">
         INSERT INTO usertbl VALUES
             (USERTBL_SEQ.NEXTVAL, #{userId}, #{userAddress}, #{userPw}, #{userName},
              #{userNickname},#{userPhoneno}, #{userGrade}, #{userValidity})
     </insert>
 
-    <update id="editUser" parameterType="com.treemarket.tree.dto.User.EditResponse">
+    <update id="editUser" parameterType="com.treemarket.tree.dto.User.UserModifyResponse">
         UPDATE usertbl SET useraddress = #{userAddress}, userpw = #{userPw},
                            usernickname = #{userNickname}, userphoneno = #{userPhoneno}
         WHERE userno = #{userNo}
@@ -32,4 +36,5 @@
     <delete id="removeUser" parameterType="Long">
         UPDATE usertbl SET uservalidity = 0 WHERE userno = #{userNo}
     </delete>
+
 </mapper>

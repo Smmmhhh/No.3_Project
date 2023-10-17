@@ -4,7 +4,9 @@ import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.UserVO;
 
 import com.treemarket.tree.dto.User.LoginRequest;
+import com.treemarket.tree.dto.User.UserDataResponse;
 import com.treemarket.tree.dto.User.RegisterRequest;
+import com.treemarket.tree.dto.User.RegisterResponse;
 import com.treemarket.tree.service.AddressService;
 import com.treemarket.tree.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -24,19 +26,30 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest loginRequest, HttpSession session) {    //로그인 페이지
 
-        UserVO user = userService.login(loginRequest.getUserId(), loginRequest.getUserPw());
+        UserVO userVO = userService.login(loginRequest.getUserId(), loginRequest.getUserPw());
 
-        if (user == null) {
+        if (userVO == null) {
             return ResponseEntity.badRequest().body(new ApiResponse(409, "로그인 실패", null));
         }
 
-        session.setAttribute("userData", user);
+        String addressname = addressService.getAddressName(userVO.getUserAddress());
+
+        UserDataResponse userDataResponse = UserDataResponse.builder()
+                .userNo(userVO.getUserNo())
+                .userId(userVO.getUserId())
+                .userPw(userVO.getUserPw())
+                .userAddress(addressname)
+                .userName(userVO.getUserName())
+                .userNickname(userVO.getUserNickname())
+                .userPhoneno(userVO.getUserPhoneno())
+                .userGrade(userVO.getUserGrade())
+                .userValidity(userVO.getUserValidity())
+                .build();
+
+        session.setAttribute("userData", userDataResponse);
         System.out.println("로그인 성공");
 
-        UserVO uservo = (UserVO) session.getAttribute("userData");
-        System.out.println(uservo.getUserName());
-
-        return ResponseEntity.ok().body(new ApiResponse(200, "로그인 성공", user));
+        return ResponseEntity.ok().body(new ApiResponse(200, "로그인 성공", userDataResponse));
     }
 
     @GetMapping ("/logout")
@@ -82,6 +95,7 @@ public class UserController {
                     .userNickname(registerRequest.getUserNickname())
                     .userAddress(addressId)
                     .userPhoneno(registerRequest.getUserPhoneno())
+                    .userGrade("C")
                     .userValidity("1")
                     .build();
 
@@ -91,8 +105,29 @@ public class UserController {
                 return ResponseEntity.badRequest().body(new ApiResponse(413, "userNo 생성 오류", null));
             }
 
-            return ResponseEntity.ok().body(new ApiResponse(200, "회원가입 성공", saveUser));
+            RegisterResponse registerResponse = RegisterResponse.builder()
+                    .userId(saveUser.getUserId())
+                    .userPw(saveUser.getUserPw())
+                    .userAddress(registerRequest.getUserAddress())
+                    .userName(saveUser.getUserName())
+                    .userNickname(saveUser.getUserNickname())
+                    .userPhoneno(saveUser.getUserPhoneno())
+                    .userGrade(saveUser.getUserGrade())
+                    .userValidity(saveUser.getUserValidity())
+                    .build();
+
+            return ResponseEntity.ok().body(new ApiResponse(200, "회원가입 성공", registerResponse));
         }
     }
 
 }
+
+/*
+*     private String userId;
+    private String userAddress;
+    private String userPw;
+    private String userName;
+    private String userNickname;
+    private String userPhoneno;
+    private String userGrade;
+    private String userValidity;*/

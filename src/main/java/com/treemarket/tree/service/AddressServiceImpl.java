@@ -5,6 +5,8 @@ import com.treemarket.tree.mapper.AddressMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
+
 @Service
 public class AddressServiceImpl implements AddressService {
 
@@ -23,6 +25,18 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public Long getAddressId(AddressVO addressVO) {
         return addressMapper.getAddressId(addressVO);
+    }
+
+    @Override
+    public String getAddressName(Long addressId) {
+        StringBuilder addressName = new StringBuilder();
+        AddressVO addressVO = addressMapper.getAddressName(addressId);
+        addressName.append(addressVO.getSido())
+                .append(" ")
+                .append(addressVO.getSigungu())
+                .append(" ")
+                .append(addressVO.getTown());
+        return addressName.toString();
     }
 
     private AddressVO parseAddress(String inputAddress){

@@ -9,5 +9,9 @@
         SELECT ctgid FROM ctgtbl WHERE ctgName = #{ctgName}
     </select>
 
+    <select id="getCtgName" resultType="String">
+        SELECT ctgName FROM ctgtbl WHERE ctgId = #{ctgId}
+    </select>
+
 
 </mapper>
