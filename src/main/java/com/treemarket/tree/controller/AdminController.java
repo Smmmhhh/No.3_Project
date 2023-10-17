@@ -60,7 +60,6 @@ public class AdminController {
         try {
             // 게시글 상태 수정 메서드
             productPostService.updatePostStatus(adminPostUpdate);
-            System.out.println("db바꿈");
             // 수정한 게시글 정보 가져오는 메서드
             ProductPostVO productPostVO = productPostService.getPostDetails(adminPostUpdateReq.getPostId());
 
