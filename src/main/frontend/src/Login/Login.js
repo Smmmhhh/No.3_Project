@@ -23,9 +23,8 @@ const Login = () => {
       const userData = await response.json(); // 응답 데이터를 JSON으로 파싱
       setLogIn(true);
       sessionStorage.setItem("userData", JSON.stringify(userData));
-      navigate(-1);
+      navigate("/");
       alert("로그인 성공");
-      console.log(userData);
     } else {
       // 로그인 실패 시
       alert("아이디와 비밀번호를 다시 확인해주세요.");
