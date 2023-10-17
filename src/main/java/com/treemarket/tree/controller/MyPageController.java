@@ -3,21 +3,20 @@ package com.treemarket.tree.controller;
 import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.domain.ProductPostVO;
+import com.treemarket.tree.dto.Productpost.req.ProductsPostRequest;
 import com.treemarket.tree.dto.Productpost.res.ProductMypageResponse;
 import com.treemarket.tree.dto.Productpost.res.ProductsPostResponse;
 import com.treemarket.tree.dto.User.EditRequest;
 import com.treemarket.tree.dto.User.EditResponse;
 import com.treemarket.tree.dto.Productpost.req.ProductModifyRequest;
-import com.treemarket.tree.service.AddressService;
-import com.treemarket.tree.service.JoinService;
-import com.treemarket.tree.service.UserService;
-import com.treemarket.tree.service.CategoryService;
-import com.treemarket.tree.service.ProductPostService;
+import com.treemarket.tree.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -30,6 +29,7 @@ public class MyPageController {
     private final JoinService joinService;  
     private final ProductPostService productPostService;
     private final CategoryService categoryService;
+    private final AwsS3ServiceImpl awsS3Service;
 
 
     @PutMapping("/users/{userNo}")
@@ -116,6 +116,7 @@ public class MyPageController {
         List<String> filesUrl = productPostService.parseAddress(productPostVO.getImage());
 
         ProductsPostResponse productsPostResponse = ProductsPostResponse.builder()
+                .postId(postId)
                 .userNickname(userService.getUserNickname(productPostVO.getUserNo()))
                 .title(productPostVO.getTitle())
                 .price(productPostVO.getPrice())
@@ -131,32 +132,39 @@ public class MyPageController {
     }
 
     @PutMapping("/productsedit/{postId}")
-    public ResponseEntity<ApiResponse> modifyPost(@PathVariable Long postId, @RequestBody ProductModifyRequest productModifyRequest) {
+    public ResponseEntity<ApiResponse> modifyPost(
+            @PathVariable Long postId,
+            @RequestPart("multipartFiles") List<MultipartFile> multipartFiles,
+            @RequestPart("productsPostRequest") ProductsPostRequest productsPostRequest) throws IOException {
 
         Long ctgId;
         Long addressId;
 
         try {
-            ctgId = categoryService.getCtgId(productModifyRequest.getCtgName());  //Category key값 찾기
+            ctgId = categoryService.getCtgId(productsPostRequest.getCtgName());  //Category key값 찾기
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("카테고리 키값 오류").build());
         }
 
         try {
-            addressId = addressService.getAddressId(productModifyRequest.getAddressName()); //Address Key값 찾기
+            addressId = addressService.getAddressId(productsPostRequest.getAddressName()); //Address Key값 찾기
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("주소 키값 오류").build());
         }
+        List<String> filesUrl = awsS3Service.uploadFile(multipartFiles);
+
+        //리스트 형태로 받은 url 합치기
+        String url = productPostService.joinUrls(filesUrl);
 
         // ProductPostVO 수정 객체 생성
         ProductPostVO productpostVO = ProductPostVO.builder()
                 .postId(postId)
                 .ctgId(ctgId)
                 .addressId(addressId)
-                .title(productModifyRequest.getTitle())
-                .price(productModifyRequest.getPrice())
-                .details(productModifyRequest.getDetails())
-                .image(productModifyRequest.getImage())
+                .title(productsPostRequest.getTitle())
+                .price(productsPostRequest.getPrice())
+                .details(productsPostRequest.getDetails())
+                .image(url)
                 .build();
 
         // 게시글 수정
