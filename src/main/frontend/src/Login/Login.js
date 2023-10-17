@@ -5,6 +5,7 @@ const Login = () => {
   const [logIn, setLogIn] = useState(false);
   const [userId, setuserId] = useState("");
   const [userPw, setuserPw] = useState("");
+  const [userName, setuserName] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -16,12 +17,15 @@ const Login = () => {
       body: JSON.stringify({
         userId,
         userPw,
+        userName,
       }),
     });
 
     if (response.ok) {
+      // 로그인 성공 시
       const userData = await response.json(); // 응답 데이터를 JSON으로 파싱
       setLogIn(true);
+
       sessionStorage.setItem("userData", JSON.stringify(userData));
       navigate("/");
       alert("로그인 성공");

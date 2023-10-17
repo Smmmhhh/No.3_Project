@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 public class AdminPostUpdateReq {
 
     private Long postId;
-    private Long productPostStatus;
+    private Long productStatus;
 
     @Builder
-    public AdminPostUpdateReq(Long postId, Long productPostStatus) {
+    public AdminPostUpdateReq(Long postId, Long productStatus) {
         this.postId = postId;
-        this.productPostStatus = productPostStatus;
+        this.productStatus = productStatus;
     }
 }

@@ -73,9 +73,9 @@ public class ProductPostController {
 
             //ApiResponse 반환
             return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productsPostResponse).build());  // 성공
-        } else if (ctgId != null && addressId == null) {  //주소 key값이 없을 때
+        } else if (ctgId != null && addressId == null) {  //주소 key 값이 없을 때
             return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("주소값 없음").build());
-        } else if (ctgId == null && addressId != null) {    //주소 key값이 없을 때
+        } else if (ctgId == null && addressId != null) {    //주소 key 값이 없을 때
             return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("카테고리값 없음").build());
         } else {
             return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("주소, 키값 없음").build());
@@ -181,9 +181,15 @@ public class ProductPostController {
     @GetMapping("/app")
     private List<ProductsAppResponse> getAllPostsForApp(){
         return productPostService.getAllPostsForApp();
+
+    }
+
+    @GetMapping("/app")
+    private List<ProductsAppResponse> getAllPostsForApp(){
+        return productPostService.getAllPostsForApp();
     }
 
 
 
-}
 
+}

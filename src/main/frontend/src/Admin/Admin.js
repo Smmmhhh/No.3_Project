@@ -12,10 +12,10 @@ const Admin = () => {
         </Link>
       </div>
       <div className="admin_onclick">
-        <Link to="/adminproduct">
+        <Link to="/admin/post">
           <button className="admin_onclick_button1">게시글 관리</button>
         </Link>
-        <Link to="/adminuser">
+        <Link to="/admin/user">
           <button className="admin_onclick_button2">회원 관리</button>
         </Link>
       </div>
