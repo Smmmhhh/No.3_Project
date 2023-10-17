@@ -94,6 +94,16 @@
         WHERE c.roomid = #{roomId}
     </select>
 
+    <select id="getTransactionCount" resultType="int">
+        SELECT (
+                    (SELECT COUNT(*) FROM purchaseComptbl WHERE postID IN (SELECT postID FROM productPosttbl WHERE userNo = u.userNo))
+                    +
+                    (SELECT COUNT(*) FROM purchaseComptbl WHERE buyerNo = u.userNo)
+                ) AS transactionCount
+        FROM usertbl u
+        WHERE u.userno = #{userno}
+    </select>
+
 
 
 </mapper>

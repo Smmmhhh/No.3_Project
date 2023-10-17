@@ -2,6 +2,7 @@ package com.treemarket.tree.service;
 
 import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.dto.User.UserModifyResponse;
+import com.treemarket.tree.dto.User.UserUpdateGrade;
 
 public interface UserService {
     UserVO login(String id, String passWord);
@@ -13,5 +14,6 @@ public interface UserService {
     void editUser(UserModifyResponse userModifyResponse);
     void removeUser(Long userNo);
     String getUserNickname(Long userId);
+    void updateGrade(UserUpdateGrade userUpdateGrade);
 
 }

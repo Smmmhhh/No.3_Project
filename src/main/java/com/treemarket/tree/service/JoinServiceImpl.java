@@ -60,4 +60,9 @@ public class JoinServiceImpl implements JoinService{
     public PurchaseCompVO getCompInfo(Long roomId) {
         return joinMapper.getCompInfo(roomId);
     }
+
+    @Override
+    public int getTransactionCount(Long userno) {
+        return joinMapper.getTransactionCount(userno);
+    }
 }
