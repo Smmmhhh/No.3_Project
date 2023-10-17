@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditRequest {
+public class UserModifyRequest {
     private String userPw;
     private String userNickname;
     private String userPhoneno;

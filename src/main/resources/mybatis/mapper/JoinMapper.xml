@@ -5,28 +5,28 @@
 
 <mapper namespace="com.treemarket.tree.mapper.JoinMapper">
 
-    <select id="findLikePostByUserNo" resultType="com.treemarket.tree.dto.Productpost.ProductMypageResponse">
+    <select id="findLikePostByUserNo" resultType="com.treemarket.tree.dto.Productpost.res.ProductMypageResponse">
         SELECT p.postid, p.title, p.price, p.image
         FROM productposttbl p
         JOIN liketbl l ON p.postid = l.postid
         WHERE l.userno = #{userNo} AND p.productstatus = 0
     </select>
     
-    <select id="findPurchasePostByUserNo" resultType="com.treemarket.tree.dto.Productpost.ProductMypageResponse">
+    <select id="findPurchasePostByUserNo" resultType="com.treemarket.tree.dto.Productpost.res.ProductMypageResponse">
         SELECT p.postid, p.title, p.price, p.image
         FROM productposttbl p
         JOIN purchasecomptbl c ON p.postid = c.postid
         WHERE c.buyerno = #{userNo}
     </select>
 
-    <select id="findSalesPostByUserNo" resultType="com.treemarket.tree.dto.Productpost.ProductMypageResponse">
+    <select id="findSalesPostByUserNo" resultType="com.treemarket.tree.dto.Productpost.res.ProductMypageResponse">
         SELECT p.postid, p.title, p.price, p.image
         FROM productposttbl p
         JOIN purchasecomptbl c ON p.postid = c.postid
         WHERE p.userno = #{userNo}
     </select>
 
-    <select id="findRegisterPostByUserNo" resultType="com.treemarket.tree.dto.Productpost.ProductMypageResponse">
+    <select id="findRegisterPostByUserNo" resultType="com.treemarket.tree.dto.Productpost.res.ProductMypageResponse">
         SELECT p.postid, p.title, p.price, p.image
         FROM productposttbl p
         LEFT JOIN purchasecomptbl c ON p.postid = c.postid
@@ -66,11 +66,34 @@
                u.userGrade,
                (SELECT COUNT(*) FROM productPosttbl WHERE userNo = u.userNo) AS postCount,
                CASE
-                   WHEN u.userValidity = 1 THEN 'O'
-                   WHEN u.userValidity = 0 THEN 'X'
+                   WHEN u.userValidity = 1 THEN 'X'
+                   WHEN u.userValidity = 0 THEN 'O'
                    ELSE NULL
                END AS userValidity
         FROM usertbl u
     </select>
+
+    <insert id="savePurchaseComp">
+        INSERT INTO purchasecomptbl (purchasecompid, postid, buyerno, PURCHASECOMPDATE)
+        SELECT purchasecomptbl_seq.nextval, postid, buyerno, sysdate
+        FROM chatroomtbl
+        WHERE roomid = #{roomId}
+    </insert>
+
+    <select id="getSellerNo" resultType="Long">
+        SELECT p.userno
+        FROM chatroomtbl c
+        INNER JOIN productPosttbl p ON c.postid = p.postid
+        WHERE c.roomid = #{roomId}
+    </select>
+
+    <select id="getCompInfo" resultType="com.treemarket.tree.domain.PurchaseCompVO">
+        SELECT p.*
+        FROM purchasecomptbl p
+        INNER JOIN chatroomtbl c ON p.postid = c.postid
+        WHERE c.roomid = #{roomId}
+    </select>
+
+
 
 </mapper>

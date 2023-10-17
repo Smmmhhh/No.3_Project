@@ -9,4 +9,8 @@
         SELECT addressid FROM addresstbl WHERE sido = #{sido} AND sigungu = #{sigungu} AND town = #{town}
     </select>
 
+    <select id="getAddressName" resultType="com.treemarket.tree.domain.AddressVO">
+        SELECT sido, sigungu, town FROM addresstbl WHERE addressid =#{addressId}
+    </select>
+
 </mapper>

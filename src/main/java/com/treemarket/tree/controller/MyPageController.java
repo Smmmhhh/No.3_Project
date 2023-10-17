@@ -3,20 +3,21 @@ package com.treemarket.tree.controller;
 import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.domain.ProductPostVO;
-import com.treemarket.tree.dto.Productpost.ProductMypageResponse;
-import com.treemarket.tree.dto.User.EditRequest;
-import com.treemarket.tree.dto.User.EditResponse;
+import com.treemarket.tree.dto.Productpost.req.ProductsPostRequest;
+import com.treemarket.tree.dto.Productpost.res.ProductMypageResponse;
+import com.treemarket.tree.dto.User.UserDataResponse;
+import com.treemarket.tree.dto.User.UserModifyRequest;
+import com.treemarket.tree.dto.User.UserModifyResponse;
+import com.treemarket.tree.dto.Productpost.res.ProductsPostResponse;
 import com.treemarket.tree.dto.Productpost.req.ProductModifyRequest;
-import com.treemarket.tree.service.AddressService;
-import com.treemarket.tree.service.JoinService;
-import com.treemarket.tree.service.UserService;
-import com.treemarket.tree.service.CategoryService;
-import com.treemarket.tree.service.ProductPostService;
+import com.treemarket.tree.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -29,38 +30,53 @@ public class MyPageController {
     private final JoinService joinService;  
     private final ProductPostService productPostService;
     private final CategoryService categoryService;
+    private final AwsS3ServiceImpl awsS3Service;
 
 
     @PutMapping("/users/{userNo}")
-    public ResponseEntity<ApiResponse> editUser(@PathVariable Long userNo, @RequestBody EditRequest editRequest, HttpSession session){
+    public ResponseEntity<ApiResponse> editUser(@PathVariable Long userNo, @RequestBody UserModifyRequest userModifyRequest, HttpSession session){
 
-        String inputAddress = editRequest.getUserAddress();
+        String inputAddress = userModifyRequest.getUserAddress();
         Long addressId = addressService.getAddressId(inputAddress);
         if(addressId == null){
             return ResponseEntity.badRequest().body(new ApiResponse(409, "주소를 찾을 수 없음", null));
         }
 
-        if(!userService.findUserByUserNo(userNo).getUserNickname().equals(editRequest.getUserNickname())){
-            boolean isNicknameUnique  = userService.checkNickname(editRequest.getUserNickname());
+        if(!userService.findUserByUserNo(userNo).getUserNickname().equals(userModifyRequest.getUserNickname())){
+            boolean isNicknameUnique  = userService.checkNickname(userModifyRequest.getUserNickname());
             if (!isNicknameUnique) {
-                return ResponseEntity.badRequest().body(new ApiResponse(409, "닉네임 중복",null));
+                return ResponseEntity.badRequest().body(new ApiResponse(412, "닉네임 중복",null));
             }
         }
 
-        EditResponse editResponse = EditResponse.builder()
+        UserModifyResponse userModifyResponse = UserModifyResponse.builder()
                 .userNo(userNo)
-                .userPw(editRequest.getUserPw())
-                .userNickname(editRequest.getUserNickname())
+                .userPw(userModifyRequest.getUserPw())
+                .userNickname(userModifyRequest.getUserNickname())
                 .userAddress(addressId)
-                .userPhoneno(editRequest.getUserPhoneno())
+                .userPhoneno(userModifyRequest.getUserPhoneno())
                 .build();
 
-        userService.editUser(editResponse);
+        userService.editUser(userModifyResponse);
 
-        UserVO edituser = userService.findUserByUserNo(userNo);
+        UserVO userVO = userService.findUserByUserNo(userNo);
 
-        session.setAttribute("userData", edituser);
-        return ResponseEntity.ok().body(new ApiResponse(200, "회원 정보 저장 성공", edituser));
+        String addressname = addressService.getAddressName(userVO.getUserAddress());
+
+        UserDataResponse userDataResponse = UserDataResponse.builder()
+                .userNo(userVO.getUserNo())
+                .userId(userVO.getUserId())
+                .userPw(userVO.getUserPw())
+                .userAddress(addressname)
+                .userName(userVO.getUserName())
+                .userNickname(userVO.getUserNickname())
+                .userPhoneno(userVO.getUserPhoneno())
+                .userGrade(userVO.getUserGrade())
+                .userValidity(userVO.getUserValidity())
+                .build();
+
+        session.setAttribute("userData", userDataResponse);
+        return ResponseEntity.ok().body(new ApiResponse(200, "회원 정보 수정 성공", userDataResponse));
     }
 
     @DeleteMapping("/users/{userNo}")
@@ -108,40 +124,62 @@ public class MyPageController {
 
     @GetMapping("/productsedit/{postId}")
     public ResponseEntity<ApiResponse> getPostDetails(@PathVariable Long postId) {
-
+        // 요청한 게시물 객체 가져오기
         ProductPostVO productPostVO = productPostService.getPostDetails(postId);
+
+        //ProductsPostResponse 객체 생성
+        List<String> filesUrl = productPostService.parseAddress(productPostVO.getImage());
+
+        ProductsPostResponse productsPostResponse = ProductsPostResponse.builder()
+                .postId(postId)
+                .userNickname(userService.getUserNickname(productPostVO.getUserNo()))
+                .title(productPostVO.getTitle())
+                .price(productPostVO.getPrice())
+                .ctgName(categoryService.getCtgName(productPostVO.getCtgId()))
+                .details(productPostVO.getDetails())
+                .addressName(addressService.getAddressName(productPostVO.getAddressId()))
+                .image(filesUrl)
+                .build();
+
         if (productPostVO == null)
             return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("실패").build());
-        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productPostVO).build());
+        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productsPostResponse).build());
     }
 
     @PutMapping("/productsedit/{postId}")
-    public ResponseEntity<ApiResponse> modifyPost(@PathVariable Long postId, @RequestBody ProductModifyRequest productModifyRequest) {
+    public ResponseEntity<ApiResponse> modifyPost(
+            @PathVariable Long postId,
+            @RequestPart("multipartFiles") List<MultipartFile> multipartFiles,
+            @RequestPart("productsPostRequest") ProductsPostRequest productsPostRequest) throws IOException {
 
         Long ctgId;
         Long addressId;
 
         try {
-            ctgId = categoryService.getCtgId(productModifyRequest.getCtgName());  //Category key값 찾기
+            ctgId = categoryService.getCtgId(productsPostRequest.getCtgName());  //Category key값 찾기
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("카테고리 키값 오류").build());
         }
 
         try {
-            addressId = addressService.getAddressId(productModifyRequest.getAddressName()); //Address Key값 찾기
+            addressId = addressService.getAddressId(productsPostRequest.getAddressName()); //Address Key값 찾기
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("주소 키값 오류").build());
         }
+        List<String> filesUrl = awsS3Service.uploadFile(multipartFiles);
+
+        //리스트 형태로 받은 url 합치기
+        String url = productPostService.joinUrls(filesUrl);
 
         // ProductPostVO 수정 객체 생성
         ProductPostVO productpostVO = ProductPostVO.builder()
                 .postId(postId)
                 .ctgId(ctgId)
                 .addressId(addressId)
-                .title(productModifyRequest.getTitle())
-                .price(productModifyRequest.getPrice())
-                .details(productModifyRequest.getDetails())
-                .image(productModifyRequest.getImage())
+                .title(productsPostRequest.getTitle())
+                .price(productsPostRequest.getPrice())
+                .details(productsPostRequest.getDetails())
+                .image(url)
                 .build();
 
         // 게시글 수정
