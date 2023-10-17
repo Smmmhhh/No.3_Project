@@ -49,7 +49,6 @@ public class ProductPostServiceImpl implements ProductPostService {
     public void updatePostStatus(AdminPostUpdateReq adminPostUpdateReq) {
         productPostMapper.updatePostStatus(adminPostUpdateReq);
     }
-
     @Override
     public String joinUrls(String[] urls) {
         StringBuilder joinUrl = new StringBuilder();
@@ -59,5 +58,4 @@ public class ProductPostServiceImpl implements ProductPostService {
         }
         return joinUrl.toString();
     }
-
 }
