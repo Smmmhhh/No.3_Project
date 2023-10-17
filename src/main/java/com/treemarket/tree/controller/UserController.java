@@ -94,7 +94,7 @@ public class UserController {
                     .userNickname(registerRequest.getUserNickname())
                     .userAddress(addressId)
                     .userPhoneno(registerRequest.getUserPhoneno())
-                    .userGrade("C")
+                    .userGrade("1")
                     .userValidity("1")
                     .build();
 
