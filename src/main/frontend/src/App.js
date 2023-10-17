@@ -8,7 +8,7 @@ import UsersEdit from "./UsersEdit";
 import MyPage from "./MyPage/MyPage";
 import TransActionComplete from "./TransActionComplete/TransactionComplete";
 import Admin from "./Admin/Admin";
-import AdminProduct from "./Admin/AdminProduct";
+import AdminPost from "./Admin/AdminPost";
 import AdminUser from "./Admin/AdminUser";
 import ProductsEdit from "./Products/ProductsEdit";
 import ProductsRegister from "./Products/ProductsRegister";
@@ -24,10 +24,10 @@ function App() {
         <Route path="/mypage/users" element={<UsersEdit />} />
         <Route path="/TransActionComplete" element={<TransActionComplete />} />
         <Route path="/admin/" element={<Admin />} />
-        <Route path="/adminproduct" element={<AdminProduct />} />
         <Route path="/products/register" element={<ProductsRegister />} />
         <Route path="/mypage/productsedit" element={<ProductsEdit />} />
         <Route path="/admin/user" element={<AdminUser />} />
+        <Route path="/admin/post" element={<AdminPost />} />
       </Routes>
     </BrowserRouter>
   );

@@ -12,16 +12,19 @@ public class ProductsPostRequest {
     private String ctgName;
     private String details;
     private String addressName;
+    private String[] img;
 
     @Builder
     public ProductsPostRequest(Long userNo, String title,
                                Long price, String ctgName,
-                               String details, String addressName) {
+                               String details, String addressName,
+                               String[] img) {
         this.userNo = userNo;
         this.title = title;
         this.price = price;
         this.ctgName = ctgName;
         this.details = details;
         this.addressName = addressName;
+        this.img = img;
     }
 }
