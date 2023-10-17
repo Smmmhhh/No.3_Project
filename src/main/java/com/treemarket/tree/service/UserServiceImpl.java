@@ -1,10 +1,9 @@
 package com.treemarket.tree.service;
 
 import com.treemarket.tree.domain.UserVO;
-import com.treemarket.tree.dto.User.EditResponse;
+import com.treemarket.tree.dto.User.UserModifyResponse;
 import com.treemarket.tree.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -53,8 +52,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void editUser(EditResponse editResponse) {
-        userMapper.editUser(editResponse);
+    public void editUser(UserModifyResponse userModifyResponse) {
+        userMapper.editUser(userModifyResponse);
     }
 
     @Override

@@ -5,9 +5,10 @@ import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.domain.ProductPostVO;
 import com.treemarket.tree.dto.Productpost.req.ProductsPostRequest;
 import com.treemarket.tree.dto.Productpost.res.ProductMypageResponse;
+import com.treemarket.tree.dto.User.UserDataResponse;
+import com.treemarket.tree.dto.User.UserModifyRequest;
+import com.treemarket.tree.dto.User.UserModifyResponse;
 import com.treemarket.tree.dto.Productpost.res.ProductsPostResponse;
-import com.treemarket.tree.dto.User.EditRequest;
-import com.treemarket.tree.dto.User.EditResponse;
 import com.treemarket.tree.dto.Productpost.req.ProductModifyRequest;
 import com.treemarket.tree.service.*;
 import lombok.RequiredArgsConstructor;
@@ -33,35 +34,49 @@ public class MyPageController {
 
 
     @PutMapping("/users/{userNo}")
-    public ResponseEntity<ApiResponse> editUser(@PathVariable Long userNo, @RequestBody EditRequest editRequest, HttpSession session){
+    public ResponseEntity<ApiResponse> editUser(@PathVariable Long userNo, @RequestBody UserModifyRequest userModifyRequest, HttpSession session){
 
-        String inputAddress = editRequest.getUserAddress();
+        String inputAddress = userModifyRequest.getUserAddress();
         Long addressId = addressService.getAddressId(inputAddress);
         if(addressId == null){
             return ResponseEntity.badRequest().body(new ApiResponse(409, "주소를 찾을 수 없음", null));
         }
 
-        if(!userService.findUserByUserNo(userNo).getUserNickname().equals(editRequest.getUserNickname())){
-            boolean isNicknameUnique  = userService.checkNickname(editRequest.getUserNickname());
+        if(!userService.findUserByUserNo(userNo).getUserNickname().equals(userModifyRequest.getUserNickname())){
+            boolean isNicknameUnique  = userService.checkNickname(userModifyRequest.getUserNickname());
             if (!isNicknameUnique) {
-                return ResponseEntity.badRequest().body(new ApiResponse(409, "닉네임 중복",null));
+                return ResponseEntity.badRequest().body(new ApiResponse(412, "닉네임 중복",null));
             }
         }
 
-        EditResponse editResponse = EditResponse.builder()
+        UserModifyResponse userModifyResponse = UserModifyResponse.builder()
                 .userNo(userNo)
-                .userPw(editRequest.getUserPw())
-                .userNickname(editRequest.getUserNickname())
+                .userPw(userModifyRequest.getUserPw())
+                .userNickname(userModifyRequest.getUserNickname())
                 .userAddress(addressId)
-                .userPhoneno(editRequest.getUserPhoneno())
+                .userPhoneno(userModifyRequest.getUserPhoneno())
                 .build();
 
-        userService.editUser(editResponse);
+        userService.editUser(userModifyResponse);
 
-        UserVO edituser = userService.findUserByUserNo(userNo);
+        UserVO userVO = userService.findUserByUserNo(userNo);
 
-        session.setAttribute("userData", edituser);
-        return ResponseEntity.ok().body(new ApiResponse(200, "회원 정보 저장 성공", edituser));
+        String addressname = addressService.getAddressName(userVO.getUserAddress());
+
+        UserDataResponse userDataResponse = UserDataResponse.builder()
+                .userNo(userVO.getUserNo())
+                .userId(userVO.getUserId())
+                .userPw(userVO.getUserPw())
+                .userAddress(addressname)
+                .userName(userVO.getUserName())
+                .userNickname(userVO.getUserNickname())
+                .userPhoneno(userVO.getUserPhoneno())
+                .userGrade(userVO.getUserGrade())
+                .userValidity(userVO.getUserValidity())
+                .build();
+
+        session.setAttribute("userData", userDataResponse);
+        return ResponseEntity.ok().body(new ApiResponse(200, "회원 정보 수정 성공", userDataResponse));
     }
 
     @DeleteMapping("/users/{userNo}")

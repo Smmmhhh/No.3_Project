@@ -73,4 +73,27 @@
         FROM usertbl u
     </select>
 
+    <insert id="savePurchaseComp">
+        INSERT INTO purchasecomptbl (purchasecompid, postid, buyerno, PURCHASECOMPDATE)
+        SELECT purchasecomptbl_seq.nextval, postid, buyerno, sysdate
+        FROM chatroomtbl
+        WHERE roomid = #{roomId}
+    </insert>
+
+    <select id="getSellerNo" resultType="Long">
+        SELECT p.userno
+        FROM chatroomtbl c
+        INNER JOIN productPosttbl p ON c.postid = p.postid
+        WHERE c.roomid = #{roomId}
+    </select>
+
+    <select id="getCompInfo" resultType="com.treemarket.tree.domain.PurchaseCompVO">
+        SELECT p.*
+        FROM purchasecomptbl p
+        INNER JOIN chatroomtbl c ON p.postid = c.postid
+        WHERE c.roomid = #{roomId}
+    </select>
+
+
+
 </mapper>

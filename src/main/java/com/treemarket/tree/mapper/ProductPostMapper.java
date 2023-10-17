@@ -2,6 +2,7 @@ package com.treemarket.tree.mapper;
 
 import com.treemarket.tree.domain.ProductPostVO;
 import com.treemarket.tree.dto.Productpost.req.AdminPostUpdateReq;
+import com.treemarket.tree.dto.Productpost.res.ProductsAppResponse;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface ProductPostMapper {
     void deletePost(Long postId);
     void updatePostStatus(AdminPostUpdateReq adminPostUpdateReq);
     String parseAddress(String joinUrl);
+
+    List<ProductsAppResponse> getAllPostsForApp();
 }
