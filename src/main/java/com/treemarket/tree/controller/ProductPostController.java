@@ -162,6 +162,7 @@ public class ProductPostController {
         List<String> filesUrl = productPostService.parseAddress(productPostVO.getImage());
 
         ProductsPostResponse productsPostResponse = ProductsPostResponse.builder()
+                .postId(postId)
                 .userNickname(userService.getUserNickname(productPostVO.getUserNo()))
                 .title(productPostVO.getTitle())
                 .price(productPostVO.getPrice())

@@ -7,6 +7,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductsPostResponse {
 
+    private Long postId;
     private String userNickname;
     private String title;
     private Long price;
@@ -16,9 +17,12 @@ public class ProductsPostResponse {
     private List<String> image;
 
     @Builder
-    public ProductsPostResponse(String userNickname, String title, Long price,
-                                String ctgName, String details,
-                                String addressName, List<String> image) {
+
+    public ProductsPostResponse(Long postId, String userNickname,
+                                String title, Long price, String ctgName,
+                                String details, String addressName,
+                                List<String> image) {
+        this.postId = postId;
         this.userNickname = userNickname;
         this.title = title;
         this.price = price;
