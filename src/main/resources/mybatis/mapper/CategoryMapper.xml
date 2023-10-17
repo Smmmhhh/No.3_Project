@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.treemarket.tree.mapper.CategoryMapper">
+
+    <select id="getCtgId" resultType="Long">
+        SELECT ctgid FROM ctgtbl WHERE ctgName = #{ctgName}
+    </select>
+
+    <select id="getCtgName" resultType="String">
+        SELECT ctgName FROM ctgtbl WHERE ctgId = #{ctgId}
+    </select>
+
+
+</mapper>

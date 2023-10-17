@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryVO {
-    private Long ctgId;
-    private String ctgName;
+public class PurchaseCompVO {
+    private Long purchaseCompId;
+    private Long postId;
+    private Long buyerNo;
+    private String purchaseCompDate;
 }

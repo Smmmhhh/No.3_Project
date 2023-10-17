@@ -1,13 +1,14 @@
-package com.treemarket.tree.domain;
+package com.treemarket.tree.dto.User;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class UserVO {
-    private Long userNo;
+public class RegisterResponse {
     private String userId;
-    private Long userAddress;
+    private String userAddress;
     private String userPw;
     private String userName;
     private String userNickname;
@@ -16,10 +17,9 @@ public class UserVO {
     private String userValidity;
 
     @Builder
-    public UserVO(Long userNo, String userId, Long userAddress, String userPw,
-                  String userName, String userNickname,
-                  String userPhoneno, String userGrade, String userValidity) {
-        this.userNo = userNo;
+
+    public RegisterResponse(String userId, String userAddress, String userPw,
+                            String userName, String userNickname, String userPhoneno, String userGrade, String userValidity) {
         this.userId = userId;
         this.userAddress = userAddress;
         this.userPw = userPw;

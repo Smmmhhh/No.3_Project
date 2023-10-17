@@ -12,14 +12,15 @@
     <table border="1">
         <thead>
         <tr>
-            <th>ctgID</th>
-            <th>ctgName</th>
+            <th>userCode</th>
+            <th>userName</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="row:${Alllist}">
-            <th th:text="${row.ctgId}"></th>
+        <tr th:each="row:${allList}">
+            <th th:text="${row.ctgID}"></th>
             <th th:text="${row.ctgName}"></th>
+
         </tr>
         </tbody>
 
