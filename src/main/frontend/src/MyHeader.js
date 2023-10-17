@@ -9,10 +9,10 @@ const MyHeader = () => {
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
     if (userData) {
-      const { userNo, userName } = userData;
       setLogin(true);
       setUserNo(userNo);
-      setUserName(userName);
+      setUserName(userData.data.userName);
+      console.log(userData);
     }
   }, []);
   const handleLogout = async () => {

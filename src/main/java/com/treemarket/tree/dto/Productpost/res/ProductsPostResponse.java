@@ -11,10 +11,10 @@ public class ProductsPostResponse {
     private Long ctgId;
     private String details;
     private Long addressId;
-    private String image;
+    private String[] image;
 
     @Builder
-    public ProductsPostResponse(Long userNo, String title, Long price, Long ctgId, String details, Long addressId, String image) {
+    public ProductsPostResponse(Long userNo, String title, Long price, Long ctgId, String details, Long addressId, String[] image) {
         this.userNo = userNo;
         this.title = title;
         this.price = price;
