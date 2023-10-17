@@ -39,13 +39,13 @@ public class MyPageController {
         String inputAddress = userModifyRequest.getUserAddress();
         Long addressId = addressService.getAddressId(inputAddress);
         if(addressId == null){
-            return ResponseEntity.badRequest().body(new ApiResponse(409, "주소를 찾을 수 없음", null));
+            return ResponseEntity.ok().body(new ApiResponse(409, "주소를 찾을 수 없음", null));
         }
 
         if(!userService.findUserByUserNo(userNo).getUserNickname().equals(userModifyRequest.getUserNickname())){
             boolean isNicknameUnique  = userService.checkNickname(userModifyRequest.getUserNickname());
             if (!isNicknameUnique) {
-                return ResponseEntity.badRequest().body(new ApiResponse(412, "닉네임 중복",null));
+                return ResponseEntity.ok().body(new ApiResponse(412, "닉네임 중복",null));
             }
         }
 
