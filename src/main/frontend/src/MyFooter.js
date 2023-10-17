@@ -11,7 +11,7 @@ const MyFooter = () => {
           1001호 (나무마켓)
         </p>
       </div>
-      <img src="/image/logo.png" />
+      <img src="/assets/logo.png" />
     </footer>
   );
 };

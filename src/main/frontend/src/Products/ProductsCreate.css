@@ -1,0 +1,121 @@
+.productcreate {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+.productcreate_body {
+  width: 50%;
+  margin: auto;
+  text-align: start;
+  padding-top: 50px;
+}
+.productcreate_body input {
+  width: 100%;
+  height: 30px;
+  border: none;
+  text-align: start;
+}
+hr {
+  width: 100%;
+}
+.productcreate_body select {
+  height: 30px;
+}
+.productcreate_body .product_info {
+  height: 100px;
+}
+.productcreate select[disabled] {
+  display: none;
+}
+.file_select_label {
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+}
+.file_select_label img {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+}
+.file_select_label p {
+  font-size: 10px;
+}
+.image-preview {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.image-preview {
+  height: 150px;
+}
+#file_select {
+  display: none;
+}
+.preview-image {
+  width: 15%;
+  margin-bottom: 20px;
+}
+.productcreate_button {
+  background-color: #3fb542;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  width: 20%;
+  margin: 40px auto;
+  height: 40px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+}
+.productcreate_button p {
+  margin: auto;
+}
+/* productsedit */
+.productedit_body {
+  width: 50%;
+  margin: auto;
+  text-align: start;
+  padding-top: 50px;
+}
+.productedit {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+.productedit_body input {
+  width: 100%;
+  height: 30px;
+  border: none;
+  text-align: start;
+}
+.productedit_body .product_info {
+  height: 100px;
+}
+.productedit_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 50px 0;
+}
+.productedit_submit {
+  background-color: #3fb542;
+  border: none;
+  border-radius: 8px;
+  width: 30%;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+.productedit_delete {
+  background-color: #e8e8e8;
+  border: none;
+  border-radius: 8px;
+  width: 30%;
+  font-size: 15px;
+  cursor: pointer;
+}
