@@ -53,7 +53,6 @@ public class ProductPostServiceImpl implements ProductPostService {
     public void updatePostStatus(AdminPostUpdateReq adminPostUpdateReq) {
         productPostMapper.updatePostStatus(adminPostUpdateReq);
     }
-
     @Override
     public String joinUrls(List<String> urls) {
         StringBuilder joinUrl = new StringBuilder();

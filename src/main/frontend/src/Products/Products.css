@@ -1,0 +1,62 @@
+/* FONT */
+@font-face {
+  font-family: "NPSfontBold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SUITE-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SUITE-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* 전체 상품 리스트 덩어리 */
+.products {
+}
+.products-container {
+  margin-left: 10vw;
+  margin-right: 10vw;
+}
+/* 중고 거래 전체 매물 글씨 */
+.products h2 {
+  font-family: "NPSfontBold";
+  text-align: center;
+  font-size: 2em;
+}
+
+/* 상단 메뉴 */
+.top-menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 내 물건 팔기 버튼 */
+.create-product-btn {
+  font-family: "SUITE-Regular";
+  font-size: 1.4em;
+  color: white;
+
+  background-color: #47ad49;
+  border: none;
+  border-radius: 18px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  cursor: pointer;
+}
