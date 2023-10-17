@@ -25,9 +25,9 @@ function App() {
         <Route path="/TransActionComplete" element={<TransActionComplete />} />
         <Route path="/admin/" element={<Admin />} />
         <Route path="/adminproduct" element={<AdminProduct />} />
-        <Route path="/adminuser" element={<AdminUser />} />
         <Route path="/products/register" element={<ProductsRegister />} />
         <Route path="/mypage/productsedit" element={<ProductsEdit />} />
+        <Route path="/admin/user" element={<AdminUser />} />
       </Routes>
     </BrowserRouter>
   );
