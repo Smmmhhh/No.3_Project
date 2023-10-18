@@ -1,0 +1,124 @@
+.admin_header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.admin_header h2 {
+  margin: auto;
+  padding-right: 180px;
+}
+.admin_header img {
+  width: 250px;
+  height: 140px;
+}
+.admin_header button {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+.admin_onclick_button1:focus {
+  background-color: #6ac26c;
+  color: white;
+}
+.admin_onclick_button2:focus {
+  background-color: #6ac26c;
+  color: white;
+}
+.admin_onclick {
+  width: 100%;
+}
+.admin_onclick_button1 {
+  background-color: white;
+  border: 1px solid #e8e8e8;
+  border-left: none;
+  width: 50%;
+  height: 80px;
+  font-size: large;
+  cursor: pointer;
+}
+.admin_onclick_button2 {
+  background-color: white;
+  border: 1px solid #e8e8e8;
+
+  border-left: none;
+  border-right: none;
+  width: 50%;
+  height: 80px;
+  font-size: large;
+  cursor: pointer;
+}
+.admin_search {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin: 30px 20px 0 0;
+}
+.admin_search input {
+  height: 25px;
+}
+.admin_search img {
+  width: 25px;
+  height: 25px;
+  padding-left: 10px;
+}
+.admin_product_nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #b9ecb5;
+  margin-top: 40px;
+}
+.admin_product_nav p {
+  text-align: center;
+  margin: auto;
+}
+.post_value {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+}
+.post_value p {
+  width: 12.5%;
+  margin: auto;
+}
+.post_value img {
+  width: 12%;
+}
+.post_select {
+  width: 12.5%;
+}
+.post_select_form {
+  margin: auto;
+  width: 12.5%;
+}
+.post_select {
+  margin: auto;
+}
+/* admin user */
+.admin_h2 {
+  text-align: center;
+  margin: auto;
+}
+.admin_user_nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #b9ecb5;
+  margin-top: 40px;
+}
+.admin_user_nav p {
+  text-align: center;
+  width: 11%;
+}
+.user_value {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+}
+.user_value p {
+  margin: 5px auto;
+  width: 11%;
+}

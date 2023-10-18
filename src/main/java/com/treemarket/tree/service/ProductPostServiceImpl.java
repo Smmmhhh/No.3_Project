@@ -25,8 +25,13 @@ public class ProductPostServiceImpl implements ProductPostService {
     }
 
     @Override
-    public List<ProductPostVO> getAllBoards() {
-        return productPostMapper.getAllBoards();
+    public List<ProductPostVO> getAllBoards(int pageSize, int offset) {
+        return productPostMapper.getAllBoards(pageSize, offset);
+    }
+
+    @Override
+    public int getTotalCount() {
+        return productPostMapper.getTotalCount();
     }
 
     @Override
@@ -53,7 +58,6 @@ public class ProductPostServiceImpl implements ProductPostService {
     public void updatePostStatus(AdminPostUpdateReq adminPostUpdateReq) {
         productPostMapper.updatePostStatus(adminPostUpdateReq);
     }
-
     @Override
     public String joinUrls(List<String> urls) {
         StringBuilder joinUrl = new StringBuilder();

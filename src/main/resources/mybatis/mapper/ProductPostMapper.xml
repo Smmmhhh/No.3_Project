@@ -25,7 +25,20 @@
 
     
     <select id="getAllBoards" resultType="com.treemarket.tree.domain.ProductPostVO">
-        SELECT * FROM productPosttbl WHERE productStatus = 1
+        SELECT *
+        FROM (
+             SELECT ROW_NUMBER() OVER (ORDER BY postId) AS rn, t.*
+             FROM (
+                  SELECT *
+                  FROM productPosttbl
+                  WHERE productStatus = 1
+             ) t
+        ) sub
+        WHERE sub.rn BETWEEN #{offset} + 1 AND #{offset} + #{pageSize}
+    </select>
+    
+    <select id="getTotalCount" resultType="int">
+        SELECT COUNT(*) FROM productPosttbl WHERE productStatus = 1
     </select>
 
     <select id="findBoardsByLocation" resultType="com.treemarket.tree.domain.ProductPostVO">
@@ -53,7 +66,7 @@
     </update>
 
     <update id="updatePostStatus" parameterType="com.treemarket.tree.dto.Productpost.req.AdminPostUpdateReq" >
-        UPDATE productPosttbl SET productStatus = #{productPostStatus} WHERE postId = #{postId}
+        UPDATE productPosttbl SET productStatus = #{productStatus} WHERE postId = #{postId}
     </update>
 
     <select id="getAllPostsForApp" resultType="com.treemarket.tree.dto.Productpost.res.ProductsAppResponse">

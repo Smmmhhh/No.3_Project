@@ -20,4 +20,5 @@ public interface JoinService {
     void savePurchaseComp(Long roomId);
     Long getSellerNo(Long roomId);
     PurchaseCompVO getCompInfo(Long roomId);
+    int getTransactionCount(Long userno);
 }
