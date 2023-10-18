@@ -13,7 +13,6 @@ const MyHeader = () => {
       setLogin(true);
       setUserNo(userNo);
       setUserName(userData.data.userName);
-      console.log(userData);
     }
   }, []);
   const handleLogout = async () => {

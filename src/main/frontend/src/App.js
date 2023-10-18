@@ -11,6 +11,11 @@ import AdminPost from "./Admin/AdminPost";
 import AdminUser from "./Admin/AdminUser";
 import ProductsEdit from "./Products/ProductsEdit";
 import ProductsRegister from "./Products/ProductsRegister";
+import MyPageSales from "./MyPage/MyPageSales";
+import MyPagePurchases from "./MyPage/MyPagePurchases";
+import MyPageRegister from "./MyPage/MyPageRegister";
+import MyPageLikes from "./MyPage/MyPageLikes";
+import Image from "./Products/Image";
 import MyPageUsers from "./MyPage/MyPageUsers";
 
 function App() {
@@ -29,6 +34,11 @@ function App() {
         <Route path="/mypage/users" element={<MyPageUsers />} />
         <Route path="/admin/user" element={<AdminUser />} />
         <Route path="/admin/post" element={<AdminPost />} />
+        <Route path="/mypage/sales" element={<MyPageSales />} />
+        <Route path="/mypage/purchases" element={<MyPagePurchases />} />
+        <Route path="/mypage/register" element={<MyPageRegister />} />
+        <Route path="/mypage/likes" element={<MyPageLikes />} />
+        <Route path="/upload/image" element={<Image />} />
 
       </Routes>
     </BrowserRouter>
