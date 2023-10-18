@@ -28,6 +28,11 @@ hr {
 .productcreate select[disabled] {
   display: none;
 }
+.productcreate_body .info_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
 .file_select_label {
   display: flex;
   flex-direction: column;
@@ -44,18 +49,21 @@ hr {
 .file_select_label p {
   font-size: 10px;
 }
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
 .image-preview {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-}
-.image-preview {
   height: 150px;
 }
 #file_select {
   display: none;
 }
-.preview-image {
+.preview-image img {
   width: 15%;
   margin-bottom: 20px;
 }
@@ -66,13 +74,14 @@ hr {
   color: white;
   width: 20%;
   margin: 40px auto;
-  height: 40px;
+  height: 80px;
   font-size: 20px;
   display: flex;
   justify-content: center;
 }
 .productcreate_button p {
   margin: auto;
+  padding: 10px 0 10px 0;
 }
 /* productsedit */
 .productedit_body {
