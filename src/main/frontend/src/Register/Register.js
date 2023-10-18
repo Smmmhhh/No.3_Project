@@ -7,8 +7,8 @@ import DaumPostCode from "react-daum-postcode";
 import Modal from "react-modal";
 
 const Register = () => {
-  const [jibunAddress, setJibunAddress] = useState(""); // 주소 정보 문자열
-  const [isOpen, setIsOpen] = useState(false); // 모달창
+  const [jibunAddress, setJibunAddress] = useState(""); // 주소 정보 문자열 //
+  const [isOpen, setIsOpen] = useState(false); // 모달창 //
   const navigate = useNavigate();
 
   //input 데이터
@@ -21,7 +21,7 @@ const Register = () => {
     userAddress: "",
   });
 
-  // 모달창의 정보 가져오기
+  // 모달창의 정보 가져오기 //
   const completeHandler = (data) => {
     const formattedAddress = `${data.sido} ${data.sigungu} ${data.bname}`;
     setJibunAddress(formattedAddress);
@@ -29,7 +29,7 @@ const Register = () => {
     setIsOpen(false);
   };
 
-  // Modal 스타일
+  // Modal 스타일 //
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0,0,0,0.5)",
@@ -44,7 +44,7 @@ const Register = () => {
     },
   };
 
-  // 검색 클릭
+  // 검색 클릭 //
   const toggle = () => {
     setIsOpen(!isOpen);
   };
