@@ -4,7 +4,6 @@ import Login from "./Login/Login";
 import Register from "./Register/Register";
 import Products from "./Products/Products";
 import MyMain from "./MyMain";
-import UsersEdit from "./UsersEdit";
 import MyPage from "./MyPage/MyPage";
 import TransActionComplete from "./TransActionComplete/TransactionComplete";
 import Admin from "./Admin/Admin";
@@ -17,6 +16,8 @@ import MyPagePurchases from "./MyPage/MyPagePurchases";
 import MyPageRegister from "./MyPage/MyPageRegister";
 import MyPageLikes from "./MyPage/MyPageLikes";
 import Image from "./Products/Image";
+import MyPageUsers from "./MyPage/MyPageUsers";
+
 function App() {
   return (
     <BrowserRouter>
@@ -26,11 +27,11 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/products" element={<Products />} />
         <Route path="/mypage" element={<MyPage />} />
-        <Route path="/mypage/users" element={<UsersEdit />} />
         <Route path="/TransActionComplete" element={<TransActionComplete />} />
         <Route path="/admin/" element={<Admin />} />
         <Route path="/products/register" element={<ProductsRegister />} />
         <Route path="/mypage/productsedit" element={<ProductsEdit />} />
+        <Route path="/mypage/users" element={<MyPageUsers />} />
         <Route path="/admin/user" element={<AdminUser />} />
         <Route path="/admin/post" element={<AdminPost />} />
         <Route path="/mypage/sales" element={<MyPageSales />} />
@@ -38,6 +39,7 @@ function App() {
         <Route path="/mypage/register" element={<MyPageRegister />} />
         <Route path="/mypage/likes" element={<MyPageLikes />} />
         <Route path="/upload/image" element={<Image />} />
+
       </Routes>
     </BrowserRouter>
   );

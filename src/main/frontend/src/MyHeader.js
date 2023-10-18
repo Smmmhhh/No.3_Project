@@ -9,6 +9,7 @@ const MyHeader = () => {
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
     if (userData) {
+      const { userNo, userName } = userData.data;
       setLogin(true);
       setUserNo(userNo);
       setUserName(userData.data.userName);

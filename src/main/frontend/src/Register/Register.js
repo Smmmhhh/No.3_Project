@@ -5,6 +5,7 @@ import "./Register.css";
 
 import DaumPostCode from "react-daum-postcode";
 import Modal from "react-modal";
+import NumberFormat from "react-number-format";
 
 const Register = () => {
   const [jibunAddress, setJibunAddress] = useState(""); // 주소 정보 문자열 //
@@ -56,8 +57,6 @@ const Register = () => {
 
   // JOIN 버튼 클릭
   const handleRegister = async () => {
-    console.log("formData changed2:", formData);
-
     const response = await fetch("/register", {
       method: "POST",
       headers: {
@@ -160,6 +159,12 @@ const Register = () => {
               </div>
               <div className="item">
                 <label htmlFor="userPhoneno">전화번호</label>
+                {/* <NumberFormat
+                  format="###-####-####"
+                  mask="_"
+                  placeholder="010-1234-1234"
+                  onValueChange={() => {}}
+                /> */}
                 <input
                   type="text"
                   name="userPhoneno"

@@ -14,11 +14,13 @@ public class ProductsPostRequest {
     private String addressName;
     private String[] img;
 
+
     @Builder
     public ProductsPostRequest(Long userNo, String title,
                                Long price, String ctgName,
                                String details, String addressName,
                                String[] img) {
+
         this.userNo = userNo;
         this.title = title;
         this.price = price;

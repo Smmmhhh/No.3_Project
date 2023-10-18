@@ -181,7 +181,14 @@ public class ProductPostController {
     @GetMapping("/app")
     private List<ProductsAppResponse> getAllPostsForApp(){
         return productPostService.getAllPostsForApp();
+
     }
+
+    @GetMapping("/app")
+    private List<ProductsAppResponse> getAllPostsForApp(){
+        return productPostService.getAllPostsForApp();
+    }
+
 
 
 
