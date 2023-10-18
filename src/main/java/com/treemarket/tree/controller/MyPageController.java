@@ -158,13 +158,13 @@ public class MyPageController {
         try {
             ctgId = categoryService.getCtgId(productsPostRequest.getCtgName());  //Category key값 찾기
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("카테고리 키값 오류").build());
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("카테고리 키값 오류").build());
         }
 
         try {
             addressId = addressService.getAddressId(productsPostRequest.getAddressName()); //Address Key값 찾기
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("주소 키값 오류").build());
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("주소 키값 오류").build());
         }
         List<String> filesUrl = awsS3Service.uploadFile(multipartFiles);
 
@@ -188,10 +188,10 @@ public class MyPageController {
             productPostService.modifyPost(productpostVO);
             // UPDATE 게시물 가져오기
             ProductPostVO productResponse = productPostService.getPostDetails(postId);
-            if(productResponse == null) return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("없는 게시글 입니다.").build());
+            if(productResponse == null) return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("없는 게시글 입니다.").build());
             return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productResponse).build());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("쿼리문 오류").build());
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("쿼리문 오류").build());
         }
     }
 

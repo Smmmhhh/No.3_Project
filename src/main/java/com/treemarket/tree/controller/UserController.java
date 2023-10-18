@@ -29,7 +29,7 @@ public class UserController {
         UserVO userVO = userService.login(loginRequest.getUserId(), loginRequest.getUserPw());
 
         if (userVO == null) {
-            return ResponseEntity.badRequest().body(new ApiResponse(409, "로그인 실패", null));
+            return ResponseEntity.ok().body(new ApiResponse(409, "존재하지 않는 계정이거나 아이디와 비밀번호가 일치하지 않습니다.", null));
         }
 
         String addressname = addressService.getAddressName(userVO.getUserAddress());
@@ -63,7 +63,7 @@ public class UserController {
             return ResponseEntity.ok().body(new ApiResponse(200, "로그아웃 성공", null));
         } catch (Exception e){
             System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(new ApiResponse(409, "로그아웃 실패", null));
+            return ResponseEntity.ok().body(new ApiResponse(409, "로그아웃 실패", null));
         }
     }
 
