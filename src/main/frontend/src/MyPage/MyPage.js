@@ -51,7 +51,7 @@ const MyPage = () => {
                 <p>구매 내역</p>
               </button>
             </Link>
-            <Link to="mypage/register">
+            <Link to="/mypage/register/:userNo">
               <button>
                 <div className="mypage_img">
                   <img src="/assets/mypage_register.png" />
