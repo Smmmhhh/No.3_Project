@@ -9,7 +9,8 @@ const MyPageEdit = (props) => {
   const [userEditInfo, setUserEditInfo] = useState({}); // 유저 전체 정보
   const [nick, setNick] = useState(props.userInfo.userNickname); // 닉네임
   const [jibunAddress, setJibunAddress] = useState(""); // 주소 정보 문자열
-  const [isOpen, setIsOpen] = useState(false); // 모달창
+  const [isOpen, setIsOpen] = useState(false); // 주소 모달창
+  const [modalIsOpen, setModalIsOpen] = useState(false); // 탈퇴 모달창
   const [localPhoneNo, setLocalPhoneNo] = useState(props.userInfo.userPhoneno); // 로컬 상태 추가
   const [password, setPassword] = useState(""); // 비밀번호 입력값
   const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인 입력값
@@ -57,6 +58,12 @@ const MyPageEdit = (props) => {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+
+  // 회원 탈퇴 클릭
+  const removeBtnToggle = () => {
+    setModalIsOpen(!modalIsOpen);
+  };
+
   // input 태그
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -103,6 +110,30 @@ const MyPageEdit = (props) => {
     }
   };
 
+  // 회원탈퇴 핸들러
+  const handleRemoveUser = async () => {
+    const response = await fetch(`/mypage/users/${userEditInfo.userNo}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const resData = await response.json();
+    switch (resData.status) {
+      case 200:
+        alert(resData.message);
+        handleLogout();
+        navigate("/", { replace: true });
+        break;
+      case 409:
+        alert(resData.message);
+        break;
+      default:
+        console.error("Unexpected response status:", resData.status);
+    }
+  };
+
   const handleSaveBtn = async () => {
     if (!passwordsMatch) {
       pwdRef.current.focus();
@@ -121,7 +152,7 @@ const MyPageEdit = (props) => {
           alert(responseData.message);
           // 정보 수정하면 로그아웃 시키고 로그인 페이지로 이동
           handleLogout();
-          navigate("/login");
+          navigate("/login", { replace: true });
           break;
         case 412:
           setShowNick(true);
@@ -157,9 +188,17 @@ const MyPageEdit = (props) => {
 
   return (
     <div className="mypage-edit">
-      <p className="delete-user-btn" onClick={() => {}}>
-        회원탈퇴
-      </p>
+      <div className="remove-user">
+        <p className="delete-user-btn" onClick={removeBtnToggle}>
+          회원탈퇴
+        </p>
+        <Modal isOpen={modalIsOpen} ariaHideApp={false}>
+          <h2>회원 탈퇴</h2>
+          <p>정말로 회원 탈퇴를 진행하시겠습니까?</p>
+          <button onClick={handleRemoveUser}>탈퇴</button>
+          <button onClick={removeBtnToggle}>취소</button>
+        </Modal>
+      </div>
       <div className="top-profile-info">
         <div className="profile-img-grade">
           <img src="/assets/profile_default.png" alt="profile-default-img" />
@@ -181,7 +220,6 @@ const MyPageEdit = (props) => {
           <p className="edit-phone">
             전화번호
             <NumberFormat
-              onClick={() => {}}
               format="###-####-####"
               mask="_"
               value={localPhoneNo}
