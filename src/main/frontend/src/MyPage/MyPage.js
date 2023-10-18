@@ -1,9 +1,19 @@
 import MyFooter from "../MyFooter";
 import MyHeader from "../MyHeader";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./MyPage.css";
+import { useEffect } from "react";
 
 const MyPage = () => {
+  const userSession = sessionStorage.getItem("userData");
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!userSession) {
+      navigate("/", { replace: true });
+    }
+  }, []);
+
   return (
     <mypage>
       <div>

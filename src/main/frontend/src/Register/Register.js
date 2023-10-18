@@ -9,7 +9,14 @@ import NumberFormat from "react-number-format";
 
 const Register = () => {
   const [jibunAddress, setJibunAddress] = useState(""); // 주소 정보 문자열 //
-  const [isOpen, setIsOpen] = useState(false); // 모달창 //
+  const [isOpen, setIsOpen] = useState(false); // 주소 모달창 //
+  // 비밀번호 일치 상태 관리
+  const [isPasswordMatching, setIsPasswordMatching] = useState(true);
+  const [isValidPassword, setIsValidPassword] = useState(true);
+  const [password, setPassword] = useState(""); // 비밀번호 입력값
+  const [confirmPassword, setConfirmPassword] = useState(""); // 비밀번호 확인 입력값
+  const [passwordsMatch, setPasswordsMatch] = useState(true); // 비밀번호 일치 여부
+
   const navigate = useNavigate();
 
   //input 데이터
@@ -50,9 +57,30 @@ const Register = () => {
     setIsOpen(!isOpen);
   };
 
+  // 비밀번호 입력값 변경 핸들러
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    console.log(passwordsMatch);
+  };
+
+  // 비밀번호 확인 입력값 변경 핸들러
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  // 비밀번호 일치 확인
+  useEffect(() => {
+    console.log("비밀번호 입력 확인 : ", password, confirmPassword);
+    setPasswordsMatch(password === confirmPassword);
+  }, [password, confirmPassword]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    // 조건문으로 각각 필드마다 정규표현식 삽입하기
+    // 비밀번호 형식 확인 (영어와 숫자만, 5~20 글자)
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,20}$/;
+    setIsValidPassword(regex.test(formData.userPw));
   };
 
   // JOIN 버튼 클릭
@@ -66,17 +94,26 @@ const Register = () => {
     });
     const responseData = await response.json();
 
-    if (response.ok) {
-      alert(responseData.message);
-      navigate("/login");
-    } else {
-      alert("회원가입 실패");
-      console.error("Request failed:", response.status, response.statusText);
+    switch (responseData.status) {
+      case 200:
+        alert(responseData.message);
+        navigate("/login", { replace: true });
+        break;
+      case 409:
+        break;
+      case 410:
+        break;
+      case 411:
+        break;
+      case 412:
+        break;
+      default:
+        console.error("Unexpected response status:", responseData.status);
     }
   };
 
   useEffect(() => {
-    console.log({ ...formData });
+    console.log("회원 정보 입력 : ", formData);
   }, [formData]);
 
   return (
@@ -125,10 +162,20 @@ const Register = () => {
                   type="password"
                   name="userPw"
                   id="userPw"
-                  onChange={handleInputChange}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                    handlePasswordChange(e);
+                  }}
                   placeholder="5~20자"
                   required
                 />
+                {!isValidPassword && (
+                  <p>
+                    올바른 비밀번호 형식이 아닙니다.
+                    <br />
+                    5~20글자, 대/소문자, 영어 조합
+                  </p>
+                )}
               </div>
               <div className="item">
                 <label htmlFor="checkpwd">비밀번호 확인</label>
@@ -137,9 +184,16 @@ const Register = () => {
                   name="checkpwd"
                   id="checkpwd"
                   placeholder="5~20자"
+                  onChange={handleConfirmPasswordChange}
                   required
                 />
-                <p className="check_pwd_txt">비밀번호가 일치하지 않습니다.</p>
+                {!passwordsMatch && (
+                  <>
+                    <p className="check_pwd_txt">
+                      비밀번호가 일치하지 않습니다.
+                    </p>
+                  </>
+                )}
               </div>
             </div>
             <div className="info_section">
@@ -159,19 +213,16 @@ const Register = () => {
               </div>
               <div className="item">
                 <label htmlFor="userPhoneno">전화번호</label>
-                {/* <NumberFormat
+                <NumberFormat
                   format="###-####-####"
                   mask="_"
-                  placeholder="010-1234-1234"
-                  onValueChange={() => {}}
-                /> */}
-                <input
-                  type="text"
-                  name="userPhoneno"
-                  id="userPhoneno"
-                  onChange={handleInputChange}
-                  placeholder="010-xxxx-xxxx"
-                  required
+                  placeholder="010-1234-5678"
+                  onValueChange={(values) => {
+                    const { formattedValue, value } = values;
+                    if (value.length === 0 || value.length === 11) {
+                      setFormData({ ...formData, userPhoneno: formattedValue });
+                    }
+                  }}
                 />
               </div>
             </div>
