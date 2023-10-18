@@ -24,4 +24,5 @@ public interface ProductPostService {
 
     List<String> parseAddress(String joinUrl);
 
+    List<ProductPostVO> searchPost(String keyword);
 }
