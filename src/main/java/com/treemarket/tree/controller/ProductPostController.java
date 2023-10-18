@@ -197,7 +197,7 @@ public class ProductPostController {
 
     @GetMapping("/search")
     public ResponseEntity<ApiResponse> searchPost
-            (@RequestParam(defaultValue = " ") String keyword) {
+            (@RequestParam(defaultValue = "") String keyword) {
 
         List<ProductPostVO> productPostVOList = productPostService.searchPost(keyword);
 
@@ -221,7 +221,7 @@ public class ProductPostController {
 
         // 리스트가 비어있을 경우
         if (productPostVOList.isEmpty())
-            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("리스트없음").build());
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("리스트 없음").build());
 
         return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productAllBoardResponseList).build());
     }
