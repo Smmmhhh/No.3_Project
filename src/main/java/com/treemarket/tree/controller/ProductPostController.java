@@ -77,11 +77,11 @@ public class ProductPostController {
             //ApiResponse 반환
             return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productsPostResponse).build());  // 성공
         } else if (ctgId != null && addressId == null) {  //주소 key 값이 없을 때
-            return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("주소값 없음").build());
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("주소값 없음").build());
         } else if (ctgId == null && addressId != null) {    //주소 key 값이 없을 때
-            return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("카테고리값 없음").build());
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("카테고리값 없음").build());
         } else {
-            return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("주소, 키값 없음").build());
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("주소, 키값 없음").build());
         }
     }
 
@@ -195,6 +195,35 @@ public class ProductPostController {
         return productPostService.getAllPostsForApp();
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse> searchPost
+            (@RequestParam(defaultValue = "") String keyword) {
 
+        List<ProductPostVO> productPostVOList = productPostService.searchPost(keyword);
 
+        //Response 리스트 객체 생성
+        List<ProductAllBoardResponse> productAllBoardResponseList = new ArrayList<>();
+        //productPostVOList를 productAllBoardResponse 객체로 변환해주기
+        for(int i = 0; i < productPostVOList.size(); i++) {
+            ProductAllBoardResponse productAllBoardResponse = ProductAllBoardResponse.builder()
+                    .postId(productPostVOList.get(i).getPostId())
+                    .ctgName(categoryService.getCtgName(productPostVOList.get(i).getCtgId()))
+                    .userNickname(userService.getUserNickname(productPostVOList.get(i).getUserNo()))
+                    .title(productPostVOList.get(i).getTitle())
+                    .price(productPostVOList.get(i).getPrice())
+                    .addressName(addressService.getAddressName(productPostVOList.get(i).getAddressId()))
+                    // 첫번쨰 url 값 가져오기(대표 이미지)
+                    .image(productPostService.parseAddress(productPostVOList.get(i).getImage()).get(0))
+                    .productStatus(productPostVOList.get(i).getProductStatus())
+                    .build();
+            productAllBoardResponseList.add(productAllBoardResponse);
+        }
+
+        // 리스트가 비어있을 경우
+        if (productPostVOList.isEmpty())
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("리스트 없음").build());
+
+        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productAllBoardResponseList).build());
+    }
 }
+

@@ -89,4 +89,9 @@ public class ProductPostServiceImpl implements ProductPostService {
     public List<ProductsAppResponse> getAllPostsForApp() {
         return productPostMapper.getAllPostsForApp();
     }
+
+    @Override
+    public List<ProductPostVO> searchPost(String keyword) {
+        return productPostMapper.searchPost(keyword);
+    }
 }

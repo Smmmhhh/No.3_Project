@@ -9,7 +9,7 @@
         SELECT p.postid, p.title, p.price, p.image
         FROM productposttbl p
         JOIN liketbl l ON p.postid = l.postid
-        WHERE l.userno = #{userNo} AND p.productstatus = 0
+        WHERE l.userno = #{userNo} AND p.productstatus = 1
     </select>
     
     <select id="findPurchasePostByUserNo" resultType="com.treemarket.tree.dto.Productpost.res.ProductMypageResponse">
@@ -71,6 +71,7 @@
                    ELSE NULL
                END AS userValidity
         FROM usertbl u
+        WHERE u.userNo >= 1;
     </select>
 
     <insert id="savePurchaseComp">

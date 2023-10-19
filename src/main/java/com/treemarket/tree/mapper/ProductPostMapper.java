@@ -21,4 +21,5 @@ public interface ProductPostMapper {
     String parseAddress(String joinUrl);
 
     List<ProductsAppResponse> getAllPostsForApp();
+    List<ProductPostVO> searchPost(String keyword);
 }

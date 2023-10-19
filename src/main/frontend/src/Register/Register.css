@@ -137,15 +137,3 @@
   border-radius: 0 20px 20px 0;
   box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
 }
-
-/* 중복 확인 및 비밀번호 확인 텍스트  */
-.check_id_txt {
-  display: none;
-}
-
-.check_nickname_txt {
-  display: none;
-}
-.check_pwd_txt {
-  display: none;
-}
