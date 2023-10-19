@@ -39,7 +39,7 @@ const MypageRegister = () => {
             <div className="List_text">
               <h3>{product.title}</h3>
               <p>{product.price} </p>
-              <Link to={`/mypage/productsEdit/${product.postId}`}>
+              <Link to={`/mypage/productsedit/${product.postId}`}>
                 수정하기
               </Link>
             </div>
