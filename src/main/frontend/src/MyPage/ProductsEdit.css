@@ -19,6 +19,23 @@
 .productedit_body .product_info {
   height: 100px;
 }
+#address {
+  text-align: center;
+  width: 90px;
+}
+.info_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+#userAddress {
+  font-size: 14px;
+  width: 180px;
+  text-align: center;
+}
+.img_input {
+  height: 150px;
+}
 .productedit_btn {
   display: flex;
   flex-direction: row;
