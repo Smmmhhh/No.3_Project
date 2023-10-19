@@ -10,13 +10,14 @@ import TransActionComplete from "./TransActionComplete/TransactionComplete";
 import Admin from "./Admin/Admin";
 import AdminPost from "./Admin/AdminPost";
 import AdminUser from "./Admin/AdminUser";
-import ProductsEdit from "./Products/ProductsEdit";
+import ProductsEdit from "./MyPage/ProductsEdit";
 import ProductsRegister from "./Products/ProductsRegister";
 import MyPageSales from "./MyPage/MyPageSales";
 import MyPagePurchases from "./MyPage/MyPagePurchases";
 import MyPageRegister from "./MyPage/MyPageRegister";
 import MyPageLikes from "./MyPage/MyPageLikes";
 import ProductDetail from "./Products/ProductDetail";
+import Chatting from "./Chatting/Chatting";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/mypage/register/:userNo" element={<MyPageRegister />} />
         <Route path="/mypage/likes/:userNo" element={<MyPageLikes />} />
         <Route path="/products/detail/:getPostId" element={<ProductDetail />} />
+        <Route path="/chat" element={<Chatting />} />
       </Routes>
     </BrowserRouter>
   );
