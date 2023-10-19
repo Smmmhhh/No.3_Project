@@ -56,23 +56,27 @@ const MyHeader = () => {
       <div className="header_right">
         {Login ? (
           <>
-            <p>{`${userName}님 반갑습니다.`}</p>
-            <Link to="/mypage">
-              <p className="my_page">마이페이지</p>
-            </Link>
-            <Link to="/chat">
-              <p className="chat_list">채팅목록</p>
-            </Link>
-            <button onClick={handleLogout}>로그아웃</button>
+            <div className="greeting">{`${userName}님 반갑습니다.`}</div>
+            <div className="links-and-logout">
+              <Link to="/mypage">
+                <p className="my_page">마이페이지</p>
+              </Link>
+              <Link to="/chat">
+                <p className="chat_list">채팅목록</p>
+              </Link>
+              <p onClick={handleLogout}>로그아웃</p>
+            </div>
           </>
         ) : (
           <>
-            <Link to="/login">
-              <p className="login">로그인</p>
-            </Link>
-            <Link to="/register">
-              <p className="register">회원가입</p>
-            </Link>
+            <div className="links-and-logout">
+              <Link to="/login">
+                <p className="login">로그인</p>
+              </Link>
+              <Link to="/register">
+                <p className="register">회원가입</p>
+              </Link>
+            </div>
           </>
         )}
       </div>
