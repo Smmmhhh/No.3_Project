@@ -19,6 +19,7 @@ const MyPageEdit = (props) => {
   const [showPasswordFields, setShowPasswordFields] = useState(false); // 비밀번호 변경 필드 표시 여부
   const [showNick, setShowNick] = useState(false); // 412 에러 처리 문구
   const [showAddress, setShowAddress] = useState(false); // 409 에러 처리 문구
+  const [isValidPassword, setIsValidPassword] = useState(true);
   const [formData, setFormData] = useState({
     // 서버 전달 객체
     userPw: "",
@@ -31,6 +32,7 @@ const MyPageEdit = (props) => {
 
   const nicknameRef = useRef(null);
   const pwdRef = useRef(null);
+  const pwdMatchRef = useRef(null);
 
   // 모달창의 정보 가져오기
   const completeHandler = (data) => {
@@ -138,6 +140,8 @@ const MyPageEdit = (props) => {
   const handleSaveBtn = async () => {
     if (!passwordsMatch) {
       pwdRef.current.focus();
+    } else if (!isValidPassword) {
+      pwdMatchRef.current.focus();
     } else {
       const response = await fetch(`/mypage/users/${userEditInfo.userNo}`, {
         method: "PUT",
@@ -174,7 +178,9 @@ const MyPageEdit = (props) => {
 
   // 비밀번호 입력값 변경 핸들러
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    const newPwd = e.target.value;
+    setPassword(newPwd);
+    setIsValidPassword(isValidPasswordFormat(newPwd));
   };
 
   // 비밀번호 확인 입력값 변경 핸들러
@@ -186,6 +192,12 @@ const MyPageEdit = (props) => {
   useEffect(() => {
     setPasswordsMatch(password === confirmPassword);
   }, [password, confirmPassword]);
+
+  const isValidPasswordFormat = (pwd) => {
+    // 비밀번호가 5~20글자, 영어와 숫자만 포함하는 정규식
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,20}$/;
+    return regex.test(pwd);
+  };
 
   return (
     <div className="mypage-edit">

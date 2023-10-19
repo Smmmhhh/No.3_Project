@@ -1,9 +1,16 @@
 import NumberFormat from "react-number-format";
 import "./ProductItem.css";
+import { useNavigate } from "react-router-dom";
 
 const ProductItem = ({ product }) => {
+  const navigate = useNavigate();
   return (
-    <div className="product-item">
+    <div
+      className="product-item"
+      onClick={() => {
+        navigate(`/products/detail/${product.postId}`);
+      }}
+    >
       <div className="product-info">
         <div className="product-img">
           <img src="/assets/logo.png" />
@@ -17,7 +24,7 @@ const ProductItem = ({ product }) => {
             thousandSeparator={true}
             suffix="원"
           />
-          <p className="product-town">서울 송파구 풍납동</p>
+          <p className="product-town">{product.addressName}</p>
         </div>
       </div>
     </div>

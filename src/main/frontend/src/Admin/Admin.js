@@ -1,15 +1,16 @@
 import "./Admin.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Admin = () => {
+  const navigate = useNavigate();
+
   return (
     <admin>
       <div className="admin_header">
         <img src="/assets/logo.png" />
         <h2>관리자 페이지</h2>
-        <Link to="/">
-          <button>로그아웃</button>
-        </Link>
+
+        <button onClick={navigate("/", { replace: true })}>로그아웃</button>
       </div>
       <div className="admin_onclick">
         <Link to="/admin/post">
