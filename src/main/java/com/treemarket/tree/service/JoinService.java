@@ -21,4 +21,5 @@ public interface JoinService {
     Long getSellerNo(Long roomId);
     PurchaseCompVO getCompInfo(Long roomId);
     int getTransactionCount(Long userno);
+    String getUserGrade(Long prodId);
 }

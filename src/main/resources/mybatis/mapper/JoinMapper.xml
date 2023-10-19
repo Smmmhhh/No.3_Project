@@ -105,6 +105,14 @@
         WHERE u.userno = #{userno}
     </select>
 
+    <select id="getUserGrade" resultType="String">
+        SELECT U.usergrade
+        from usertbl U
+            inner join  productposttbl P
+                ON U.userno = P.userno
+        where P.postid = #{prodId}
+    </select>
+
 
 
 </mapper>
