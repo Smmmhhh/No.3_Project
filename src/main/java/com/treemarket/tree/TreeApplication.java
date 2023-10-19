@@ -30,4 +30,5 @@ public class TreeApplication {
 	}
 		//.xml 형태의 모든 파일을 받기때문에 배열로 받는다.
 		// 만약 한가지만 받으면 배열로[] 받을 필요가 없다.
+
 }

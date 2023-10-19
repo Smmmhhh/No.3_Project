@@ -22,5 +22,8 @@ public interface JoinMapper {
     void savePurchaseComp(Long roomId);
     Long getSellerNo(Long roomId);
     PurchaseCompVO getCompInfo(Long roomId);
+    int getTransactionCount(Long userno);
+
+    String getUserGrade(Long prodId);
 
 }

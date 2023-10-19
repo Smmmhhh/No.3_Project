@@ -50,18 +50,16 @@ public class AdminController {
 
     @PutMapping("/post")
     public ResponseEntity<ApiResponse> updatePostStatus(@RequestBody AdminPostUpdateReq adminPostUpdateReq) {
-        System.out.println("start");
+
         // AdminPostUpdateReq 객체 생성 후 상태수정 메서드 실행
         AdminPostUpdateReq adminPostUpdate = AdminPostUpdateReq.builder()
                 .postId(adminPostUpdateReq.getPostId())
                 .productStatus(adminPostUpdateReq.getProductStatus())
                 .build();
-        System.out.println("바꾸기전");
 
         try {
             // 게시글 상태 수정 메서드
             productPostService.updatePostStatus(adminPostUpdate);
-            System.out.println("db바꿈");
             // 수정한 게시글 정보 가져오는 메서드
             ProductPostVO productPostVO = productPostService.getPostDetails(adminPostUpdateReq.getPostId());
 
@@ -69,9 +67,6 @@ public class AdminController {
         }catch (Exception e) {
             return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("게시글 상태 수정 실패").build());
         }
-
-
-
 
     }
 
