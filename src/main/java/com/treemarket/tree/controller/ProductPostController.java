@@ -90,7 +90,7 @@ public class ProductPostController {
     public ResponseEntity<ExtendedApiResponse> getAllBoards(
             @RequestParam(defaultValue = "1") int page) {
 
-        int pageSize = 3;
+        int pageSize = 12;
         int offset = (page - 1) * pageSize;
 
         int totalCount = productPostService.getTotalCount();
