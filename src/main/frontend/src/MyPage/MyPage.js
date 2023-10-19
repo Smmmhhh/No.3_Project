@@ -10,8 +10,10 @@ const MyPage = ({ showFooter }) => {
 
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
+    console.log(userData.data);
     if (userData) {
       setUserNo(userData.data.userNo);
+      setUserNickName(userData.data.userNickname);
     }
   }, []);
 
@@ -25,7 +27,7 @@ const MyPage = ({ showFooter }) => {
           <div className="first_section">
             <div className="first_section_left">
               <img className="profile" src="/assets/profile_default.png" />
-              <h2>윰형대장</h2>
+              <h2>{userNickName}</h2>
               <img className="grade" src="/assets/grade1.png" />
             </div>
             <div className="first_section_right">
