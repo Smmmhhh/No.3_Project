@@ -5,12 +5,16 @@ import NumberFormat from "react-number-format";
 import MyHeader from "../MyHeader";
 import MyFooter from "../MyFooter";
 
+import "./ProductDetail.css";
+
 const ProductDetail = () => {
   const currentUser = JSON.parse(sessionStorage.getItem("userData"));
   const { getPostId } = useParams();
   const [productInfo, setProductInfo] = useState({});
   const [currentUserInfo, setCurrentUserInfo] = useState([]);
   const [userConnect, setUserConnect] = useState(false);
+  const [heart, setHeart] = useState(false);
+
   const navigate = useNavigate();
 
   const handleChatBtn = () => {
@@ -23,6 +27,10 @@ const ProductDetail = () => {
       );
       navigate("/login", { replace: true });
     }
+  };
+
+  const handleHeartToggle = () => {
+    setHeart(!heart);
   };
 
   useEffect(() => {
@@ -55,24 +63,53 @@ const ProductDetail = () => {
   return (
     <div className="product-detail">
       <MyHeader />
-      <img className="product-img" src="/assets/logo.png" />
-      <img className="prodile-img" src="/assets/profile_default.png" />
-      <p className="board-nickname">{productInfo.userNickname}</p>
-      <p className="board-town">{productInfo.addressName}</p>
-      <img src="/assets/grade1.png" />
-      <hr />
-      <p>{productInfo.title}</p>
-      <img src="/assets/empty-heart.png" />
-      <p>{productInfo.ctgName}</p>
-      <NumberFormat
-        value={productInfo.price}
-        displayType="text"
-        thousandSeparator={true}
-        suffix="원"
-      />
-      <p>{productInfo.details}</p>
-      <hr />
-      <button onClick={handleChatBtn}>채팅하기</button>
+      <div className="product-info">
+        <div className="main-images">
+          <img className="product-img" src="/assets/logo.png" />
+        </div>
+
+        <div className="seller-info">
+          <img className="profile-img" src="/assets/profile_default.png" />
+          <span className="seller-name">
+            <p className="board-nickname">{productInfo.userNickname}</p>
+            <p className="board-town">{productInfo.addressName}</p>
+          </span>
+          <img className="grade" src="/assets/grade1.png" />
+        </div>
+        <hr />
+        <div className="product-description">
+          <div className="desc-top">
+            <p className="product-title">{productInfo.title}</p>
+            {heart ? (
+              <img
+                onClick={handleHeartToggle}
+                className="heart"
+                src="/assets/full_heart.png"
+              />
+            ) : (
+              <img
+                onClick={handleHeartToggle}
+                className="heart"
+                src="/assets/empty-heart.png"
+              />
+            )}
+          </div>
+          <p className="product-ctg">{productInfo.ctgName}</p>
+          <NumberFormat
+            className="product-price"
+            value={productInfo.price}
+            displayType="text"
+            thousandSeparator={true}
+            suffix="원"
+          />
+          <p className="product-desc">{productInfo.details}</p>
+        </div>
+        <hr />
+        <button className="chat-btn" onClick={handleChatBtn}>
+          채팅하기
+        </button>
+      </div>
+
       <MyFooter />
     </div>
   );

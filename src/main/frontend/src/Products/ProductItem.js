@@ -6,25 +6,25 @@ const ProductItem = ({ product }) => {
   const navigate = useNavigate();
   return (
     <div
-      className="product-item"
+      className="products-item"
       onClick={() => {
         navigate(`/products/detail/${product.postId}`);
       }}
     >
-      <div className="product-info">
-        <div className="product-img">
+      <div className="products-data">
+        <div className="products-image">
           <img src={product.image} />
         </div>
-        <div className="product-description">
-          <p className="product-title">{product.title}</p>
+        <div className="products-description">
+          <p className="products-title">{product.title}</p>
           <NumberFormat
-            className="product-price"
+            className="products-price"
             value={product.price}
             displayType="text"
             thousandSeparator={true}
             suffix="원"
           />
-          <p className="product-town">{product.addressName}</p>
+          <p className="products-town">{product.addressName}</p>
         </div>
       </div>
     </div>

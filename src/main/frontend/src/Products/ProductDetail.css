@@ -1,0 +1,139 @@
+/* FONT */
+@font-face {
+  font-family: "NPSfontBold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SUITE-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SUITE-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+.product-info {
+  margin: auto;
+  font-family: "SUITE-Regular";
+  width: 65vw;
+}
+
+.main-images {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.product-img {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 30vw;
+  height: 60vh;
+  object-fit: cover;
+}
+
+.seller-info {
+  padding: 15px;
+  display: flex;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin: auto;
+}
+
+.board-nickname {
+  font-family: "SUITE-Bold";
+  font-size: 28px;
+}
+.board-town {
+  font-size: 18px;
+  color: #333;
+  margin-right: 10px;
+}
+
+.board-town,
+.board-nickname {
+  width: 50vw;
+}
+
+.grade {
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+}
+
+.product-description {
+  padding: 15px;
+}
+
+.desc-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-title {
+  font-size: 24px;
+}
+
+.heart {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.product-ctg {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+.product-desc {
+  font-size: 24px;
+}
+
+.product-price {
+  font-size: 20px;
+  color: #d33;
+  margin-top: 10px;
+}
+
+.chat-btn {
+  font-family: "SUITE-Regular";
+  letter-spacing: 4px;
+  font-size: 20px;
+  display: block;
+  width: 60%;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chat-btn:hover {
+  background-color: #45a049;
+}
+
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ccc;
+}

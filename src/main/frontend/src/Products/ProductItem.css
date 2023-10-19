@@ -15,18 +15,18 @@
 }
 
 /* 상품 정보 전체 */
-.product-item {
+.products-item {
   font-family: "SUITE-Regular";
   cursor: pointer;
 }
 /* 상품 이미지 */
-.product-img {
+.products-image {
   border: 1px solid #e2e2e2;
   height: 350px;
   width: 280px;
   border-radius: 30px;
 }
-.product-img img {
+.products-image img {
   border-radius: 30px;
   height: 100%;
   width: 100%;
@@ -34,16 +34,16 @@
 }
 
 /* 상품 정보 제목 */
-.product-title {
+.products-title {
   font-family: "SUITE-Bold";
   font-size: 1.4em;
 }
 /* 상품 가격 */
-.product-price {
+.products-price {
   font-family: "SUITE-Bold";
   font-size: 1.1em;
 }
 /* 상품 거래 주소 */
-.product-town {
+.products-town {
   color: #8c8c8c;
 }
