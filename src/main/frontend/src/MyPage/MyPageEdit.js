@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import "./MyPageEdit.css";
 
 import DaumPostCode from "react-daum-postcode";
 import Modal from "react-modal";
@@ -204,7 +205,8 @@ const MyPageEdit = (props) => {
         <p className="delete-user-btn" onClick={removeBtnToggle}>
           회원탈퇴
         </p>
-        <Modal isOpen={modalIsOpen} ariaHideApp={false}>
+        <Modal className="remove-user-modal"
+            isOpen={modalIsOpen} ariaHideApp={false}>
           <h2>회원 탈퇴</h2>
           <p>정말로 회원 탈퇴를 진행하시겠습니까?</p>
           <button onClick={handleRemoveUser}>탈퇴</button>
@@ -221,92 +223,109 @@ const MyPageEdit = (props) => {
       <hr />
       <div className="profile-edit-section">
         <section className="edit-info">
-          <p className="edit-id">
-            아이디
-            <input value={userEditInfo.userId} disabled />
-          </p>
-          <p className="edit-name">
-            이름
-            <input value={userEditInfo.userName} disabled />
-          </p>
-          <p className="edit-phone">
-            전화번호
-            <NumberFormat
-              format="###-####-####"
-              mask="_"
-              value={localPhoneNo}
-              placeholder="010-1234-5678"
-              onValueChange={(values) => {
-                const { formattedValue, value } = values;
-                setLocalPhoneNo(value);
-                if (value.length === 0 || value.length === 11) {
-                  setFormData({ ...formData, userPhoneno: formattedValue });
-                }
-              }}
-            />
-          </p>
-          <p className="edit-nickname">
-            닉네임
-            <input
-              type="text"
-              name="userNickname"
-              id="userNickname"
-              value={nick}
-              onChange={handleInputChange}
-              ref={nicknameRef}
-            />
-          </p>
-          {showNick && (
-            <>
-              <p>이미 존재하는 닉네임입니다.</p>
-            </>
-          )}
-        </section>
-
-        <section className="edit-pwd">
-          <button onClick={handlePwdBtn}>비밀번호 변경</button>
-          {showPasswordFields && (
-            <>
-              <p className="edit-pwd">
-                비밀번호
-                <input
-                  className="userPw"
-                  name="userPw"
-                  type="password"
-                  placeholder="5~20자, 영문자 및 숫자만 가능"
-                  onChange={handlePasswordChange}
-                  ref={pwdMatchRef}
+          <div className="info_sections">
+            <div className="items">
+              <p className="edit-id">
+                <label>아이디</label>
+                <input value={userEditInfo.userId} disabled />
+              </p>
+            </div>
+            <div className="items">
+              <p className="edit-name">
+                <label>이름</label>
+                <input value={userEditInfo.userName} disabled />
+              </p>
+            </div>
+          </div>
+          <div className="info_sections">
+            <div className="items">
+              <p className="edit-phone">
+                <label>전화번호</label>
+                <NumberFormat
+                    format="###-####-####"
+                    mask="_"
+                    value={localPhoneNo}
+                    placeholder="010-1234-5678"
+                    onValueChange={(values) => {
+                      const { formattedValue, value } = values;
+                      setLocalPhoneNo(value);
+                      if (value.length === 0 || value.length === 11) {
+                        setFormData({ ...formData, userPhoneno: formattedValue });
+                      }
+                    }}
                 />
               </p>
-              {!isValidPassword && <p>비밀번호 형식이 일치하지 않습니다.</p>}
-              <p className="edit-pwd-match">
-                비밀번호 확인
+            </div>
+            <div className="items">
+              <p className="edit-nickname">
+                <label>닉네임</label>
                 <input
-                  type="password"
-                  onChange={handleConfirmPasswordChange}
-                  ref={pwdRef}
+                    type="text"
+                    name="userNickname"
+                    id="userNickname"
+                    value={nick}
+                    onChange={handleInputChange}
+                    ref={nicknameRef}
                 />
               </p>
-              {!passwordsMatch && <p>비밀번호가 일치하지 않습니다.</p>}
-            </>
-          )}
-        </section>
-
-        <section className="edit-town" onClick={toggle}>
-          <p>동네 설정</p>
-          <button onClick={toggle}>주소 검색</button>
-          <input
-            value={
-              jibunAddress === "" ? userEditInfo.userAddress : jibunAddress
-            }
-          />
-          {showAddress && <p>주소 형식이 잘못 되었습니다.</p>}
-          <div className="post_code_modal">
-            <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
-              <DaumPostCode onComplete={completeHandler} />
-            </Modal>
+              {showNick && (
+                  <>
+                    <p className="error-nickname">이미 존재하는 닉네임입니다.</p>
+                  </>
+              )}
+            </div>
           </div>
         </section>
+        <div className="info_sections">
+          <div className="items">
+            <section className="edit-pwd">
+              <div className="pwd-sections">
+                <button onClick={handlePwdBtn}>비밀번호 변경</button>
+                {showPasswordFields && (
+                    <>
+                      <p className="edit-pwd">
+                        <label>비밀번호</label>
+                        <input
+                            className="userPw"
+                            name="userPw"
+                            type="password"
+                            onChange={handlePasswordChange}
+                        />
+                      </p>
+                      <p className="edit-pwd-match">
+                        <label>비밀번호 확인</label>
+                        <input
+                            type="password"
+                            onChange={handleConfirmPasswordChange}
+                            ref={pwdRef}
+                        />
+                      </p>
+                      {!passwordsMatch && <p>비밀번호가 일치하지 않습니다.</p>}
+                    </>
+                )}
+              </div>
+            </section>
+          </div>
+          <div className="items">
+            <section className="edit-town" onClick={toggle}>
+              <div className="town-info">
+                <label>동네 설정</label>
+                <button onClick={toggle}>주소 검색</button>
+              </div>
+              <input
+                  value={
+                    jibunAddress === "" ? userEditInfo.userAddress : jibunAddress
+                  }
+              />
+              {showAddress && <p>주소 형식이 잘못 되었습니다.</p>}
+              <div className="post_code_modal">
+                <Modal isOpen={isOpen} ariaHideApp={false} style={customStyles}>
+                  <DaumPostCode onComplete={completeHandler} />
+                </Modal>
+              </div>
+            </section>
+          </div>
+        </div>
       </div>
       <button className="save-btn" onClick={handleSaveBtn}>
         저장
