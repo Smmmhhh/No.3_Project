@@ -5,8 +5,8 @@ import "./MyPage.css";
 import { useEffect, useState } from "react";
 
 const MyPage = ({ showFooter }) => {
-  const [userData, setUserData] = useState("");
   const [userNo, setUserNo] = useState(0);
+  const [userNickName, setUserNickName] = useState("");
 
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
