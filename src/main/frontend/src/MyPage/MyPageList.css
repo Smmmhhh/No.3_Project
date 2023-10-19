@@ -1,0 +1,13 @@
+.mypage_List {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+.List_form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.List_img {
+  width: 30%;
+}

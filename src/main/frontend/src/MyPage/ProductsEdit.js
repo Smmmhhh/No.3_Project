@@ -4,8 +4,10 @@ import MyHeader from "../MyHeader";
 import "./ProductsEdit.css";
 import Modal from "react-modal";
 import DaumPostCode from "react-daum-postcode";
+import { useParams } from "react-router-dom";
 
 const ProductsEdit = ({}) => {
+  const { postId } = useParams();
   const [userNo, setUserNo] = useState(0);
   const [files, setFiles] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +21,7 @@ const ProductsEdit = ({}) => {
     details: "",
     addressName: "",
   });
+
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
     if (userData) {
@@ -26,8 +29,33 @@ const ProductsEdit = ({}) => {
         ...prevProductData,
         userNo: userData.data.userNo,
       }));
+
+      fetch(`/mypage/productsedit/${postId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === 200) {
+            const ProductData = {
+              title: data.title,
+              price: data.price,
+              ctgName: data.ctgName,
+              details: data.details,
+            };
+            console.log("데이터 불러오기 성공", ProductData);
+          } else {
+            console.error("데이터 불러오기 실패");
+          }
+        })
+        .catch((error) => {
+          console.error("오류:", error);
+        });
     }
-  }, []);
+  }, [postId]);
+
 
   const handleImageChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -41,6 +69,7 @@ const ProductsEdit = ({}) => {
       alert("최대 5장의 사진을 업로드할 수 있습니다.");
     }
   };
+
   const renderImagePreviews = imagePreview.map((preview, index) => (
     <img src={preview} key={index} alt={`Preview ${index}`} />
   ));
@@ -48,7 +77,6 @@ const ProductsEdit = ({}) => {
   const handleUpUpadate = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-
     files.forEach((file, index) => {
       formData.append(`multipartFiles`, file);
     });
@@ -57,7 +85,7 @@ const ProductsEdit = ({}) => {
     const jsonBlob = new Blob([jsonData], { type: "application/json" });
     formData.append("productsPostRequest", jsonBlob);
 
-    fetch("/mypage/productsedit/1", {
+    fetch(`/mypage/productsedit/${postId}`, {
       method: "PUT",
       body: formData,
     })
@@ -70,40 +98,9 @@ const ProductsEdit = ({}) => {
       });
   };
 
-  const handledisplay = async () => {
-    try {
-      const response = await fetch("/mypage/productsedit/1", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-
-        const ProductData = {
-          title: data.title,
-          price: data.price,
-          ctgName: data.ctgName,
-          details: data.details,
-        };
-
-        console.log("데이터 불러오기 성공", ProductData);
-
-        // 필요에 따라 state나 다른 작업에 데이터를 할당
-        // setProductData(updatedProductData); // 예를 들어, state에 할당하는 경우
-      } else {
-        console.error("데이터 불러오기 실패");
-      }
-    } catch (error) {
-      console.error("오류:", error);
-    }
-  };
-
   const handleDelete = async () => {
     try {
-      const response = await fetch("mypage/products/delete/1", {
+      const response = await fetch(`/mypage/products/delete/${postId}`, {
         method: "DELETE",
       });
 
@@ -130,6 +127,7 @@ const ProductsEdit = ({}) => {
       overflow: "hidden",
     },
   };
+
   const toggle = () => {
     setIsOpen(!isOpen);
   };

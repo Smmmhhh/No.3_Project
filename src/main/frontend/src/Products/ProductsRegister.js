@@ -10,7 +10,7 @@ const ImageUploadComponent = () => {
   const [files, setFiles] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [addressName, setaddressName] = useState("");
-  const [imagePreview, setImagePreview] = useState([]); // Define imagePreview state
+  const [imagePreview, setImagePreview] = useState([]);
   const [productData, setProductData] = useState({
     userNo: userNo,
     title: "",

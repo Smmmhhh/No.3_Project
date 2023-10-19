@@ -16,7 +16,6 @@ import MyPageSales from "./MyPage/MyPageSales";
 import MyPagePurchases from "./MyPage/MyPagePurchases";
 import MyPageRegister from "./MyPage/MyPageRegister";
 import MyPageLikes from "./MyPage/MyPageLikes";
-import Image from "./Products/Image";
 import ProductDetail from "./Products/ProductDetail";
 
 function App() {
@@ -32,15 +31,14 @@ function App() {
         <Route path="/TransActionComplete" element={<TransActionComplete />} />
         <Route path="/admin/" element={<Admin />} />
         <Route path="/products/register" element={<ProductsRegister />} />
-        <Route path="/mypage/productsedit" element={<ProductsEdit />} />
+        <Route path="/mypage/productsedit/:postId" element={<ProductsEdit />} />
         <Route path="/admin/user" element={<AdminUser />} />
         <Route path="/admin/post" element={<AdminPost />} />
-        <Route path="/mypage/sales" element={<MyPageSales />} />
-        <Route path="/mypage/purchases" element={<MyPagePurchases />} />
-        <Route path="/mypage/register" element={<MyPageRegister />} />
-        <Route path="/mypage/likes" element={<MyPageLikes />} />
+        <Route path="/mypage/sales/:userNo" element={<MyPageSales />} />
+        <Route path="/mypage/purchases/:userNo" element={<MyPagePurchases />} />
+        <Route path="/mypage/register/:userNo" element={<MyPageRegister />} />
+        <Route path="/mypage/likes/:userNo" element={<MyPageLikes />} />
         <Route path="/products/detail/:getPostId" element={<ProductDetail />} />
-        <Route path="/upload/image" element={<Image />} />
       </Routes>
     </BrowserRouter>
   );
