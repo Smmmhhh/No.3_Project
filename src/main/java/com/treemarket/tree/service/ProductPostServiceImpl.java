@@ -25,8 +25,13 @@ public class ProductPostServiceImpl implements ProductPostService {
     }
 
     @Override
-    public List<ProductPostVO> getAllBoards() {
-        return productPostMapper.getAllBoards();
+    public List<ProductPostVO> getAllBoards(int pageSize, int offset) {
+        return productPostMapper.getAllBoards(pageSize, offset);
+    }
+
+    @Override
+    public int getTotalCount() {
+        return productPostMapper.getTotalCount();
     }
 
     @Override
@@ -70,7 +75,7 @@ public class ProductPostServiceImpl implements ProductPostService {
 
     @Override
     public List<String> parseAddress(String joinUrl) {
-        String[] parseUrlsArr = productPostMapper.parseAddress(joinUrl).split(",");
+        String[] parseUrlsArr = joinUrl.split(",");
         List<String> parseUrlsList = new ArrayList<>();
         for(int i = 0; i < parseUrlsArr.length; i++) {
             parseUrlsList.add(parseUrlsArr[i]);
@@ -83,5 +88,10 @@ public class ProductPostServiceImpl implements ProductPostService {
     @Override
     public List<ProductsAppResponse> getAllPostsForApp() {
         return productPostMapper.getAllPostsForApp();
+    }
+
+    @Override
+    public List<ProductPostVO> searchPost(String keyword) {
+        return productPostMapper.searchPost(keyword);
     }
 }

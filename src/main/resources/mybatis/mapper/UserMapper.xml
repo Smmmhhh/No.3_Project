@@ -37,4 +37,9 @@
         UPDATE usertbl SET uservalidity = 0 WHERE userno = #{userNo}
     </delete>
 
+    <update id="updateGrade" parameterType="com.treemarket.tree.dto.User.UserUpdateGrade">
+        UPDATE  usertbl SET usergrade = #{userGrade}
+        WHERE userno = #{userNo}
+    </update>
+
 </mapper>

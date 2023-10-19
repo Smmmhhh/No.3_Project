@@ -1,0 +1,218 @@
+/* FONT */
+@font-face {
+    font-family: "NPSfontBold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2")
+    format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SUITE-Regular";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2")
+    format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SUITE-Bold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2")
+    format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+
+/* 모달 창 */
+.remove-user-modal {
+    font-family: "SUITE-Regular";
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    text-align: center;
+    max-width: 400px;
+    margin-top: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.remove-user-modal h2 {
+    font-size: 24px;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.remove-user-modal p {
+    font-size: 16px;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.remove-user-modal button {
+    background-color: #47ad49;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.remove-user-modal button:hover {
+    background-color: #cc0000;
+}
+
+/* 회원 탈퇴 */
+.remove-user{
+    width: 88%;
+    text-align: right;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0%;
+}
+
+.delete-user-btn {
+    cursor: pointer;
+    font-size: 18px;
+    font-family: "SUITE-Regular";
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+
+/* 프로필 사진 */
+.profile-img-grade img {
+    display: block; /* 이미지를 블록 요소로 표시합니다. */
+    margin: 0 auto; /* 이미지를 가로 중앙에 정렬합니다. */
+    width: 130px; /* 이미지 너비를 원하는 크기(예: 100px)로 설정합니다. */
+    height: 130px; /* 이미지 높이를 원하는 크기(예: 100px)로 설정합니다. */
+}
+
+/* 등급 사진 */
+.profile-img-grade img:last-child {
+    /* 마지막 이미지(grade 이미지)의 크기를 원하는 크기로 설정할 수 있습니다. */
+    width: 40px;
+    height: 40px;
+}
+
+/* 유저 닉네임 */
+.top-profile-info h2 {
+    display: block; /* h2 요소를 블록 요소로 표시합니다. */
+    text-align: center; /* h2 텍스트를 가운데 정렬합니다. */
+    margin-top: 10px; /* h2와 이미지 사이의 간격을 조절합니다. */
+    font-family: "NPSfontBold";
+    font-size: 35px;
+}
+.profile-edit-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    font-family: "SUITE-Regular";}
+
+
+.items {
+    width: 35%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+/* 회원 정보 입력 요소 item */
+.items p {
+    display: flex;
+    flex-direction: column;
+}
+
+.items p label {
+    font-size: 20px;
+    text-align: start;
+    margin-bottom: 8px;
+}
+
+.items p input {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 16px;
+}
+
+.info_sections {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.error-nickname {
+    color: red;
+    font-size: 18px;
+}
+
+.pwd-sections {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.pwd-sections p label{
+    font-size: 16px;
+    text-align: start;
+    margin-bottom: 8px;
+}
+
+.edit-town {
+    font-size: 20px;
+    text-align: start;
+    margin-bottom: 8px;
+}
+
+.town-info {
+    display: flex;
+    margin-bottom: 8px;
+}
+.town-info label {
+    font-size: 20px;
+    text-align: start;
+    margin-bottom: 8px;
+    margin-right : 30px;
+}
+
+.edit-town input {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 16px;
+    width: 94%
+}
+
+.pwd-sections button, .edit-town button {
+    width: 25%;
+    cursor: pointer;
+    border: none;
+    height: 35px;
+    border-radius: 10px;
+    background-color: #47ad49;
+    color: white;
+    font-size: 15px;
+}
+.save-btn {
+    width: 20%;
+    cursor: pointer;
+    border: none;
+    height: 35px;
+    border-radius: 10px;
+    background-color: #47ad49;
+    color: white;
+    font-size: 18px;
+
+    margin-bottom: 70px;
+    margin-top: 70px;
+}

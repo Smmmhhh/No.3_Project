@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
@@ -20,25 +20,39 @@ const Login = () => {
         userName,
       }),
     });
+    const userData = await response.json(); // 응답 데이터를 JSON으로 파싱
+    switch (userData.status) {
+      case 200:
+        if (userId === "admin") {
+          navigate("/admin", { replace: true });
+          alert("관리자 로그인 성공");
+        } else {
+          // 로그인 성공 시
 
-    if (response.ok) {
-      // 로그인 성공 시
-      const userData = await response.json(); // 응답 데이터를 JSON으로 파싱
-      setLogIn(true);
-
-      sessionStorage.setItem("userData", JSON.stringify(userData));
-      navigate(-1);
-      alert("로그인 성공");
-      console.log(userData);
-    } else {
-      // 로그인 실패 시
-      alert("아이디와 비밀번호를 다시 확인해주세요.");
+          setLogIn(true);
+          sessionStorage.setItem("userData", JSON.stringify(userData));
+          navigate("/", { replace: true });
+          alert("로그인 성공");
+        }
+        break;
+      case 409:
+        // 로그인 실패 시
+        alert("아이디와 비밀번호를 다시 확인해주세요.");
+        break;
+      default:
+        console.error("Unexpected response status:", userData.status);
     }
   };
 
   return (
     <div className="login">
-      <img className="login_main_img" src="/assets/logo.png" />
+      <img
+        className="login_main_img"
+        src="/assets/logo.png"
+        onClick={() => {
+          navigate("/", { replace: true });
+        }}
+      />
       <div className="login_form">
         <div className="login_left">
           <img className="login_left_img" src="/assets/loginpanda.png" />

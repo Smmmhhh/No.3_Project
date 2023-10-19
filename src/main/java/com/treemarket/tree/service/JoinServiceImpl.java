@@ -13,9 +13,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class JoinServiceImpl implements JoinService{
+public class JoinServiceImpl implements JoinService {
 
     private final JoinMapper joinMapper;
+
     @Override
     public List<ProductMypageResponse> findLikePostByUserNo(Long userNo) {
         return joinMapper.findLikePostByUserNo(userNo);
@@ -60,4 +61,15 @@ public class JoinServiceImpl implements JoinService{
     public PurchaseCompVO getCompInfo(Long roomId) {
         return joinMapper.getCompInfo(roomId);
     }
+
+    @Override
+    public int getTransactionCount(Long userno) {
+        return joinMapper.getTransactionCount(userno);
+    }
+
+    @Override
+    public String getUserGrade(Long prodId) {
+        return joinMapper.getUserGrade(prodId);
+    }
+
 }

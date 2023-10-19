@@ -1,6 +1,7 @@
 package com.treemarket.tree.controller;
 
 import com.treemarket.tree.common.ApiResponse;
+import com.treemarket.tree.common.ExtendedApiResponse;
 import com.treemarket.tree.domain.AddressVO;
 import com.treemarket.tree.domain.ProductPostVO;
 import com.treemarket.tree.domain.UserVO;
@@ -13,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ public class ProductPostController {
     private final AddressService addressService;
     private final CategoryService categoryService;
     private final UserService userService;
+    private final JoinService joinService;
     private final AwsS3ServiceImpl awsS3Service;
 
     @PostMapping("/register")
@@ -74,17 +78,25 @@ public class ProductPostController {
             //ApiResponse 반환
             return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productsPostResponse).build());  // 성공
         } else if (ctgId != null && addressId == null) {  //주소 key 값이 없을 때
-            return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("주소값 없음").build());
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("주소값 없음").build());
         } else if (ctgId == null && addressId != null) {    //주소 key 값이 없을 때
-            return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("카테고리값 없음").build());
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("카테고리값 없음").build());
         } else {
-            return ResponseEntity.badRequest().body(ApiResponse.builder().status(400).message("주소, 키값 없음").build());
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("주소, 키값 없음").build());
         }
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse> getAllBoards() {
-        List<ProductPostVO> productPostVOList = productPostService.getAllBoards();
+    public ResponseEntity<ExtendedApiResponse> getAllBoards(
+            @RequestParam(defaultValue = "1") int page) {
+
+        int pageSize = 3;
+        int offset = (page - 1) * pageSize;
+
+        int totalCount = productPostService.getTotalCount();
+        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
+
+        List<ProductPostVO> productPostVOList = productPostService.getAllBoards(pageSize, offset);
 
         //Response 리스트 객체 생성
         List<ProductAllBoardResponse> productAllBoardResponseList = new ArrayList<>();
@@ -107,8 +119,9 @@ public class ProductPostController {
 
         // 리스트가 비어있을 경우
         if (productAllBoardResponseList.isEmpty())
-            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("리스트없음").build());
-        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productAllBoardResponseList).build());
+            return ResponseEntity.ok().body(ExtendedApiResponse.extendedApiResponseBuilder().status(400).message("리스트없음").build());
+        return ResponseEntity.ok().body(ExtendedApiResponse.extendedApiResponseBuilder().status(200).message("성공")
+                .data(productAllBoardResponseList).totalPage(totalPage).build());
     }
 
 
@@ -171,6 +184,7 @@ public class ProductPostController {
                 .details(productPostVO.getDetails())
                 .addressName(addressService.getAddressName(productPostVO.getAddressId()))
                 .image(filesUrl)
+                .userGrade(joinService.getUserGrade(postId))
                 .build();
 
         if (productPostVO == null)
@@ -183,7 +197,35 @@ public class ProductPostController {
         return productPostService.getAllPostsForApp();
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<ApiResponse> searchPost
+            (@RequestParam(defaultValue = "") String keyword) {
 
+        List<ProductPostVO> productPostVOList = productPostService.searchPost(keyword);
 
+        //Response 리스트 객체 생성
+        List<ProductAllBoardResponse> productAllBoardResponseList = new ArrayList<>();
+        //productPostVOList를 productAllBoardResponse 객체로 변환해주기
+        for(int i = 0; i < productPostVOList.size(); i++) {
+            ProductAllBoardResponse productAllBoardResponse = ProductAllBoardResponse.builder()
+                    .postId(productPostVOList.get(i).getPostId())
+                    .ctgName(categoryService.getCtgName(productPostVOList.get(i).getCtgId()))
+                    .userNickname(userService.getUserNickname(productPostVOList.get(i).getUserNo()))
+                    .title(productPostVOList.get(i).getTitle())
+                    .price(productPostVOList.get(i).getPrice())
+                    .addressName(addressService.getAddressName(productPostVOList.get(i).getAddressId()))
+                    // 첫번쨰 url 값 가져오기(대표 이미지)
+                    .image(productPostService.parseAddress(productPostVOList.get(i).getImage()).get(0))
+                    .productStatus(productPostVOList.get(i).getProductStatus())
+                    .build();
+            productAllBoardResponseList.add(productAllBoardResponse);
+        }
+
+        // 리스트가 비어있을 경우
+        if (productPostVOList.isEmpty())
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("리스트 없음").build());
+
+        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productAllBoardResponseList).build());
+    }
 }
 

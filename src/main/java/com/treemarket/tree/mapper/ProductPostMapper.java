@@ -11,7 +11,8 @@ import java.util.List;
 public interface ProductPostMapper {
 
     void savePost(ProductPostVO productpostVO);
-    List<ProductPostVO> getAllBoards();
+    List<ProductPostVO> getAllBoards(int pageSize, int offset);
+    int getTotalCount();
     List<ProductPostVO> findBoardsByLocation(Long addressId);
     ProductPostVO getPostDetails(Long postId);
     void modifyPost(ProductPostVO productpostVO);
@@ -20,4 +21,5 @@ public interface ProductPostMapper {
     String parseAddress(String joinUrl);
 
     List<ProductsAppResponse> getAllPostsForApp();
+    List<ProductPostVO> searchPost(String keyword);
 }
