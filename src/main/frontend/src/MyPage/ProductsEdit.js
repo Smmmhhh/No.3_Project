@@ -56,6 +56,7 @@ const ProductsEdit = ({}) => {
     }
   }, [postId]);
 
+
   const handleImageChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
     setFiles([...files, ...selectedFiles]);
