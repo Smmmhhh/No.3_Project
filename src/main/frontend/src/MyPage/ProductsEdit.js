@@ -13,6 +13,7 @@ const ProductsEdit = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [addressName, setaddressName] = useState("");
   const [imagePreview, setImagePreview] = useState([]);
+  const [productData, setProductData] = useState({});
   const [updateproductData, setUpdateProductData] = useState({
     userNo: userNo,
     title: "",
@@ -38,14 +39,16 @@ const ProductsEdit = ({}) => {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log("데이터 불러오기 성공", data);
           if (data.status === 200) {
-            const ProductData = {
-              title: data.title,
-              price: data.price,
-              ctgName: data.ctgName,
-              details: data.details,
-            };
-            console.log("데이터 불러오기 성공", ProductData);
+            // const loadProductData = {
+            //   title: data.title,
+            //   price: data.price,
+            //   ctgName: data.ctgName,
+            //   details: data.details,
+            //   addressName: data.addressName,
+            // };
+            setProductData(data);
           } else {
             console.error("데이터 불러오기 실패");
           }
@@ -55,6 +58,10 @@ const ProductsEdit = ({}) => {
         });
     }
   }, [postId]);
+
+  useEffect(() => {
+    console.log("제품 정보 : ", productData);
+  }, [productData]);
 
   const handleImageChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -147,36 +154,36 @@ const ProductsEdit = ({}) => {
       <div className="productedit_body">
         <input
           type="text"
-          placeholder="제목"
-          value={updateproductData.title}
-          onChange={(e) =>
+          value={updateproductData.title} // 제품 제목
+          onChange={(e) => {
             setUpdateProductData({
               ...updateproductData,
               title: e.target.value,
-            })
-          }
+            });
+          }}
         />
+
         <hr />
         <input
           type="text"
           placeholder="가격"
           value={updateproductData.price}
-          onChange={(e) =>
+          onChange={(e) => {
             setUpdateProductData({
               ...updateproductData,
               price: e.target.value,
-            })
-          }
+            });
+          }}
         />
         <hr />
         <select
           value={updateproductData.ctgName}
-          onChange={(e) =>
+          onChange={(e) => {
             setUpdateProductData({
               ...updateproductData,
               ctgName: e.target.value,
-            })
-          }
+            });
+          }}
         >
           <option value="" disabled>
             카테고리 선택
@@ -194,12 +201,12 @@ const ProductsEdit = ({}) => {
           type="text"
           placeholder="상품 내용"
           value={updateproductData.details}
-          onChange={(e) =>
+          onChange={(e) => {
             setUpdateProductData({
               ...updateproductData,
               details: e.target.value,
-            })
-          }
+            });
+          }}
         />
         <hr />
         <div className="info_section" onClick={toggle}>
@@ -216,12 +223,12 @@ const ProductsEdit = ({}) => {
               id="userAddress"
               type="text"
               value={updateproductData.addressName}
-              onChange={(e) =>
+              onChange={(e) => {
                 setUpdateProductData({
                   ...updateproductData,
-                  addressName: e.target.value,
-                })
-              }
+                  ctgName: e.target.value,
+                });
+              }}
               placeholder="나무시 죽순구 새싹동"
               required
               disabled
