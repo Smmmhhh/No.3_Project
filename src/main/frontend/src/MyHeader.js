@@ -43,7 +43,7 @@ const MyHeader = () => {
         <Link to="/" style={{ width: "200px" }}>
           <img className="logo_img" src="/assets/logo.png" alt="로고" />
         </Link>
-        <Link to="/product">
+        <Link to="/products">
           <h1 className="category">중고 거래</h1>
         </Link>
       </div>

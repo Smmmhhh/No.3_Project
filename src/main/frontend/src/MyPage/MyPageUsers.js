@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MyFooter from "../MyFooter";
 import MyHeader from "../MyHeader";
 import MyPageEdit from "./MyPageEdit";
+import "./MyPageUsers.css";
 
 const MyPageUsers = () => {
   const [userInfo, setUserInfo] = useState({
@@ -42,33 +43,35 @@ const MyPageUsers = () => {
     <div className="mypage-users">
       <MyHeader />
       <div className="pwd-check-form">
-        <h2>정보 수정</h2>
+        <h2 className="title-pwd-check-form">정보 수정</h2>
         <hr />
         {!showUpdateForm ? (
           <>
             <p className="text1">
-              정보를 안전하게 보호하기 위해
+              정보를 안전하게 보호하기 위해 &nbsp;
               <span>비밀번호를 다시 한번 확인</span>
               합니다.
             </p>
             <p className="text2">
               비밀번호가 타인에게 노출되지 않도록 항상 주의해주세요.
             </p>
-            <p>
-              아이디&nbsp;&nbsp;&nbsp; &nbsp;
-              <span className="id-text">{userInfo.userId}</span>
-            </p>
-            <p className="text3">
-              비밀번호&nbsp;&nbsp;
-              <input
-                type="password"
-                className="check-pwd-input"
-                onChange={handlePwdChange}
-              />
-            </p>
-            {!isPwdMatch && <p>비밀번호가 일치하지 않습니다.</p>}
+            <div className="input-form">
+              <p className="text3">
+                아이디
+                <span className="id-text">{userInfo.userId}</span>
+              </p>
+              <p className="text4">
+                비밀번호
+                <input
+                  type="password"
+                  className="check-pwd-input"
+                  onChange={handlePwdChange}
+                />
+              </p>
+              {!isPwdMatch && <p className="text5">비밀번호가 일치하지 않습니다.</p>}
+            </div>
             <button className="submit-btn" onClick={handleCheckPwd}>
-              확인
+              확&nbsp;&nbsp;인
             </button>
           </>
         ) : (

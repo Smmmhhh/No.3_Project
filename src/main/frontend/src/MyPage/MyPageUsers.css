@@ -1,0 +1,114 @@
+/* FONT */
+@font-face {
+    font-family: "NPSfontBold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2")
+    format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SUITE-Regular";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2")
+    format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SUITE-Bold";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2")
+    format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+
+.pwd-check-form {
+    margin: auto;
+    width: 90%;
+    text-align: center;
+}
+/* 정보 수정 title*/
+.title-pwd-check-form {
+    font-family: "SUITE-Bold";
+    font-size: 25px;
+}
+
+hr {
+    width: 90%;
+}
+
+.text1, .text2, .text3, .text4, .text5  {
+    font-family: "SUITE-Regular";
+}
+/* 정보를 안전하게 ~ */
+.text1 {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+.text1 span {
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+}
+/* 타인에게 노출~ */
+.text2 {
+    font-size: 20px;
+    color: gray;
+}
+/* ID 비밀번호 div */
+.input-form {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    width: 25%;
+}
+
+.text3,.text4 {
+    text-align: left;
+    font-size: 20px;
+}
+
+.text3 span {
+    margin-left: 38px;
+}
+
+
+.text4 {
+    margin-bottom: 5px;
+}
+
+.text4 input{
+    margin-left: 23px;
+    height: 20px;
+}
+
+/* 비번 틀렸을 때 */
+.text5 {
+    color : red;
+    font-size: 16px;
+    margin-top: 2%;
+}
+
+/* 확인 버튼 */
+.submit-btn {
+    font-family: "SUITE-Regular";
+    font-size: 18px;
+    color: white;
+
+    background-color: #47ad49;
+    border: none;
+    border-radius: 10px;
+
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+
+    cursor: pointer;
+
+    margin-bottom: 15%;
+}
