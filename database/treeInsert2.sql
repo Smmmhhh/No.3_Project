@@ -21,24 +21,6 @@ UPDATE productposttbl SET addressid = 560 WHERE postid = 10;
 UPDATE productposttbl SET addressid = 759 WHERE postid = 11;
 UPDATE productposttbl SET addressid = 803 WHERE postid = 12;
 
-/* 파일 이미지 경로 변경 */
-UPDATE productposttbl SET image = 'image1.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_1.jpg';
-UPDATE productposttbl SET image = 'image2.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_2.jpg';
-UPDATE productposttbl SET image = 'image3.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_3.jpg';
-UPDATE productposttbl SET image = 'image4.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_4.jpg';
-UPDATE productposttbl SET image = 'image5.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_5.jpg';
-UPDATE productposttbl SET image = 'image6.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_6.jpg';
-UPDATE productposttbl SET image = 'image7.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_7.jpg';
-UPDATE productposttbl SET image = 'image8.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_8.jpg';
-UPDATE productposttbl SET image = 'image9.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_9.jpg';
-UPDATE productposttbl SET image = 'image10.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_10.jpg';
-UPDATE productposttbl SET image = 'image11.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_11.jpg';
-UPDATE productposttbl SET image = 'image11.jpg' WHERE image = 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_12.jpg';
-
-
-
-
-
 
 
 /* 테스트를 위해 userno가 1인 사람의 post로 변경 */

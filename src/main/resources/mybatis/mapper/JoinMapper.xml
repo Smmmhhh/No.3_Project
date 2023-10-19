@@ -30,7 +30,7 @@
         SELECT p.postid, p.title, p.price, p.image
         FROM productposttbl p
         LEFT JOIN purchasecomptbl c ON p.postid = c.postid
-        WHERE p.userno = #{userNo} AND c.postId IS NULL
+        WHERE p.userno = #{userNo} AND c.postId IS NULL AND p.productstatus = 1
     </select>
     
     <select id="getAllBoards" resultType="com.treemarket.tree.dto.Productpost.res.AdminProductPostList">
