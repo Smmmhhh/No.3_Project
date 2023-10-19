@@ -41,13 +41,13 @@ const ProductsEdit = ({}) => {
         .then((data) => {
           console.log("데이터 불러오기 성공", data);
           if (data.status === 200) {
-            // const loadProductData = {
-            //   title: data.title,
-            //   price: data.price,
-            //   ctgName: data.ctgName,
-            //   details: data.details,
-            //   addressName: data.addressName,
-            // };
+            const loadProductData = {
+              title: data.title,
+              price: data.price,
+              ctgName: data.ctgName,
+              details: data.details,
+              addressName: data.addressName,
+            };
             setProductData(data);
           } else {
             console.error("데이터 불러오기 실패");
@@ -154,7 +154,8 @@ const ProductsEdit = ({}) => {
       <div className="productedit_body">
         <input
           type="text"
-          value={updateproductData.title} // 제품 제목
+          placeholder={productData.title}
+          value={updateproductData.title}
           onChange={(e) => {
             setUpdateProductData({
               ...updateproductData,
@@ -166,7 +167,7 @@ const ProductsEdit = ({}) => {
         <hr />
         <input
           type="text"
-          placeholder="가격"
+          placeholder={productData.price}
           value={updateproductData.price}
           onChange={(e) => {
             setUpdateProductData({
@@ -240,21 +241,19 @@ const ProductsEdit = ({}) => {
             </div>
           </div>
         </div>
-        <label className="file_select_label" htmlFor="file_select">
-          <img src="/assets/createimg.png" />
-          <p>
-            사진 등록
-            <br />
-            (최대 5장)
-          </p>
-        </label>
-        <input
-          className="image-preview"
-          type="file"
-          value={updateproductData.image}
-          multiple
-          onChange={handleImageChange}
-        />
+        <hr />
+        <div className="img_input">
+          <label className="file_select_label" htmlFor="file_select"></label>
+          <p>사진 등록하기</p>
+          <input
+            className="image-preview"
+            type="file"
+            placeholder={productData.image}
+            value={updateproductData.image}
+            multiple
+            onChange={handleImageChange}
+          />
+        </div>
         <hr />
         <div className="preview-image">{renderImagePreviews}</div>
         <div className="productedit_btn">
@@ -265,10 +264,10 @@ const ProductsEdit = ({}) => {
           >
             <p>수정하기</p>
           </button>
+          <button className="productedit_delete" onClick={handleDelete}>
+            <p>삭제하기</p>
+          </button>
         </div>
-        <button className="productedit_delete" onClick={handleDelete}>
-          <p>삭제하기</p>
-        </button>
       </div>
       <MyFooter />
     </div>
