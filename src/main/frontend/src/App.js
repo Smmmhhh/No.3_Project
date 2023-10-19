@@ -16,6 +16,8 @@ import MyPageSales from "./MyPage/MyPageSales";
 import MyPagePurchases from "./MyPage/MyPagePurchases";
 import MyPageRegister from "./MyPage/MyPageRegister";
 import MyPageLikes from "./MyPage/MyPageLikes";
+import ProductDetail from "./Products/ProductDetail";
+
 function App() {
   return (
     <BrowserRouter>
@@ -36,6 +38,7 @@ function App() {
         <Route path="/mypage/purchases/:userNo" element={<MyPagePurchases />} />
         <Route path="/mypage/register/:userNo" element={<MyPageRegister />} />
         <Route path="/mypage/likes/:userNo" element={<MyPageLikes />} />
+        <Route path="/products/detail/:getPostId" element={<ProductDetail />} />
       </Routes>
     </BrowserRouter>
   );

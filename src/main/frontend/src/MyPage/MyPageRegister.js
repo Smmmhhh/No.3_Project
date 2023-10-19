@@ -5,7 +5,7 @@ import MyPage from "./MyPage";
 const MypageRegister = () => {
   const [userNo, setUserNo] = useState(0);
   const [register, setRegister] = useState([]);
-
+  
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
     if (userData) {
@@ -49,5 +49,4 @@ const MypageRegister = () => {
     </div>
   );
 };
-
 export default MypageRegister;
