@@ -850,28 +850,28 @@ INSERT INTO ctgtbl (ctgID, ctgName) VALUES (ctgtbl_seq.NEXTVAL, '잡화');
 
 -- productPosttbl에 더미 데이터 12개를 INSERT
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 1, 1, 276, '상품1', 10000, '상품 1 상세 설명', 'image1.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 1, 1, 276, '상품1', 10000, '상품 1 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_1.jpg', 1);
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 2, 2, 277, '상품2', 15000, '상품 2 상세 설명', 'image2.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 2, 2, 277, '상품2', 15000, '상품 2 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_2.jpg', 1);
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 3, 3, 278, '상품3', 20000, '상품 3 상세 설명', 'image3.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 3, 3, 278, '상품3', 20000, '상품 3 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_3.jpg', 1);
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 4, 4, 279, '상품4', 25000, '상품 4 상세 설명', 'image4.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 4, 4, 279, '상품4', 25000, '상품 4 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_4.jpg', 1);
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 5, 5, 280, '상품5', 30000, '상품 5 상세 설명', 'image5.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 5, 5, 280, '상품5', 30000, '상품 5 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_5.jpg', 1);
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 6, 6, 281, '상품6', 35000, '상품 6 상세 설명', 'image6.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 6, 6, 281, '상품6', 35000, '상품 6 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_6.jpg', 1);
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 1, 7, 282, '상품7', 40000, '상품 7 상세 설명', 'image7.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 1, 7, 282, '상품7', 40000, '상품 7 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_7.jpg', 1);
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 2, 8, 283, '상품8', 45000, '상품 8 상세 설명', 'image8.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 2, 8, 283, '상품8', 45000, '상품 8 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_8.jpg', 1);
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 3, 9, 284, '상품9', 50000, '상품 9 상세 설명', 'image9.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 3, 9, 284, '상품9', 50000, '상품 9 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_9.jpg', 1);
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 4, 10, 285, '상품10', 55000, '상품 10 상세 설명', 'image10.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 4, 10, 285, '상품10', 55000, '상품 10 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_10.jpg', 1);
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 5, 1, 286, '상품11', 60000, '상품 11 상세 설명', 'image11.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 5, 1, 286, '상품11', 60000, '상품 11 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_11.jpg.jpg', 1);
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 6, 2, 287, '상품12', 65000, '상품 12 상세 설명', 'image12.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 6, 2, 287, '상품12', 65000, '상품 12 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_12.jpg', 1);
 
 commit;

@@ -1,24 +1,53 @@
 /* FONT */
 @font-face {
     font-family: "NPSfontBold";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2")
-    format("woff2");
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2") format("woff2");
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: "SUITE-Regular";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2")
-    format("woff2");
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2") format("woff2");
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
     font-family: "SUITE-Bold";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2")
-    format("woff2");
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2") format("woff2");
     font-weight: 600;
     font-style: normal;
+}
+
+.List_form {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.items {
+
+}
+
+.List_item {
+    /*border: 1px solid #ddd; !* 테이블 셀 간 경계선 스타일 설정 *!*/
+
+}
+
+
+.List_item td {
+    padding: 10px;
+}
+
+
+.List_item td {
+    padding: 10px;
+    text-align: center; /* 가운데 정렬을 추가합니다. */
+}
+
+.List_img {
+    width: 100px; /* 이미지 크기 조절 */
+    height: auto; /* 이미지 비율 유지 */
+    display: block; /* 가운데 정렬을 위해 블록 요소로 설정합니다. */
+    margin: 0 auto; /* 가운데 정렬을 위해 margin을 조절합니다. */
 }
