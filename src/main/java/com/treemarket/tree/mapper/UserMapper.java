@@ -2,6 +2,7 @@ package com.treemarket.tree.mapper;
 
 import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.dto.User.UserModifyResponse;
+import com.treemarket.tree.dto.User.UserUpdateGrade;
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -14,5 +15,6 @@ public interface UserMapper {
     void editUser(UserModifyResponse userModifyResponse);
     void removeUser(Long userNo);
     String getUserNickname(Long userId);
+    void updateGrade(UserUpdateGrade userUpdateGrade);
 
 }

@@ -29,7 +29,7 @@ public class UserController {
         UserVO userVO = userService.login(loginRequest.getUserId(), loginRequest.getUserPw());
 
         if (userVO == null) {
-            return ResponseEntity.badRequest().body(new ApiResponse(409, "로그인 실패", null));
+            return ResponseEntity.ok().body(new ApiResponse(409, "존재하지 않는 계정이거나 아이디와 비밀번호가 일치하지 않습니다.", null));
         }
 
         String addressname = addressService.getAddressName(userVO.getUserAddress());
@@ -63,7 +63,7 @@ public class UserController {
             return ResponseEntity.ok().body(new ApiResponse(200, "로그아웃 성공", null));
         } catch (Exception e){
             System.out.println(e.getMessage());
-            return ResponseEntity.badRequest().body(new ApiResponse(409, "로그아웃 실패", null));
+            return ResponseEntity.ok().body(new ApiResponse(409, "로그아웃 실패", null));
         }
     }
 
@@ -74,18 +74,16 @@ public class UserController {
         String inputAddress = registerRequest.getUserAddress();
         Long addressId = addressService.getAddressId(inputAddress);
         if(addressId == null){
-            return ResponseEntity.badRequest().body(new ApiResponse(409, "주소를 찾을 수 없음", null));
+            return ResponseEntity.ok().body(new ApiResponse(409, "주소를 찾을 수 없음", null));
         }
 
         boolean isIdUnique = userService.checkId(registerRequest.getUserId());
         boolean isNicknameUnique  = userService.checkNickname(registerRequest.getUserNickname());
 
-        if (!isIdUnique && !isNicknameUnique) {
-            return ResponseEntity.badRequest().body(new ApiResponse(410, "ID와 닉네임 중복",null));
-        } else if (!isIdUnique) {
-            return ResponseEntity.badRequest().body(new ApiResponse(411, "ID 중복",null));
+        if (!isIdUnique) {
+            return ResponseEntity.ok().body(new ApiResponse(411, "ID 중복",null));
         } else if (!isNicknameUnique) {
-            return ResponseEntity.badRequest().body(new ApiResponse(412, "닉네임 중복",null));
+            return ResponseEntity.ok().body(new ApiResponse(412, "닉네임 중복",null));
         } else {
             UserVO userVO = UserVO.builder()
                     .userId(registerRequest.getUserId())
@@ -94,14 +92,14 @@ public class UserController {
                     .userNickname(registerRequest.getUserNickname())
                     .userAddress(addressId)
                     .userPhoneno(registerRequest.getUserPhoneno())
-                    .userGrade("C")
+                    .userGrade("1")
                     .userValidity("1")
                     .build();
 
             userService.saveUser(userVO);
             UserVO saveUser = userService.findUserByUserId(userVO.getUserId());
             if(saveUser.getUserNo() == null){
-                return ResponseEntity.badRequest().body(new ApiResponse(413, "userNo 생성 오류", null));
+                return ResponseEntity.ok().body(new ApiResponse(413, "userNo 생성 오류", null));
             }
 
             RegisterResponse registerResponse = RegisterResponse.builder()
@@ -120,13 +118,3 @@ public class UserController {
     }
 
 }
-
-/*
-*     private String userId;
-    private String userAddress;
-    private String userPw;
-    private String userName;
-    private String userNickname;
-    private String userPhoneno;
-    private String userGrade;
-    private String userValidity;*/
