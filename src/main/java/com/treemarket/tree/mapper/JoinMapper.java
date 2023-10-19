@@ -24,4 +24,6 @@ public interface JoinMapper {
     PurchaseCompVO getCompInfo(Long roomId);
     int getTransactionCount(Long userno);
 
+    String getUserGrade(Long prodId);
+
 }

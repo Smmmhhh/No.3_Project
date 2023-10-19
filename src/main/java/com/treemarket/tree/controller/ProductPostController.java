@@ -31,6 +31,7 @@ public class ProductPostController {
     private final AddressService addressService;
     private final CategoryService categoryService;
     private final UserService userService;
+    private final JoinService joinService;
     private final AwsS3ServiceImpl awsS3Service;
 
     @PostMapping("/register")
@@ -183,6 +184,7 @@ public class ProductPostController {
                 .details(productPostVO.getDetails())
                 .addressName(addressService.getAddressName(productPostVO.getAddressId()))
                 .image(filesUrl)
+                .userGrade(joinService.getUserGrade(postId))
                 .build();
 
         if (productPostVO == null)
