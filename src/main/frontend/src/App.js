@@ -17,7 +17,6 @@ import MyPagePurchases from "./MyPage/MyPagePurchases";
 import MyPageRegister from "./MyPage/MyPageRegister";
 import MyPageLikes from "./MyPage/MyPageLikes";
 import Image from "./Products/Image";
-import MyPageUsers from "./MyPage/MyPageUsers";
 import ProductDetail from "./Products/ProductDetail";
 
 function App() {
@@ -42,7 +41,6 @@ function App() {
         <Route path="/mypage/likes" element={<MyPageLikes />} />
         <Route path="/products/detail/:getPostId" element={<ProductDetail />} />
         <Route path="/upload/image" element={<Image />} />
-
       </Routes>
     </BrowserRouter>
   );
