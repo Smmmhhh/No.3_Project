@@ -810,34 +810,34 @@ INSERT INTO addresstbl VALUES (addresstbl_seq.nextval, '서울', '강동구', '�
 
 -- usertbl에 더미 데이터 10개를 INSERT
 INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES (usertbl_seq.NEXTVAL, 'user1', 1, 'password1', '손흥민', 'Sonny', '010-1111-1111', 'S', 1);
+VALUES (usertbl_seq.NEXTVAL, 'user1', 1, 'password1', '손흥민', 'Sonny', '010-1111-1111', '3', 1);
 
 INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES (usertbl_seq.NEXTVAL, 'user2', 1, 'password2', '기성용', 'Ki King', '010-1111-1112', 'A', 1);
+VALUES (usertbl_seq.NEXTVAL, 'user2', 1, 'password2', '기성용', 'Ki King', '010-1111-1112', '2', 1);
 
 INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES (usertbl_seq.NEXTVAL, 'user3', 1, 'password3', '이강인', 'Kangaroo', '010-1111-1113', 'B', 1);
+VALUES (usertbl_seq.NEXTVAL, 'user3', 1, 'password3', '이강인', 'Kangaroo', '010-1111-1113', '1', 1);
 
 INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user4', 1, 'password4', '황희찬', 'Goal-chan', '010-1111-1114', 'S', 1);
+VALUES(usertbl_seq.NEXTVAL, 'user4', 1, 'password4', '황희찬', 'Goal-chan', '010-1111-1114', '3', 1);
 
 INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user5', 1, 'password5', '김민재', 'Min-God', '010-1111-1115', 'A', 1);
+VALUES(usertbl_seq.NEXTVAL, 'user5', 1, 'password5', '김민재', 'Min-God', '010-1111-1115', '2', 1);
 
 INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user6', 1, 'password6', '황의조', 'Ui-Goal', '010-1111-1116', 'B', 1);
+VALUES(usertbl_seq.NEXTVAL, 'user6', 1, 'password6', '황의조', 'Ui-Goal', '010-1111-1116', '1', 1);
 
 INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user7', 1, 'password7', '권창훈', 'Chang-hoonaldo', '010-1111-1117', 'S', 1);
+VALUES(usertbl_seq.NEXTVAL, 'user7', 1, 'password7', '권창훈', 'Chang-hoonaldo', '010-1111-1117', '3', 1);
 
 INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user8', 1, 'password8', '김영권', 'Gwonzilla', '010-1111-1118', 'A', 1);
+VALUES(usertbl_seq.NEXTVAL, 'user8', 1, 'password8', '김영권', 'Gwonzilla', '010-1111-1118', '2', 1);
 
 INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user9', 1, 'password9', '조현우', 'Superman', '010-1111-1119', 'B', 1);
+VALUES(usertbl_seq.NEXTVAL, 'user9', 1, 'password9', '조현우', 'Superman', '010-1111-1119', '1', 1);
 
 INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user10', 1, 'password10', '이재성', 'Maestro', '010-1111-1120', 'S', 1);
+VALUES(usertbl_seq.NEXTVAL, 'user10', 1, 'password10', '이재성', 'Maestro', '010-1111-1120', '3', 1);
 
 
 -- ctgtbl에 더미 데이터 6개를 INSERT

@@ -1,0 +1,44 @@
+.productedit_body {
+  width: 50%;
+  margin: auto;
+  text-align: start;
+  padding-top: 50px;
+}
+.productedit {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
+.productedit_body input {
+  width: 100%;
+  height: 30px;
+  border: none;
+  text-align: start;
+}
+.productedit_body .product_info {
+  height: 100px;
+}
+.productedit_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 50px 0;
+}
+.productedit_submit {
+  background-color: #3fb542;
+  border: none;
+  border-radius: 8px;
+  width: 30%;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+.productedit_delete {
+  background-color: #e8e8e8;
+  border: none;
+  border-radius: 8px;
+  width: 30%;
+  font-size: 15px;
+  cursor: pointer;
+}

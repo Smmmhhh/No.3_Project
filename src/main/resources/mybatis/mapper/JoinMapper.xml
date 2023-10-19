@@ -9,7 +9,7 @@
         SELECT p.postid, p.title, p.price, p.image
         FROM productposttbl p
         JOIN liketbl l ON p.postid = l.postid
-        WHERE l.userno = #{userNo} AND p.productstatus = 0
+        WHERE l.userno = #{userNo} AND p.productstatus = 1
     </select>
     
     <select id="findPurchasePostByUserNo" resultType="com.treemarket.tree.dto.Productpost.res.ProductMypageResponse">
@@ -71,6 +71,7 @@
                    ELSE NULL
                END AS userValidity
         FROM usertbl u
+        WHERE u.userNo >= 1;
     </select>
 
     <insert id="savePurchaseComp">
@@ -92,6 +93,24 @@
         FROM purchasecomptbl p
         INNER JOIN chatroomtbl c ON p.postid = c.postid
         WHERE c.roomid = #{roomId}
+    </select>
+
+    <select id="getTransactionCount" resultType="int">
+        SELECT (
+                    (SELECT COUNT(*) FROM purchaseComptbl WHERE postID IN (SELECT postID FROM productPosttbl WHERE userNo = u.userNo))
+                    +
+                    (SELECT COUNT(*) FROM purchaseComptbl WHERE buyerNo = u.userNo)
+                ) AS transactionCount
+        FROM usertbl u
+        WHERE u.userno = #{userno}
+    </select>
+
+    <select id="getUserGrade" resultType="String">
+        SELECT U.usergrade
+        from usertbl U
+            inner join  productposttbl P
+                ON U.userno = P.userno
+        where P.postid = #{prodId}
     </select>
 
 

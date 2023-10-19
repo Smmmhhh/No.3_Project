@@ -1,6 +1,7 @@
 import "./Admin.css";
 import Admin from "./Admin";
 import React, { useState, useEffect } from "react";
+import MyHeader from "../MyHeader";
 const AdminPost = () => {
   const [post, setPost] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState({});
@@ -22,7 +23,6 @@ const AdminPost = () => {
       if (response.ok) {
         const postData = await response.json();
         setPost(postData.data);
-        console.log(postData);
       } else {
         alert("게시글 불러오기 실패");
       }
@@ -45,7 +45,7 @@ const AdminPost = () => {
   const updatePostStatus = async (postId, newStatus) => {
     try {
       const response = await fetch("/admin/post", {
-        method: "PUT", // PUT 요청으로 변경
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -65,6 +65,7 @@ const AdminPost = () => {
   };
   return (
     <div>
+      <MyHeader />
       <Admin />
       <div className="admin_product_nav">
         <p>

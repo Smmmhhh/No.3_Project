@@ -2,6 +2,7 @@ package com.treemarket.tree.service;
 
 import com.treemarket.tree.domain.UserVO;
 import com.treemarket.tree.dto.User.UserModifyResponse;
+import com.treemarket.tree.dto.User.UserUpdateGrade;
 import com.treemarket.tree.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -64,5 +65,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getUserNickname(Long userId) {
         return userMapper.getUserNickname(userId);
+    }
+
+    @Override
+    public void updateGrade(UserUpdateGrade userUpdateGrade) {
+        userMapper.updateGrade(userUpdateGrade);
     }
 }

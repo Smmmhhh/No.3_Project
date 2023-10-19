@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
+import MyFooter from "../MyFooter";
+import MyHeader from "../MyHeader";
+import "./ProductsEdit.css";
 import Modal from "react-modal";
 import DaumPostCode from "react-daum-postcode";
-import "./ProductsCreate.css";
-import MyHeader from "../MyHeader";
-import MyFooter from "../MyFooter";
 
-const ImageUploadComponent = () => {
+const ProductsEdit = ({}) => {
   const [userNo, setUserNo] = useState(0);
   const [files, setFiles] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [addressName, setaddressName] = useState("");
-  const [imagePreview, setImagePreview] = useState([]); // Define imagePreview state
-  const [productData, setProductData] = useState({
+  const [imagePreview, setImagePreview] = useState([]);
+  const [updateproductData, setUpdateProductData] = useState({
     userNo: userNo,
     title: "",
     price: 0,
@@ -22,15 +22,15 @@ const ImageUploadComponent = () => {
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
     if (userData) {
-      setProductData((prevProductData) => ({
+      setUpdateProductData((prevProductData) => ({
         ...prevProductData,
         userNo: userData.data.userNo,
       }));
     }
   }, []);
 
-  const handleFileChange = (event) => {
-    const selectedFiles = Array.from(event.target.files);
+  const handleImageChange = (e) => {
+    const selectedFiles = Array.from(e.target.files);
     setFiles([...files, ...selectedFiles]);
     if (selectedFiles.length <= 5) {
       const selectedPreviews = selectedFiles.map((file) =>
@@ -41,35 +41,80 @@ const ImageUploadComponent = () => {
       alert("최대 5장의 사진을 업로드할 수 있습니다.");
     }
   };
-
   const renderImagePreviews = imagePreview.map((preview, index) => (
     <img src={preview} key={index} alt={`Preview ${index}`} />
   ));
 
-  const handleUpload = () => {
+  const handleUpUpadate = async (e) => {
+    e.preventDefault();
     const formData = new FormData();
 
-    // 이미지 파일 추가
     files.forEach((file, index) => {
       formData.append(`multipartFiles`, file);
     });
 
-    // 상품 데이터 추가
-    const jsonData = JSON.stringify(productData);
+    const jsonData = JSON.stringify(updateproductData);
     const jsonBlob = new Blob([jsonData], { type: "application/json" });
     formData.append("productsPostRequest", jsonBlob);
 
-    fetch("/products/register", {
-      method: "POST",
+    fetch("/mypage/productsedit/1", {
+      method: "PUT",
       body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Image and data upload successful", data);
+        console.log("업데이트 완료", data);
       })
       .catch((error) => {
-        console.error("Error uploading images and data:", error);
+        console.error("응 실패얌", error);
       });
+  };
+
+  const handledisplay = async () => {
+    try {
+      const response = await fetch("/mypage/productsedit/1", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        const ProductData = {
+          title: data.title,
+          price: data.price,
+          ctgName: data.ctgName,
+          details: data.details,
+        };
+
+        console.log("데이터 불러오기 성공", ProductData);
+
+        // 필요에 따라 state나 다른 작업에 데이터를 할당
+        // setProductData(updatedProductData); // 예를 들어, state에 할당하는 경우
+      } else {
+        console.error("데이터 불러오기 실패");
+      }
+    } catch (error) {
+      console.error("오류:", error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch("mypage/products/delete/1", {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        alert("상품이 성공적으로 삭제되었습니다.");
+      } else {
+        console.error("데이터 삭제 실패");
+      }
+    } catch (error) {
+      console.error("오류:", error);
+    }
   };
 
   const customStyles = {
@@ -92,35 +137,48 @@ const ImageUploadComponent = () => {
   const completeHandler = (data) => {
     const formattedAddress = `${data.sido} ${data.sigungu} ${data.bname}`;
     setaddressName(formattedAddress);
-    setProductData({ ...productData, addressName: formattedAddress });
+    setUpdateProductData({
+      ...updateproductData,
+      addressName: formattedAddress,
+    });
     setIsOpen(false);
   };
+
   return (
-    <div className="productcreate">
+    <div className="productedit">
       <MyHeader />
-      <div className="productcreate_body">
+      <div className="productedit_body">
         <input
-          placeholder="제목"
           type="text"
-          value={productData.title}
+          placeholder="제목"
+          value={updateproductData.title}
           onChange={(e) =>
-            setProductData({ ...productData, title: e.target.value })
+            setUpdateProductData({
+              ...updateproductData,
+              title: e.target.value,
+            })
           }
         />
         <hr />
         <input
-          placeholder="가격"
           type="text"
+          placeholder="가격"
+          value={updateproductData.price}
           onChange={(e) =>
-            setProductData({ ...productData, price: e.target.value })
+            setUpdateProductData({
+              ...updateproductData,
+              price: e.target.value,
+            })
           }
         />
         <hr />
         <select
-          type="text"
-          value={productData.ctgName}
+          value={updateproductData.ctgName}
           onChange={(e) =>
-            setProductData({ ...productData, ctgName: e.target.value })
+            setUpdateProductData({
+              ...updateproductData,
+              ctgName: e.target.value,
+            })
           }
         >
           <option value="" disabled>
@@ -137,14 +195,16 @@ const ImageUploadComponent = () => {
         <input
           className="product_info"
           type="text"
-          placeholder="상품 설명"
-          value={productData.details}
+          placeholder="상품 내용"
+          value={updateproductData.details}
           onChange={(e) =>
-            setProductData({ ...productData, details: e.target.value })
+            setUpdateProductData({
+              ...updateproductData,
+              details: e.target.value,
+            })
           }
         />
         <hr />
-
         <div className="info_section" onClick={toggle}>
           <div className="item">
             <label htmlFor="mytown">동네 설정</label>
@@ -158,9 +218,12 @@ const ImageUploadComponent = () => {
               name="userAddress"
               id="userAddress"
               type="text"
-              value={productData.addressName}
+              value={updateproductData.addressName}
               onChange={(e) =>
-                setProductData({ ...productData, addressName: e.target.value })
+                setUpdateProductData({
+                  ...updateproductData,
+                  addressName: e.target.value,
+                })
               }
               placeholder="나무시 죽순구 새싹동"
               required
@@ -173,26 +236,39 @@ const ImageUploadComponent = () => {
             </div>
           </div>
         </div>
-        <hr />
-        <h4>판매글 이미지 등록</h4>
-        <p>(최대 5장)</p>
-
+        <label className="file_select_label" htmlFor="file_select">
+          <img src="/assets/createimg.png" />
+          <p>
+            사진 등록
+            <br />
+            (최대 5장)
+          </p>
+        </label>
         <input
           className="image-preview"
           type="file"
-          onChange={handleFileChange}
+          value={updateproductData.image}
           multiple
+          onChange={handleImageChange}
         />
-
+        <hr />
         <div className="preview-image">{renderImagePreviews}</div>
+        <div className="productedit_btn">
+          <button
+            onClick={handleUpUpadate}
+            className="productedit_submit"
+            type="submit"
+          >
+            <p>수정하기</p>
+          </button>
+        </div>
+        <button className="productedit_delete" onClick={handleDelete}>
+          <p>삭제하기</p>
+        </button>
       </div>
-
-      <button className="productcreate_button" onClick={handleUpload}>
-        <p>등록하기</p>
-      </button>
       <MyFooter />
     </div>
   );
 };
 
-export default ImageUploadComponent;
+export default ProductsEdit;
