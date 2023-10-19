@@ -74,21 +74,6 @@ public class ProductPostServiceImpl implements ProductPostService {
     }
 
     @Override
-    public String joinUrls(List<String> urls) {
-        StringBuilder joinUrl = new StringBuilder();
-        for(int i = 0; i < urls.size(); i++) {
-            joinUrl.append(urls.get(i));
-            if(i+1 < urls.size()) joinUrl.append(",");
-        }
-        return joinUrl.toString();
-    }
-
-    @Override
-    public List<ProductAllBoardResponse> replaceAllBoardResponse(List<ProductPostVO> productPostVOList) {
-        return null;
-    }
-
-    @Override
     public List<String> parseAddress(String joinUrl) {
         String[] parseUrlsArr = joinUrl.split(",");
         List<String> parseUrlsList = new ArrayList<>();
