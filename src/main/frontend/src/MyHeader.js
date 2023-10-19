@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MyHeader = () => {
   const [Login, setLogin] = useState(false);
   const [userNo, setUserNo] = useState(0);
   const [userName, setUserName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
@@ -18,7 +19,7 @@ const MyHeader = () => {
   const handleLogout = async () => {
     sessionStorage.removeItem("userData");
     setLogin(false);
-    setUserNo(0);
+    setUserNo(-1);
     setUserName("");
     try {
       const response = await fetch("/logout", {
@@ -30,6 +31,7 @@ const MyHeader = () => {
 
       if (response.ok) {
         console.log("로그아웃 성공");
+        navigate("/", { replace: true });
       } else {
         console.error("로그아웃 실패");
       }
@@ -43,7 +45,7 @@ const MyHeader = () => {
         <Link to="/" style={{ width: "200px" }}>
           <img className="logo_img" src="/assets/logo.png" alt="로고" />
         </Link>
-        <Link to="/product">
+        <Link to="/products">
           <h1 className="category">중고 거래</h1>
         </Link>
       </div>
@@ -54,23 +56,27 @@ const MyHeader = () => {
       <div className="header_right">
         {Login ? (
           <>
-            <p>{`${userName}님 반갑습니다.`}</p>
-            <Link to="/mypage">
-              <p className="my_page">마이페이지</p>
-            </Link>
-            <Link to="/chat">
-              <p className="chat_list">채팅목록</p>
-            </Link>
-            <button onClick={handleLogout}>로그아웃</button>
+            <div className="greeting">{`${userName}님 반갑습니다.`}</div>
+            <div className="links-and-logout">
+              <Link to="/mypage">
+                <p className="my_page">마이페이지</p>
+              </Link>
+              <Link to="/chat">
+                <p className="chat_list">채팅목록</p>
+              </Link>
+              <p onClick={handleLogout}>로그아웃</p>
+            </div>
           </>
         ) : (
           <>
-            <Link to="/login">
-              <p className="login">로그인</p>
-            </Link>
-            <Link to="/register">
-              <p className="register">회원가입</p>
-            </Link>
+            <div className="links-and-logout">
+              <Link to="/login">
+                <p className="login">로그인</p>
+              </Link>
+              <Link to="/register">
+                <p className="register">회원가입</p>
+              </Link>
+            </div>
           </>
         )}
       </div>

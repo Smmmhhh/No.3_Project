@@ -2,40 +2,43 @@ import MyFooter from "../MyFooter";
 import MyHeader from "../MyHeader";
 import { Link, useNavigate } from "react-router-dom";
 import "./MyPage.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const MyPage = () => {
-  const userSession = sessionStorage.getItem("userData");
+const MyPage = ({ showFooter }) => {
+  const [userNo, setUserNo] = useState(0);
+  const [userNickName, setUserNickName] = useState("");
 
-  const navigate = useNavigate();
   useEffect(() => {
-    if (!userSession) {
-      navigate("/", { replace: true });
+    const userData = JSON.parse(sessionStorage.getItem("userData"));
+    console.log(userData.data);
+    if (userData) {
+      setUserNo(userData.data.userNo);
+      setUserNickName(userData.data.userNickname);
     }
   }, []);
 
   return (
-    <mypage>
-      <div>
-        <MyHeader />
-        <div className="mypage">
+    <div>
+      <MyHeader />
+      <div className="mypage">
+        <mypage>
           <h2>마이 페이지</h2>
           <hr />
           <div className="first_section">
             <div className="first_section_left">
               <img className="profile" src="/assets/profile_default.png" />
-              <h2>윰형대장</h2>
+              <h2>{userNickName}</h2>
               <img className="grade" src="/assets/grade1.png" />
             </div>
             <div className="first_section_right">
-              <Link to="/mypage/users">
+              <Link to="/mypage/users/">
                 <p>정보 수정</p>
               </Link>
             </div>
           </div>
           <hr />
           <div className="second_section">
-            <Link to="mypage/sales">
+            <Link to={`/mypage/sales/${userNo}`}>
               <button>
                 <div className="mypage_img">
                   <img src="/assets/mypage_sales.png" />
@@ -43,7 +46,7 @@ const MyPage = () => {
                 <p>판매 내역</p>
               </button>
             </Link>
-            <Link to="mypage/purchases">
+            <Link to={`/mypage/purchases/${userNo}`}>
               <button>
                 <div className="mypage_img">
                   <img src="/assets/mypage_purchases.png" />
@@ -51,7 +54,7 @@ const MyPage = () => {
                 <p>구매 내역</p>
               </button>
             </Link>
-            <Link to="mypage/register">
+            <Link to={`/mypage/register/${userNo}`}>
               <button>
                 <div className="mypage_img">
                   <img src="/assets/mypage_register.png" />
@@ -59,7 +62,7 @@ const MyPage = () => {
                 <p>등록 내역</p>
               </button>
             </Link>
-            <Link to="mypage/likes">
+            <Link to={`/mypage/likes/${userNo}`}>
               <button>
                 <div className="mypage_img">
                   <img src="/assets/full_heart.png" />
@@ -69,10 +72,10 @@ const MyPage = () => {
             </Link>
           </div>
           <hr />
-        </div>
-        <MyFooter />
+        </mypage>
       </div>
-    </mypage>
+      {showFooter && <MyFooter />}
+    </div>
   );
 };
 export default MyPage;
