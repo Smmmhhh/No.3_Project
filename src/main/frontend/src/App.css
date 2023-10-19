@@ -12,6 +12,14 @@
   font-weight: 300;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "SUITE-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2")
+  format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
 header {
   display: flex;
   flex-direction: row;
@@ -68,13 +76,43 @@ header {
 }
 .header_right {
   text-align: center;
-  margin: auto;
-  width: 10%;
+  width: 30%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: right;
   font-family: "SUITE-Regular";
 }
+.greeting{
+  margin-top: 10px;
+  margin-right: 40px;
+  font-weight: bold;
+  text-align: right;
+  font-size: 18px;
+}
+
+.links-and-logout {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  margin-right: 0px;
+}
+
+.links-and-logout p {
+  margin-right: 35px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a :hover, .links-and-logout p:hover{
+  color: gray;
+}
+
 /* 메인페이지 이미지 */
 .main_img1_box {
   width: 100%;
@@ -105,6 +143,7 @@ footer {
   border-top: solid #e6e6e6;
 }
 .footer_section {
+  font-family: "SUITE-Bold";
   display: flex;
   flex-direction: column;
   justify-content: start;
