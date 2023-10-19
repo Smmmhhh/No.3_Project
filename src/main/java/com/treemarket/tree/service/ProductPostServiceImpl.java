@@ -75,7 +75,7 @@ public class ProductPostServiceImpl implements ProductPostService {
 
     @Override
     public List<String> parseAddress(String joinUrl) {
-        String[] parseUrlsArr = productPostMapper.parseAddress(joinUrl).split(",");
+        String[] parseUrlsArr = joinUrl.split(",");
         List<String> parseUrlsList = new ArrayList<>();
         for(int i = 0; i < parseUrlsArr.length; i++) {
             parseUrlsList.add(parseUrlsArr[i]);

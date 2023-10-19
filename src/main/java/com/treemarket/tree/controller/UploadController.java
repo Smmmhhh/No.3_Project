@@ -30,7 +30,6 @@ public class UploadController {
         System.out.println("컨트롤러" +  productsPostRequest.getUserNo());
         System.out.println("컨트롤러" +  productsPostRequest.getCtgName());
 
-
         return ResponseEntity.ok(awsS3Service.uploadFile(multipartFiles));
     }
 
