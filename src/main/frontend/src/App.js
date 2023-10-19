@@ -18,6 +18,7 @@ import MyPageRegister from "./MyPage/MyPageRegister";
 import MyPageLikes from "./MyPage/MyPageLikes";
 import ProductDetail from "./Products/ProductDetail";
 
+
 function App() {
   return (
     <BrowserRouter>

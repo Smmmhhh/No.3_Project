@@ -5,6 +5,8 @@ import "./ProductsCreate.css";
 import MyHeader from "../MyHeader";
 import MyFooter from "../MyFooter";
 
+
+
 const ImageUploadComponent = () => {
   const [userNo, setUserNo] = useState(0);
   const [files, setFiles] = useState([]);
