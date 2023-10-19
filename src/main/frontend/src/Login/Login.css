@@ -33,6 +33,7 @@
   margin: auto;
   text-align: center;
   margin-bottom: 20px;
+  cursor: pointer;
 }
 .login_form {
   display: flex;
