@@ -29,13 +29,13 @@ function App() {
         <Route path="/TransActionComplete" element={<TransActionComplete />} />
         <Route path="/admin/" element={<Admin />} />
         <Route path="/products/register" element={<ProductsRegister />} />
-        <Route path="/mypage/productsedit" element={<ProductsEdit />} />
+        <Route path="/mypage/productsedit/:postId" element={<ProductsEdit />} />
         <Route path="/admin/user" element={<AdminUser />} />
         <Route path="/admin/post" element={<AdminPost />} />
-        <Route path="/mypage/sales" element={<MyPageSales />} />
-        <Route path="/mypage/purchases" element={<MyPagePurchases />} />
-        <Route path="/mypage/register" element={<MyPageRegister />} />
-        <Route path="/mypage/likes" element={<MyPageLikes />} />
+        <Route path="/mypage/sales/:userNo" element={<MyPageSales />} />
+        <Route path="/mypage/purchases/:userNo" element={<MyPagePurchases />} />
+        <Route path="/mypage/register/:userNo" element={<MyPageRegister />} />
+        <Route path="/mypage/likes/:userNo" element={<MyPageLikes />} />
       </Routes>
     </BrowserRouter>
   );
