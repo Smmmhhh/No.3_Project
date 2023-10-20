@@ -123,19 +123,19 @@ const Register = () => {
   }, [formData]);
 
   return (
-    <div className="register">
-      <div className="top_logo">
+    <div className="user_register">
+      <div className="user_top_logo">
         <Link to={"/"}>
           <img src="/assets/logo.png" alt="logoImage" />
         </Link>
       </div>
-      <div className="register_inputs">
-        <section className="register_left">
-          <p className="title">회원가입</p>
+      <div className="user_register_inputs">
+        <section className="user_register_left">
+          <p className="user_register_title">회원가입</p>
 
-          <div className="register_form">
-            <div className="info_section">
-              <div className="item">
+          <div className="user_register_form">
+            <div className="user_register_info_section">
+              <div className="user_register_item">
                 <label htmlFor="userId">아이디</label>
                 <input
                   type="text"
@@ -154,7 +154,7 @@ const Register = () => {
                 )}
               </div>
 
-              <div className="item">
+              <div className="user_register_item">
                 <label htmlFor="userName">이름</label>
                 <input
                   type="text"
@@ -166,8 +166,8 @@ const Register = () => {
                 />
               </div>
             </div>
-            <div className="info_section">
-              <div className="item">
+            <div className="user_register_info_section">
+              <div className="user_register_item">
                 <label htmlFor="userPw">비밀번호</label>
                 <input
                   type="password"
@@ -188,7 +188,7 @@ const Register = () => {
                   </p>
                 )}
               </div>
-              <div className="item">
+              <div className="user_register_item">
                 <label htmlFor="checkpwd">비밀번호 확인</label>
                 <input
                   type="password"
@@ -207,8 +207,8 @@ const Register = () => {
                 )}
               </div>
             </div>
-            <div className="info_section">
-              <div className="item">
+            <div className="user_register_info_section">
+              <div className="user_register_item">
                 <label htmlFor="userNickname">닉네임</label>
                 <input
                   type="text"
@@ -225,7 +225,7 @@ const Register = () => {
                   </p>
                 )}
               </div>
-              <div className="item">
+              <div className="user_register_item">
                 <label htmlFor="userPhoneno">전화번호</label>
                 <NumberFormat
                   format="###-####-####"
@@ -241,11 +241,11 @@ const Register = () => {
               </div>
             </div>
 
-            <div className="info_section" onClick={toggle}>
-              <div className="item">
+            <div className="user_register_info_section" onClick={toggle}>
+              <div className="user_register_item">
                 <label htmlFor="mytown">동네 설정</label>
                 <input
-                  id="address"
+                  id="register_address"
                   type="button"
                   onClick={toggle}
                   value={"주소 검색"}
@@ -270,7 +270,7 @@ const Register = () => {
                   </Modal>
                 </div>
               </div>
-              <div className="item">
+              <div className="user_register_item">
                 <input type="hidden"></input>
               </div>
             </div>
@@ -278,7 +278,7 @@ const Register = () => {
             <button onClick={handleRegister}>JOIN</button>
           </div>
         </section>
-        <section className="register_right">
+        <section className="user_register_right">
           <img src="assets/loginpanda.png" alt="logoPandaImage" />
         </section>
       </div>
