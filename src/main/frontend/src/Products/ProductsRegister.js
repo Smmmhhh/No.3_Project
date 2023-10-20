@@ -1,11 +1,10 @@
-  import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import DaumPostCode from "react-daum-postcode";
 import "./ProductsCreate.css";
 import MyHeader from "../MyHeader";
 import MyFooter from "../MyFooter";
-
-
+import NumberFormat from "react-number-format";
 
 const ImageUploadComponent = () => {
   const [userNo, setUserNo] = useState(0);
@@ -110,12 +109,16 @@ const ImageUploadComponent = () => {
           }
         />
         <hr />
-        <input
-          placeholder="가격"
-          type="text"
-          onChange={(e) =>
-            setProductData({ ...productData, price: e.target.value })
-          }
+        <NumberFormat
+          value={productData.price}
+          onValueChange={({ value }) => {
+            setProductData({
+              ...productData,
+              price: value,
+            });
+          }}
+          thousandSeparator={true}
+          suffix={"원"}
         />
         <hr />
         <select

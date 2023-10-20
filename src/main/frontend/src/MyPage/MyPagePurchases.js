@@ -35,6 +35,8 @@ const MyPagePurchases = () => {
       <div className="mypage_List">
         <MyHeader />
         <MyPageForm />
+        <h2 className="list_h2">구매 내역</h2>
+
         {purchases.map((purchases) => (
           <div className="mypage_List_form" key={purchases.postId}>
             <img className="mypage_List_img" src={purchases.image} />

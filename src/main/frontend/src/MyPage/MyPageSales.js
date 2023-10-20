@@ -35,7 +35,7 @@ const MyPageSales = () => {
       <div className="mypage_List">
         <MyHeader />
         <MyPageForm />
-
+        <h2 className="list_h2">판매 내역</h2>
         {sales.map((sales) => (
           <div className="mypage_List_form" key={sales.postId}>
             <img className="mypage_List_img" src={sales.image} />

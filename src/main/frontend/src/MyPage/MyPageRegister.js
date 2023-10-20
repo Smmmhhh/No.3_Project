@@ -38,6 +38,7 @@ const MypageRegister = () => {
       <div className="register_List">
         <MyHeader />
         <MyPageForm />
+        <h2 className="register_h2">등록 내역</h2>
         {register.map((product) => (
           <div className="register_List_form" key={product.postId}>
             <div className="mypage_register_left">
