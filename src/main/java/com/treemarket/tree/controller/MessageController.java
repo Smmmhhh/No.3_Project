@@ -17,6 +17,9 @@ public class MessageController {
         if (ChatMessage.MessageType.ENTER.equals(message.getType())) {
             message.setMessage(message.getSender()+"님이 입장하였습니다.");
         }
+        System.out.println("메시지" + message.getMessage());
         sendingOperations.convertAndSend("/topic/chat/room/"+message.getRoomId(),message);
     }
 }
+
+

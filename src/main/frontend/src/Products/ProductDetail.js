@@ -18,6 +18,7 @@ const ProductDetail = () => {
   const [heart, setHeart] = useState(false); // 찜하트
 
   // 이미지 관련
+  const [activeImage, setActiveImage] = useState(0);
   const imageBox = useRef(null);
   const [num, setNum] = useState(1);
   const [carouseTransition, setcarouseTransition] = useState(
@@ -56,6 +57,17 @@ const ProductDetail = () => {
         }
       });
   }, []);
+  useEffect(() => {
+    // Auto-slide the images every 5 seconds
+    const interval = setInterval(() => {
+      const nextImage = (activeImage + 1) % originalImage.length;
+      setActiveImage(nextImage);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [activeImage, originalImage]);
 
   useEffect(() => {
     handleImage();
@@ -80,7 +92,15 @@ const ProductDetail = () => {
     ];
     setCloneImages(newCloneImages);
   };
-
+  const showPreviousImage = () => {
+    const prevImage =
+      (activeImage - 1 + originalImage.length) % originalImage.length;
+    setActiveImage(prevImage);
+  };
+  const showNextImage = () => {
+    const nextImage = (activeImage + 1) % originalImage.length;
+    setActiveImage(nextImage);
+  };
   const handleChatBtn = () => {
     if (userConnect) {
       // 채팅창으로 데이터 들고 이동
@@ -118,34 +138,19 @@ const ProductDetail = () => {
       <MyHeader />
       <div className="product-info">
         <div className="image-slide">
-          <button
-            className="prev-slide"
-            onClick={() => {
-              handleSlide("prev");
-            }}
-          >
-            <IoArrowBackOutline size={30} color="#333" />
+          <button className="prev-slide" onClick={showPreviousImage}>
+            &#8249;
           </button>
-          <div
-            className="main-images"
-            style={{
-              transition: `${carouseTransition}`,
-              transform: `translateX(-${num}00%)`,
-            }}
-            ref={imageBox}
-          >
-            {cloneImages.map((image, i) => {
-              return <img className="product-img" key={i} src={image} />;
-            })}
-          </div>
-
-          <button
-            className="next-slide"
-            onClick={() => {
-              handleSlide("next");
-            }}
-          >
-            <IoArrowForward size={30} color="#333" />
+          {originalImage.map((image, index) => (
+            <img
+              key={index}
+              className={`product-img ${activeImage === index ? "active" : ""}`}
+              src={image}
+              alt={`Product Image ${index}`}
+            />
+          ))}
+          <button className="next-slide" onClick={showNextImage}>
+            &#8250;
           </button>
         </div>
 
