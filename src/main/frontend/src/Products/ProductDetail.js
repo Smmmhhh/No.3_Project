@@ -19,7 +19,6 @@ const ProductDetail = () => {
 
   // 이미지 관련
   const [activeImage, setActiveImage] = useState(0);
-  const imageBox = useRef(null);
   const [num, setNum] = useState(1);
   const [carouseTransition, setcarouseTransition] = useState(
     "transform 500ms ease-in-out"
@@ -139,7 +138,7 @@ const ProductDetail = () => {
       <div className="product-info">
         <div className="image-slide">
           <button className="prev-slide" onClick={showPreviousImage}>
-            &#8249;
+            <IoArrowBackOutline />
           </button>
           {originalImage.map((image, index) => (
             <img
@@ -150,7 +149,7 @@ const ProductDetail = () => {
             />
           ))}
           <button className="next-slide" onClick={showNextImage}>
-            &#8250;
+            <IoArrowForward />
           </button>
         </div>
 
