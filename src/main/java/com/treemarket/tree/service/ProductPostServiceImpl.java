@@ -25,13 +25,8 @@ public class ProductPostServiceImpl implements ProductPostService {
     }
 
     @Override
-    public List<ProductPostVO> getAllBoards(int pageSize, int offset) {
-        return productPostMapper.getAllBoards(pageSize, offset);
-    }
-
-    @Override
-    public int getTotalCount() {
-        return productPostMapper.getTotalCount();
+    public List<ProductPostVO> getAllBoards() {
+        return productPostMapper.getAllBoards();
     }
 
     @Override
