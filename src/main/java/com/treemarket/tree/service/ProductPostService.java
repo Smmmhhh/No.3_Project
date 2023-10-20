@@ -10,8 +10,7 @@ import java.util.List;
 public interface ProductPostService {
 
     void savePost(ProductPostVO productpostVO);
-    List<ProductPostVO> getAllBoards(int pageSize, int offset);
-    int getTotalCount();
+    List<ProductPostVO> getAllBoards();
     List<ProductPostVO> findBoardsByLocation(Long addressId);
     ProductPostVO getPostDetails(Long postId);
     void modifyPost(ProductPostVO productpostVO);
