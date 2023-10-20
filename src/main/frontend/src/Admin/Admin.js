@@ -4,13 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 const Admin = () => {
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    navigate("/", { replace: true });
+  };
   return (
     <admin>
       <div className="admin_header">
         <img src="/assets/logo.png" />
         <h2>관리자 페이지</h2>
-
-        <button onClick={navigate("/", { replace: true })}>로그아웃</button>
+        <button onClick={handleLogout}>로그아웃</button>
       </div>
       <div className="admin_onclick">
         <Link to="/admin/post">
