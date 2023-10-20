@@ -152,16 +152,13 @@ const ImageUploadComponent = () => {
 
         <div className="info_section" onClick={toggle}>
           <div className="item">
-            <label htmlFor="mytown">동네 설정</label>
-            <input
-              id="address"
-              type="button"
-              onClick={toggle}
-              value={"주소 검색"}
-            />
+            <p>거래 희망 장소</p>
+            <div className="productregister_town-info">
+              <button onClick={toggle}>주소 검색</button>
+            </div>
             <input
               name="userAddress"
-              id="userAddress"
+              id="productregister_userAddress"
               type="text"
               value={productData.addressName}
               onChange={(e) =>
@@ -177,9 +174,9 @@ const ImageUploadComponent = () => {
               </Modal>
             </div>
           </div>
+          <hr />
         </div>
-        <hr />
-        <h4>판매글 이미지 등록</h4>
+        <h4>판매 이미지 등록</h4>
         <p>(최대 5장)</p>
 
         <input
@@ -190,8 +187,8 @@ const ImageUploadComponent = () => {
         />
 
         <div className="preview-image">{renderImagePreviews}</div>
+        <hr />
       </div>
-
       <button className="productcreate_button" onClick={handleUpload}>
         <p>등록하기</p>
       </button>

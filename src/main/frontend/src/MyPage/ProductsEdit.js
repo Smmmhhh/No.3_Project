@@ -7,10 +7,11 @@ import MyFooter from "../MyFooter";
 import MyHeader from "../MyHeader";
 import "./ProductsEdit.css";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const ProductsEdit = () => {
   const { postId } = useParams(); // path Valiable
+  const [userNo, setUserNo] = useState(0);
   const [originData, setOriginData] = useState({}); // 원본 데이터
   const [modifyData, setModifyData] = useState({
     // 변경 데이터
@@ -26,6 +27,16 @@ const ProductsEdit = () => {
   const [isOpen, setIsOpen] = useState(false); // 주소 모달창
   const [files, setFiles] = useState([]); // 이미지 저장 배열
   const [imagePreview, setImagePreview] = useState([]);
+
+  useEffect(() => {
+    const userData = JSON.parse(sessionStorage.getItem("userData"));
+    if (userData) {
+      setModifyData((prevProductData) => ({
+        ...prevProductData,
+        userNo: userData.data.userNo,
+      }));
+    }
+  }, []);
 
   const navigate = useNavigate();
 
@@ -123,6 +134,9 @@ const ProductsEdit = () => {
     }
   };
 
+  const renderImagePreviews = imagePreview.map((preview, index) => (
+    <img src={preview} key={index} alt={`Preview ${index}`} />
+  ));
   // 게시글 수정 버튼 클릭
   const handleUpUpadate = async (e) => {
     e.preventDefault();
@@ -172,13 +186,15 @@ const ProductsEdit = () => {
   return (
     <div className="productedit">
       <MyHeader />
+      <h2 className="productsedit_h2">나의 물건 정보 수정</h2>
       <div className="productedit_body">
-        <h2>나의 물건 정보 수정</h2>
         <input
           type="text"
           name="title"
           value={modifyData.title}
-          onChange={handleInputChange}
+          onChange={(e) => {
+            setModifyData({ ...modifyData, title: e.target.value });
+          }}
         />
         <hr />
         <NumberFormat
@@ -222,6 +238,7 @@ const ProductsEdit = () => {
             <button onClick={toggle}>주소 검색</button>
           </div>
           <input
+            id="update_address"
             value={jibunAddress === "" ? modifyData.addressName : jibunAddress}
           />
           <div className="post_code_modal">
@@ -229,10 +246,11 @@ const ProductsEdit = () => {
               <DaumPostCode onComplete={completeHandler} />
             </Modal>
           </div>
-
+          <hr />
           <div className="img_input">
             <label className="file_select_label" htmlFor="file_select"></label>
-            <p>사진 등록하기</p>
+            <h4>수정 이미지 등록</h4>
+            <p>(최대 5장)</p>
             <input
               className="image-preview"
               type="file"
@@ -241,24 +259,24 @@ const ProductsEdit = () => {
             />
           </div>
 
-          <div className="preview-image">
-            {modifyData.image.map((images, i) => {
-              return <img key={i} src={images} />;
-            })}
-          </div>
+          <div className="preview-image">{renderImagePreviews}</div>
           <hr />
         </div>
         <div className="productedit_btn">
-          <button
-            onClick={() => {}}
-            className="productedit_submit"
-            type="submit"
-          >
-            수정하기
-          </button>
-          <button className="productedit_delete" onClick={handleDelete}>
-            삭제하기
-          </button>
+          <Link to="/mypage/register">
+            <button
+              onClick={handleUpUpadate}
+              className="productedit_submit"
+              type="submit"
+            >
+              수정하기
+            </button>
+          </Link>
+          <Link to="/mypage/register">
+            <button className="productedit_delete" onClick={handleDelete}>
+              삭제하기
+            </button>
+          </Link>
         </div>
       </div>
       <MyFooter />
