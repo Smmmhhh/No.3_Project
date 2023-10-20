@@ -29,13 +29,13 @@ const MyPageLikes = () => {
   return (
     <div className="mypage_List">
       <MyPage showFooter={false} />
-      <div className="List_form">
+      <div className="Mypage_List_form">
         {likes.map((likes) => (
           <div key={likes.postId}>
             <img className="List_img" src={likes.image} />
-            <div className="List_text">
+            <div className="Mypage_List_text">
               <h3>{likes.title}</h3>
-              <p>{likes.price}</p>
+              <p className="List_text_p">{likes.price}</p>
             </div>
           </div>
         ))}
