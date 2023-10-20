@@ -77,6 +77,7 @@ const MyPageEdit = (props) => {
   useEffect(() => {
     setUserEditInfo(props.userInfo);
   }, []);
+
   // formData 변경이 없을 경우
   useEffect(() => {
     if (!formData.userAddress) {
@@ -102,7 +103,7 @@ const MyPageEdit = (props) => {
     sessionStorage.removeItem("userData");
 
     try {
-      const response = await fetch("/logout", {
+      await fetch("/logout", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -205,8 +206,11 @@ const MyPageEdit = (props) => {
         <p className="delete-user-btn" onClick={removeBtnToggle}>
           회원탈퇴
         </p>
-        <Modal className="remove-user-modal"
-            isOpen={modalIsOpen} ariaHideApp={false}>
+        <Modal
+          className="remove-user-modal"
+          isOpen={modalIsOpen}
+          ariaHideApp={false}
+        >
           <h2>회원 탈퇴</h2>
           <p>정말로 회원 탈퇴를 진행하시겠습니까?</p>
           <button onClick={handleRemoveUser}>탈퇴</button>
@@ -242,17 +246,17 @@ const MyPageEdit = (props) => {
               <p className="edit-phone">
                 <label>전화번호</label>
                 <NumberFormat
-                    format="###-####-####"
-                    mask="_"
-                    value={localPhoneNo}
-                    placeholder="010-1234-5678"
-                    onValueChange={(values) => {
-                      const { formattedValue, value } = values;
-                      setLocalPhoneNo(value);
-                      if (value.length === 0 || value.length === 11) {
-                        setFormData({ ...formData, userPhoneno: formattedValue });
-                      }
-                    }}
+                  format="###-####-####"
+                  mask="_"
+                  value={localPhoneNo}
+                  placeholder="010-1234-5678"
+                  onValueChange={(values) => {
+                    const { formattedValue, value } = values;
+                    setLocalPhoneNo(value);
+                    if (value.length === 0 || value.length === 11) {
+                      setFormData({ ...formData, userPhoneno: formattedValue });
+                    }
+                  }}
                 />
               </p>
             </div>
@@ -260,18 +264,18 @@ const MyPageEdit = (props) => {
               <p className="edit-nickname">
                 <label>닉네임</label>
                 <input
-                    type="text"
-                    name="userNickname"
-                    id="userNickname"
-                    value={nick}
-                    onChange={handleInputChange}
-                    ref={nicknameRef}
+                  type="text"
+                  name="userNickname"
+                  id="userNickname"
+                  value={nick}
+                  onChange={handleInputChange}
+                  ref={nicknameRef}
                 />
               </p>
               {showNick && (
-                  <>
-                    <p className="error-nickname">이미 존재하는 닉네임입니다.</p>
-                  </>
+                <>
+                  <p className="error-nickname">이미 존재하는 닉네임입니다.</p>
+                </>
               )}
             </div>
           </div>
@@ -282,26 +286,26 @@ const MyPageEdit = (props) => {
               <div className="pwd-sections">
                 <button onClick={handlePwdBtn}>비밀번호 변경</button>
                 {showPasswordFields && (
-                    <>
-                      <p className="edit-pwd">
-                        <label>비밀번호</label>
-                        <input
-                            className="userPw"
-                            name="userPw"
-                            type="password"
-                            onChange={handlePasswordChange}
-                        />
-                      </p>
-                      <p className="edit-pwd-match">
-                        <label>비밀번호 확인</label>
-                        <input
-                            type="password"
-                            onChange={handleConfirmPasswordChange}
-                            ref={pwdRef}
-                        />
-                      </p>
-                      {!passwordsMatch && <p>비밀번호가 일치하지 않습니다.</p>}
-                    </>
+                  <>
+                    <p className="edit-pwd">
+                      <label>비밀번호</label>
+                      <input
+                        className="userPw"
+                        name="userPw"
+                        type="password"
+                        onChange={handlePasswordChange}
+                      />
+                    </p>
+                    <p className="edit-pwd-match">
+                      <label>비밀번호 확인</label>
+                      <input
+                        type="password"
+                        onChange={handleConfirmPasswordChange}
+                        ref={pwdRef}
+                      />
+                    </p>
+                    {!passwordsMatch && <p>비밀번호가 일치하지 않습니다.</p>}
+                  </>
                 )}
               </div>
             </section>
@@ -313,9 +317,9 @@ const MyPageEdit = (props) => {
                 <button onClick={toggle}>주소 검색</button>
               </div>
               <input
-                  value={
-                    jibunAddress === "" ? userEditInfo.userAddress : jibunAddress
-                  }
+                value={
+                  jibunAddress === "" ? userEditInfo.userAddress : jibunAddress
+                }
               />
               {showAddress && <p>주소 형식이 잘못 되었습니다.</p>}
               <div className="post_code_modal">
