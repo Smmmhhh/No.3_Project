@@ -1,80 +1,27 @@
 import MyFooter from "../MyFooter";
 import MyHeader from "../MyHeader";
-import { Link, useNavigate } from "react-router-dom";
-import "./MyPage.css";
-import { useEffect, useState } from "react";
-
-const MyPage = ({ showFooter }) => {
-  const [userNo, setUserNo] = useState(0);
-  const [userNickName, setUserNickName] = useState("");
-
-  useEffect(() => {
-    const userData = JSON.parse(sessionStorage.getItem("userData"));
-    console.log(userData.data);
-    if (userData) {
-      setUserNo(userData.data.userNo);
-      setUserNickName(userData.data.userNickname);
-    }
-  }, []);
-
+import MyPageForm from "./MyPageForm";
+import "./MyPageForm.css";
+const MyPage = () => {
   return (
     <div>
-      <MyHeader />
-      <div className="mypage">
-        <mypage>
-          <h2>마이 페이지</h2>
-          <hr />
-          <div className="first_section">
-            <div className="first_section_left">
-              <img className="profile" src="/assets/profile_default.png" />
-              <h2>{userNickName}</h2>
-              <img className="grade" src="/assets/grade1.png" />
-            </div>
-            <div className="first_section_right">
-              <Link to="/mypage/users/">
-                <p>정보 수정</p>
-              </Link>
-            </div>
-          </div>
-          <hr />
-          <div className="second_section">
-            <Link to={`/mypage/sales/${userNo}`}>
-              <button>
-                <div className="mypage_img">
-                  <img src="/assets/mypage_sales.png" />
-                </div>
-                <p>판매 내역</p>
-              </button>
-            </Link>
-            <Link to={`/mypage/purchases/${userNo}`}>
-              <button>
-                <div className="mypage_img">
-                  <img src="/assets/mypage_purchases.png" />
-                </div>
-                <p>구매 내역</p>
-              </button>
-            </Link>
-            <Link to={`/mypage/register/${userNo}`}>
-              <button>
-                <div className="mypage_img">
-                  <img src="/assets/mypage_register.png" />
-                </div>
-                <p>등록 내역</p>
-              </button>
-            </Link>
-            <Link to={`/mypage/likes/${userNo}`}>
-              <button>
-                <div className="mypage_img">
-                  <img src="/assets/full_heart.png" />
-                </div>
-                <p>찜한 내역</p>
-              </button>
-            </Link>
-          </div>
-          <hr />
-        </mypage>
+      <div className="header_mypage">
+        <MyHeader />
+        <MyPageForm />
       </div>
-      {showFooter && <MyFooter />}
+      <div className="footer">
+        <div className="footer_section">
+          <p>
+            ∙ 사업자명 : 윤나무 ∙ 사업자번호 : 111-11-11111 ∙ 직업정보 제공사업
+            신고번호 : J1122334455667
+          </p>
+          <p>
+            ∙ 전화번호 : 1544-0000 ∙ 주소 : 서울특별시 나무구 나무로 28길 30,
+            1001호 (나무마켓)
+          </p>
+        </div>
+        <img src="/assets/logo.png" />
+      </div>
     </div>
   );
 };

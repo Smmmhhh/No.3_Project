@@ -1,8 +1,32 @@
+@font-face {
+  font-family: "NPSfontBold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SUITE-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SUITE-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
 .productedit_body {
   width: 50%;
   margin: auto;
   text-align: start;
   padding-top: 50px;
+  font-family: "SUITE-Regular";
 }
 .productedit {
   display: flex;
@@ -19,6 +43,23 @@
 .productedit_body .product_info {
   height: 100px;
 }
+#address {
+  text-align: center;
+  width: 90px;
+}
+.info_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+#userAddress {
+  font-size: 14px;
+  width: 180px;
+  text-align: center;
+}
+.img_input {
+  height: 150px;
+}
 .productedit_btn {
   display: flex;
   flex-direction: row;
@@ -33,6 +74,7 @@
   color: white;
   font-size: 15px;
   cursor: pointer;
+  font-family: "SUITE-Regular";
 }
 .productedit_delete {
   background-color: #e8e8e8;
@@ -41,4 +83,5 @@
   width: 30%;
   font-size: 15px;
   cursor: pointer;
+  font-family: "SUITE-Regular";
 }

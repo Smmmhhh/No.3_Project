@@ -124,6 +124,7 @@ public class MyPageController {
 
     @GetMapping("/productsedit/{postId}")
     public ResponseEntity<ApiResponse> getPostDetails(@PathVariable Long postId) {
+        System.out.println("컨트률" + postId);
         // 요청한 게시물 객체 가져오기
         ProductPostVO productPostVO = productPostService.getPostDetails(postId);
 
