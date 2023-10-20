@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import MyPage from "./MyPage";
+import MyPageForm from "./MyPageForm";
 import MyFooter from "../MyFooter";
+import NumberFormat from "react-number-format";
+import MyHeader from "../MyHeader";
 
 const MyPageSales = () => {
   const [userNo, setUserNo] = useState(0);
@@ -29,15 +31,23 @@ const MyPageSales = () => {
   }, []);
 
   return (
-    <div className="mypage_List">
-      <MyPage showFooter={false} />
-      <div className="List_form">
+    <div>
+      <div className="mypage_List">
+        <MyHeader />
+        <MyPageForm />
+
         {sales.map((sales) => (
-          <div key={sales.postId}>
-            <img className="List_img" src={sales.image} />
-            <div className="List_text">
+          <div className="mypage_List_form" key={sales.postId}>
+            <img className="mypage_List_img" src={sales.image} />
+            <div className="mypage_List_text">
               <h3>{sales.title}</h3>
-              <p>{sales.price}</p>
+              <NumberFormat
+                className="mypage_price"
+                value={sales.price}
+                displayType="text"
+                thousandSeparator={true}
+                suffix="원"
+              />
             </div>
           </div>
         ))}

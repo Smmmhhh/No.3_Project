@@ -1,53 +1,70 @@
 /* FONT */
 @font-face {
-    font-family: "NPSfontBold";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2") format("woff2");
-    font-weight: 700;
-    font-style: normal;
+  font-family: "NPSfontBold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontBold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "SUITE-Regular";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2") format("woff2");
-    font-weight: 600;
-    font-style: normal;
+  font-family: "SUITE-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: "SUITE-Bold";
-    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2") format("woff2");
-    font-weight: 600;
-    font-style: normal;
+  font-family: "SUITE-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
 }
-
-.List_form {
-    width: 100%;
-    border-collapse: collapse;
+.mypage_List {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: auto;
 }
-
-.items {
-
+.register_List_form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 150px;
+  width: 80%;
+  border-bottom: 1px solid #ccc;
+  margin: auto;
 }
-
-.List_item {
-    /*border: 1px solid #ddd; !* 테이블 셀 간 경계선 스타일 설정 *!*/
-
+.mypage_register_left {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
 }
-
-
-.List_item td {
-    padding: 10px;
+.register_List_img {
+  width: 13%;
+  margin: auto 0 auto 40px;
 }
-
-
-.List_item td {
-    padding: 10px;
-    text-align: center; /* 가운데 정렬을 추가합니다. */
+.register_List_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 0 30px 20px;
 }
-
-.List_img {
-    width: 100px; /* 이미지 크기 조절 */
-    height: auto; /* 이미지 비율 유지 */
-    display: block; /* 가운데 정렬을 위해 블록 요소로 설정합니다. */
-    margin: 0 auto; /* 가운데 정렬을 위해 margin을 조절합니다. */
+.register_price {
+  margin-top: -30px;
+}
+.register_edit_btn {
+  background-color: #3fb542;
+  border-radius: 8px;
+  text-align: center;
+  width: 10%;
+  height: 30px;
+  margin: auto;
+}
+.register_edit_btn_p {
+  margin: auto;
+  margin-top: 4px;
+  color: white;
 }
