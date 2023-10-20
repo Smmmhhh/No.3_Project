@@ -22,6 +22,11 @@
   font-weight: 600;
   font-style: normal;
 }
+.register_h2 {
+  margin: 30px auto;
+  text-align: center;
+  font-family: "SUITE-Regular";
+}
 .mypage_List {
   display: flex;
   flex-direction: column;
@@ -36,6 +41,7 @@
   width: 80%;
   border-bottom: 1px solid #ccc;
   margin: auto;
+  font-family: "SUITE-Regular";
 }
 .mypage_register_left {
   display: flex;
@@ -54,6 +60,7 @@
 }
 .register_price {
   margin-top: -30px;
+  font-family: "SUITE-Bold";
 }
 .register_edit_btn {
   background-color: #3fb542;
