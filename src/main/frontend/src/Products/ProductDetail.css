@@ -29,19 +29,40 @@
   width: 65vw;
 }
 
-.main-images {
+.image-slide {
   width: 100%;
+  overflow: hidden;
+}
+
+.main-images {
+  width: 30%;
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
-
+/* 제품 이미지 */
 .product-img {
   border: 1px solid #ccc;
   border-radius: 20px;
   width: 30vw;
   height: 60vh;
   object-fit: cover;
+  margin-left: 30px;
+}
+
+/* 이미지 이동 버튼 */
+.prev-slide,
+.next-slide {
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: fit-content;
+  border-radius: 20px;
+  margin: auto;
+}
+.prev-slide:hover,
+.next-slide:hover {
+  background-color: #ececec;
 }
 
 .seller-info {

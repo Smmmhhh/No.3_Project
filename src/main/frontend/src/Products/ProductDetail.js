@@ -1,21 +1,85 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useAsyncError, useNavigate, useParams } from "react-router-dom";
 
 import NumberFormat from "react-number-format";
 import MyHeader from "../MyHeader";
 import MyFooter from "../MyFooter";
 
+import { IoArrowBackOutline, IoArrowForward } from "react-icons/io5";
+
 import "./ProductDetail.css";
 
 const ProductDetail = () => {
-  const currentUser = JSON.parse(sessionStorage.getItem("userData"));
-  const { getPostId } = useParams();
-  const [productInfo, setProductInfo] = useState({});
-  const [currentUserInfo, setCurrentUserInfo] = useState([]);
-  const [userConnect, setUserConnect] = useState(false);
-  const [heart, setHeart] = useState(false);
+  const currentUser = JSON.parse(sessionStorage.getItem("userData")); // 로그인 정보 세션
+  const { getPostId } = useParams(); // pathVariable 값
+  const [productInfo, setProductInfo] = useState({}); // 등록된 제품 정보
+  const [currentUserInfo, setCurrentUserInfo] = useState([]); // 현재 로그인한 유저의 정보
+  const [userConnect, setUserConnect] = useState(false); //현재 로그인한 유저 접속 유무
+  const [heart, setHeart] = useState(false); // 찜하트
 
+  // 이미지 관련
+  const imageBox = useRef(null);
+  const [num, setNum] = useState(1);
+  const [carouseTransition, setcarouseTransition] = useState(
+    "transform 500ms ease-in-out"
+  );
+  const [originalImage, setOriginalImage] = useState([]); // 원본 이미지 배열
+  const [cloneImages, setCloneImages] = useState([]); // 무한 슬라이드
+  const lastImage = cloneImages.length - 1; // 마지막 이미지
   const navigate = useNavigate();
+
+  // useEffect
+  useEffect(() => {
+    if (currentUser) {
+      setCurrentUserInfo(currentUser.data);
+      setUserConnect(true);
+    }
+    fetch(`/products/detail/${getPostId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        switch (res.status) {
+          case 200:
+            setProductInfo(res.data);
+            setOriginalImage(res.data.image);
+            break;
+          case 409:
+            alert("존재하지 않는 게시글 입니다.");
+            navigate("/products/", { replace: true });
+            break;
+          default:
+            console.error("Unexpected response status:", res.status);
+        }
+      });
+  }, []);
+
+  useEffect(() => {
+    handleImage();
+    console.log(originalImage);
+  }, [originalImage]);
+
+  useEffect(() => {
+    if (num === lastImage) handleOriginSlide(1);
+    else if (num === 0) handleOriginSlide(lastImage - 1);
+  }, [cloneImages.length, lastImage, num]);
+
+  useEffect(() => {
+    console.log(cloneImages);
+  }, [cloneImages]);
+
+  // handler
+  const handleImage = () => {
+    const newCloneImages = [
+      originalImage[originalImage.length - 1],
+      ...originalImage,
+      originalImage[0],
+    ];
+    setCloneImages(newCloneImages);
+  };
 
   const handleChatBtn = () => {
     if (userConnect) {
@@ -33,39 +97,69 @@ const ProductDetail = () => {
     setHeart(!heart);
   };
 
-  useEffect(() => {
-    if (currentUser) {
-      setCurrentUserInfo(currentUser.data);
-      setUserConnect(true);
+  function handleSlide(direction) {
+    if (direction === "prev") {
+      setNum((num) => num - 1);
+    } else {
+      setNum((num) => num + 1);
     }
-    fetch(`/products/detail/${getPostId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        switch (res.status) {
-          case 200:
-            setProductInfo(res.data);
-            break;
-          case 409:
-            alert("존재하지 않는 게시글 입니다.");
-            navigate("/products/", { replace: true });
-            break;
-          default:
-            console.error("Unexpected response status:", res.status);
-        }
-      });
-  }, []);
+    setcarouseTransition("transform 500ms ease-in-out");
+  }
+
+  function handleOriginSlide(index) {
+    setTimeout(() => {
+      setNum(index);
+      setcarouseTransition("");
+    }, 500);
+  }
 
   return (
     <div className="product-detail">
       <MyHeader />
       <div className="product-info">
-        <div className="main-images">
-          <img className="product-img" src="/assets/logo.png" />
+        <div className="image-slide">
+          <button
+            className="prev-slide"
+            onClick={() => {
+              handleSlide("prev");
+            }}
+          >
+            <IoArrowBackOutline size={30} color="#333" />
+          </button>
+          <div
+            className="main-images"
+            style={{
+              transition: `${carouseTransition}`,
+              transform: `translateX(-${num}00%)`,
+            }}
+            ref={imageBox}
+          >
+            {cloneImages.map((image, i) => {
+              return <img className="product-img" key={i} src={image} />;
+            })}
+          </div>
+
+          <button
+            className="next-slide"
+            onClick={() => {
+              handleSlide("next");
+            }}
+          >
+            <IoArrowForward size={30} color="#333" />
+          </button>
+        </div>
+
+        <div>
+          {originalImage.map((dot) => {
+            return (
+              <div
+                key={dot.src}
+                onClick={() => {
+                  setNum(dot.id + 1);
+                }}
+              />
+            );
+          })}
         </div>
 
         <div className="seller-info">

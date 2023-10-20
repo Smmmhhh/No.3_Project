@@ -1,7 +1,6 @@
 package com.treemarket.tree.controller;
 
 import com.treemarket.tree.common.ApiResponse;
-import com.treemarket.tree.common.ExtendedApiResponse;
 import com.treemarket.tree.domain.AddressVO;
 import com.treemarket.tree.domain.ProductPostVO;
 import com.treemarket.tree.domain.UserVO;
@@ -87,16 +86,8 @@ public class ProductPostController {
     }
 
     @GetMapping
-    public ResponseEntity<ExtendedApiResponse> getAllBoards(
-            @RequestParam(defaultValue = "1") int page) {
-
-        int pageSize = 12;
-        int offset = (page - 1) * pageSize;
-
-        int totalCount = productPostService.getTotalCount();
-        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
-
-        List<ProductPostVO> productPostVOList = productPostService.getAllBoards(pageSize, offset);
+    public ResponseEntity<ApiResponse> getAllBoards() {
+        List<ProductPostVO> productPostVOList = productPostService.getAllBoards();
 
         //Response 리스트 객체 생성
         List<ProductAllBoardResponse> productAllBoardResponseList = new ArrayList<>();
@@ -114,14 +105,14 @@ public class ProductPostController {
                     .image(productPostService.parseAddress(productPostVOList.get(i).getImage()).get(0))
                     .productStatus(productPostVOList.get(i).getProductStatus())
                     .build();
+
             productAllBoardResponseList.add(productAllBoardResponse);
         }
 
         // 리스트가 비어있을 경우
         if (productAllBoardResponseList.isEmpty())
-            return ResponseEntity.ok().body(ExtendedApiResponse.extendedApiResponseBuilder().status(400).message("리스트없음").build());
-        return ResponseEntity.ok().body(ExtendedApiResponse.extendedApiResponseBuilder().status(200).message("성공")
-                .data(productAllBoardResponseList).totalPage(totalPage).build());
+            return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("리스트없음").build());
+        return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("성공").data(productAllBoardResponseList).build());
     }
 
 
