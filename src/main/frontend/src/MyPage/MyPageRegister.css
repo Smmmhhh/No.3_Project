@@ -23,7 +23,8 @@
   font-style: normal;
 }
 .register_h2 {
-  margin: 30px auto;
+  margin: auto;
+  margin-top: -80px;
   text-align: center;
   font-family: "SUITE-Regular";
 }
@@ -49,7 +50,7 @@
   width: 80%;
 }
 .register_List_img {
-  width: 13%;
+  width: 8%;
   margin: auto 0 auto 40px;
 }
 .register_List_text {
