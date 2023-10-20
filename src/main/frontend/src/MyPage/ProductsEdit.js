@@ -5,15 +5,23 @@ import "./ProductsEdit.css";
 import Modal from "react-modal";
 import DaumPostCode from "react-daum-postcode";
 import { useParams } from "react-router-dom";
+import NumberFormat from "react-number-format";
 
-const ProductsEdit = ({}) => {
+const ProductsEdit = () => {
   const { postId } = useParams();
   const [userNo, setUserNo] = useState(0);
   const [files, setFiles] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [addressName, setaddressName] = useState("");
   const [imagePreview, setImagePreview] = useState([]);
-  const [productData, setProductData] = useState({});
+  const [productData, setProductData] = useState({
+    // title: "",
+    // price: 0,
+    // ctgName: "",
+    // details: "",
+    // addressName: "",
+    // image: [],
+  });
   const [updateproductData, setUpdateProductData] = useState({
     userNo: userNo,
     title: "",
@@ -21,9 +29,10 @@ const ProductsEdit = ({}) => {
     ctgName: "",
     details: "",
     addressName: "",
+    image: [],
   });
 
-  useEffect(() => {
+  const loadProductData = () => {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
     if (userData) {
       setUpdateProductData((prevProductData) => ({
@@ -41,14 +50,15 @@ const ProductsEdit = ({}) => {
         .then((data) => {
           console.log("데이터 불러오기 성공", data);
           if (data.status === 200) {
-            // const loadProductData = {
-            //   title: data.title,
-            //   price: data.price,
-            //   ctgName: data.ctgName,
-            //   details: data.details,
-            //   addressName: data.addressName,
-            // };
-            setProductData(data);
+            console.log("시발" + data.data.title);
+            const loadedProductData = {
+              title: data.data.title,
+              price: data.data.price,
+              ctgName: data.data.ctgName,
+              details: data.data.details,
+              addressName: data.data.addressName,
+            };
+            setProductData(loadedProductData);
           } else {
             console.error("데이터 불러오기 실패");
           }
@@ -57,11 +67,10 @@ const ProductsEdit = ({}) => {
           console.error("오류:", error);
         });
     }
-  }, [postId]);
-
+  };
   useEffect(() => {
-    console.log("제품 정보 : ", productData);
-  }, [productData]);
+    loadProductData();
+  }, [postId]);
 
   const handleImageChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
@@ -91,17 +100,20 @@ const ProductsEdit = ({}) => {
     const jsonBlob = new Blob([jsonData], { type: "application/json" });
     formData.append("productsPostRequest", jsonBlob);
 
-    fetch(`/mypage/productsedit/${postId}`, {
-      method: "PUT",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("업데이트 완료", data);
-      })
-      .catch((error) => {
-        console.error("응 실패얌", error);
+    try {
+      const response = await fetch(`/mypage/productsedit/${postId}`, {
+        method: "PUT",
+        body: formData,
       });
+
+      if (response.status === 200) {
+        alert("업데이트 완료");
+      } else {
+        alert("업데이트 실패");
+      }
+    } catch (error) {
+      console.error("오류:", error);
+    }
   };
 
   const handleDelete = async () => {
@@ -154,7 +166,8 @@ const ProductsEdit = ({}) => {
       <div className="productedit_body">
         <input
           type="text"
-          value={updateproductData.title} // 제품 제목
+          placeholder={productData.title}
+          value={updateproductData.title}
           onChange={(e) => {
             setUpdateProductData({
               ...updateproductData,
@@ -164,19 +177,22 @@ const ProductsEdit = ({}) => {
         />
 
         <hr />
-        <input
-          type="text"
-          placeholder="가격"
+
+        <NumberFormat
           value={updateproductData.price}
-          onChange={(e) => {
+          onValueChange={({ value }) => {
             setUpdateProductData({
               ...updateproductData,
-              price: e.target.value,
+              price: value,
             });
           }}
+          thousandSeparator={true}
+          suffix={"원"}
         />
+
         <hr />
         <select
+          placeholder={productData.ctgName}
           value={updateproductData.ctgName}
           onChange={(e) => {
             setUpdateProductData({
@@ -199,7 +215,7 @@ const ProductsEdit = ({}) => {
         <input
           className="product_info"
           type="text"
-          placeholder="상품 내용"
+          placeholder={productData.details}
           value={updateproductData.details}
           onChange={(e) => {
             setUpdateProductData({
@@ -229,7 +245,7 @@ const ProductsEdit = ({}) => {
                   ctgName: e.target.value,
                 });
               }}
-              placeholder="나무시 죽순구 새싹동"
+              placeholder={productData.addressName}
               required
               disabled
             />
@@ -240,23 +256,23 @@ const ProductsEdit = ({}) => {
             </div>
           </div>
         </div>
-        <label className="file_select_label" htmlFor="file_select">
-          <img src="/assets/createimg.png" />
-          <p>
-            사진 등록
-            <br />
-            (최대 5장)
-          </p>
-        </label>
-        <input
-          className="image-preview"
-          type="file"
-          value={updateproductData.image}
-          multiple
-          onChange={handleImageChange}
-        />
         <hr />
-        <div className="preview-image">{renderImagePreviews}</div>
+        <div className="img_input">
+          <label className="file_select_label" htmlFor="file_select"></label>
+          <p>사진 등록하기</p>
+          <input
+            className="image-preview"
+            type="file"
+            value={updateproductData.image}
+            multiple
+            onChange={handleImageChange}
+          />
+        </div>
+        <hr />
+        <div placeholder={productData.image} className="preview-image">
+          {renderImagePreviews}
+        </div>
+
         <div className="productedit_btn">
           <button
             onClick={handleUpUpadate}
@@ -265,10 +281,10 @@ const ProductsEdit = ({}) => {
           >
             <p>수정하기</p>
           </button>
+          <button className="productedit_delete" onClick={handleDelete}>
+            <p>삭제하기</p>
+          </button>
         </div>
-        <button className="productedit_delete" onClick={handleDelete}>
-          <p>삭제하기</p>
-        </button>
       </div>
       <MyFooter />
     </div>
