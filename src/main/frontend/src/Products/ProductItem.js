@@ -13,7 +13,7 @@ const ProductItem = ({ product }) => {
     >
       <div className="product-info">
         <div className="product-img">
-          <img src="/assets/logo.png" />
+          <img src={product.image} />
         </div>
         <div className="product-description">
           <p className="product-title">{product.title}</p>

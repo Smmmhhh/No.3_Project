@@ -14,6 +14,9 @@ const Products = () => {
   const [jibunAddress, setJibunAddress] = useState(""); // 주소 정보 문자열 //
   const [isOpen, setIsOpen] = useState(false); // 주소 모달창 //
   const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1); // 페이징 처리
+  const itemsPerPage = 12; // 페이징 처리
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +32,6 @@ const Products = () => {
   }, []);
 
   useEffect(() => {
-    console.log(jibunAddress);
     if (jibunAddress) {
       fetch(`/products/region/${jibunAddress}`, {
         method: "GET",
