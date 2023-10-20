@@ -28,6 +28,9 @@
   padding-top: 50px;
   font-family: "SUITE-Regular";
 }
+.productsedit_h2 {
+  margin: auto;
+}
 .productedit {
   display: flex;
   flex-direction: column;
@@ -52,10 +55,32 @@
   flex-direction: column;
   justify-content: left;
 }
-#userAddress {
-  font-size: 14px;
-  width: 180px;
+
+.town-info button {
+  background-color: #47ad49;
+  cursor: pointer;
+  margin-bottom: 10px;
+  background-color: #47ad49;
+  color: white;
+  border-radius: 20px;
+  width: 15%;
   text-align: center;
+  font-size: 15px;
+  padding: 3px 0;
+  font-family: "SUITE-Regular";
+  border: none;
+}
+#update_address {
+  width: 25%;
+  border: none;
+  border-radius: 7px;
+  background-color: #d9f3bc;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+  font-size: 15px;
 }
 .img_input {
   height: 150px;
@@ -64,15 +89,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 50px 0;
+  margin-top: 50px;
+  margin-right: 90px;
 }
 .productedit_submit {
   background-color: #3fb542;
   border: none;
   border-radius: 8px;
-  width: 30%;
+  width: 200%;
+  height: 150%;
   color: white;
-  font-size: 15px;
+  font-size: 20px;
   cursor: pointer;
   font-family: "SUITE-Regular";
 }
@@ -80,8 +107,9 @@
   background-color: #e8e8e8;
   border: none;
   border-radius: 8px;
-  width: 30%;
-  font-size: 15px;
+  width: 200%;
+  height: 150%;
+  font-size: 20px;
   cursor: pointer;
   font-family: "SUITE-Regular";
 }
