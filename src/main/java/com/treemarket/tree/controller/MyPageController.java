@@ -97,6 +97,12 @@ public class MyPageController {
     @GetMapping("/purchases/{userNo}")
     public ResponseEntity<ApiResponse> getPurchasePost(@PathVariable Long userNo){
         List<ProductMypageResponse> purchasePosts = joinService.findPurchasePostByUserNo(userNo);
+
+        for(int i = 0; i < purchasePosts.size(); i++) {
+            purchasePosts.get(i).setImage(
+                    productPostService.parseAddress(purchasePosts.get(i).getImage()).get(0));
+        }
+
         if(purchasePosts.isEmpty()){
             return ResponseEntity.ok().body(new ApiResponse(200, "물품 구매 내역 0개", purchasePosts));
         }
@@ -106,6 +112,12 @@ public class MyPageController {
     @GetMapping("/sales/{userNo}")
     public ResponseEntity<ApiResponse> getSalePost(@PathVariable Long userNo){
         List<ProductMypageResponse> salesPosts = joinService.findSalesPostByUserNo(userNo);
+
+        for(int i = 0; i < salesPosts.size(); i++) {
+            salesPosts.get(i).setImage(
+                    productPostService.parseAddress(salesPosts.get(i).getImage()).get(0));
+        }
+
         if(salesPosts.isEmpty()){
             return ResponseEntity.ok().body(new ApiResponse(200, "물품 판매 내역 0개", salesPosts));
         }
@@ -115,6 +127,12 @@ public class MyPageController {
     @GetMapping("/register/{userNo}")
     public ResponseEntity<ApiResponse> getRegisterPost(@PathVariable Long userNo) {
         List<ProductMypageResponse> registerPosts = joinService.findRegisterPostByUserNo(userNo);
+
+        for(int i = 0; i < registerPosts.size(); i++) {
+            registerPosts.get(i).setImage(
+                    productPostService.parseAddress(registerPosts.get(i).getImage()).get(0));
+        }
+
         if (registerPosts.isEmpty()) {
             return ResponseEntity.ok().body(new ApiResponse(200, "물품 등록 내역 0개", registerPosts));
         }

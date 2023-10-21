@@ -52,7 +52,7 @@
     </update>
 
     <update id="updatePostStatus" parameterType="com.treemarket.tree.dto.Productpost.req.AdminPostUpdateReq" >
-        UPDATE productPosttbl SET productStatus = #{productPostStatus} WHERE postId = #{postId}
+        UPDATE productPosttbl SET productStatus = #{productStatus} WHERE postId = #{postId}
     </update>
 
     <select id="searchPost" resultType="com.treemarket.tree.domain.ProductPostVO">
@@ -62,6 +62,4 @@
     <select id="getAllPostsForApp" resultType="com.treemarket.tree.dto.Productpost.res.ProductsAppResponse">
         SELECT title, price, image From productPosttbl
     </select>
-
-
 </mapper>
