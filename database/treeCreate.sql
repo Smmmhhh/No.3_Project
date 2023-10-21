@@ -50,8 +50,8 @@ CREATE TABLE usertbl
     userID varchar2(40) UNIQUE NOT NULL,
     userAddress number REFERENCES addresstbl(addressID) NOT NULL,
     userPW varchar2(20) NOT NULL,
-    userName varchar2(10) NOT NULL,
-    userNickname varchar2(20) NOT NULL,
+    userName varchar2(30) NOT NULL,
+    userNickname varchar2(30) NOT NULL,
     userPhoneNo varchar2(20),
     userGrade varchar2(10),
     userValidity number NOT NULL
@@ -81,9 +81,9 @@ CREATE TABLE productPosttbl
     ctgID number REFERENCES ctgtbl(ctgID) NOT NULL,
     userNo number REFERENCES usertbl(userNo) NOT NULL,
     addressID number REFERENCES addresstbl(addressID) NOT NULL,
-    title varchar2(20) NOT NULL,
+    title varchar2(100) NOT NULL,
     price number NOT NULL,
-    details varchar2(200) NOT NULL,
+    details varchar2(500) NOT NULL,
     image varchar2(600),
     creationDate date default sysdate,
     productStatus number NOT NULL
