@@ -83,16 +83,16 @@
   font-size: 15px;
 }
 .img_input {
-  height: 150px;
+  height: 220px;
 }
 .productedit_btn {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   margin-top: 50px;
-  margin-right: 90px;
+  padding-right: 70px;
 }
-.productedit_submit {
+.productedit_submit_btn {
   background-color: #3fb542;
   border: none;
   border-radius: 8px;
@@ -103,7 +103,7 @@
   cursor: pointer;
   font-family: "SUITE-Regular";
 }
-.productedit_delete {
+.productedit_delete_btn {
   background-color: #e8e8e8;
   border: none;
   border-radius: 8px;
@@ -112,4 +112,7 @@
   font-size: 20px;
   cursor: pointer;
   font-family: "SUITE-Regular";
+}
+.img_input img {
+  width: 10%;
 }

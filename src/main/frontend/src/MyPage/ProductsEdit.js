@@ -27,6 +27,7 @@ const ProductsEdit = () => {
   const [isOpen, setIsOpen] = useState(false); // 주소 모달창
   const [files, setFiles] = useState([]); // 이미지 저장 배열
   const [imagePreview, setImagePreview] = useState([]);
+  const [showImg, setShowImg] = useState(true); // 등록되어 있는 이미지 보여주는 역할
 
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
@@ -35,6 +36,7 @@ const ProductsEdit = () => {
         ...prevProductData,
         userNo: userData.data.userNo,
       }));
+      console.log(userData.data.image);
     }
   }, []);
 
@@ -103,6 +105,10 @@ const ProductsEdit = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleShowImg = () => {
+    setShowImg(false);
+  };
+
   // modify 변경이 없을 경우 / 공백인 경우
   const handleValueChange = () => {
     if (!modifyData.userNo) {
@@ -157,6 +163,7 @@ const ProductsEdit = () => {
 
       if (response.status === 200) {
         alert("업데이트 완료");
+        navigate(`/mypage/register/${originData.userNo}`, { replace: true });
       } else {
         alert("업데이트 실패");
       }
@@ -173,7 +180,6 @@ const ProductsEdit = () => {
       });
 
       if (response.ok) {
-        alert("상품이 성공적으로 삭제되었습니다.");
         navigate(`/mypage/register/${originData.userNo}`, { replace: true });
       } else {
         console.error("데이터 삭제 실패");
@@ -254,26 +260,31 @@ const ProductsEdit = () => {
             <input
               className="image-preview"
               type="file"
+              onClick={handleShowImg}
               onChange={handleImageChange}
               multiple
             />
+            {showImg &&
+              modifyData.image.map((img, index) => (
+                <img key={index} src={img} alt={`Image ${index}`} />
+              ))}
           </div>
 
           <div className="preview-image">{renderImagePreviews}</div>
           <hr />
         </div>
         <div className="productedit_btn">
-          <Link to="/mypage/register">
+          <Link to={`/mypage/register/${userNo}`}>
             <button
               onClick={handleUpUpadate}
-              className="productedit_submit"
+              className="productedit_submit_btn"
               type="submit"
             >
               수정하기
             </button>
           </Link>
-          <Link to="/mypage/register">
-            <button className="productedit_delete" onClick={handleDelete}>
+          <Link to={`/mypage/register/${userNo}`}>
+            <button className="productedit_delete_btn" onClick={handleDelete}>
               삭제하기
             </button>
           </Link>
