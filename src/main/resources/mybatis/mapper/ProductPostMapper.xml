@@ -24,7 +24,7 @@
     </select>
 
     <select id="getAllBoards" resultType="com.treemarket.tree.domain.ProductPostVO">
-        SELECT * FROM productPosttbl WHERE productStatus = 1
+        SELECT * FROM productPosttbl WHERE productStatus = 1 ORDER BY postid DESC
     </select>
 
     <select id="findBoardsByLocation" resultType="com.treemarket.tree.domain.ProductPostVO">
