@@ -5,6 +5,7 @@ import "./ProductsCreate.css";
 import MyHeader from "../MyHeader";
 import MyFooter from "../MyFooter";
 import NumberFormat from "react-number-format";
+import { Link } from "react-router-dom";
 
 const ImageUploadComponent = () => {
   const [userNo, setUserNo] = useState(0);
@@ -189,9 +190,11 @@ const ImageUploadComponent = () => {
         <div className="preview-image">{renderImagePreviews}</div>
         <hr />
       </div>
-      <button className="productcreate_button" onClick={handleUpload}>
-        <p>등록하기</p>
-      </button>
+      <Link to="/">
+        <button className="productcreate_button" onClick={handleUpload}>
+          <p>등록하기</p>
+        </button>
+      </Link>
       <MyFooter />
     </div>
   );
