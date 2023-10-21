@@ -4,14 +4,14 @@ import com.treemarket.tree.common.ApiResponse;
 import com.treemarket.tree.domain.ProductPostVO;
 import com.treemarket.tree.dto.Productpost.req.AdminPostUpdateReq;
 import com.treemarket.tree.dto.Productpost.res.AdminProductPostList;
+import com.treemarket.tree.dto.Productpost.res.ProductAllBoardResponse;
 import com.treemarket.tree.dto.User.AdminUserList;
-import com.treemarket.tree.service.JoinService;
-import com.treemarket.tree.service.ProductPostService;
-import com.treemarket.tree.service.UserService;
+import com.treemarket.tree.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -22,6 +22,8 @@ public class AdminController {
     private final UserService userService;
     private final JoinService joinService;
     private final ProductPostService productPostService;
+    private final AwsS3ServiceImpl awsS3Service;
+    private final AddressService addressService;
 
     @GetMapping("/user")
     public ResponseEntity<ApiResponse> getAllUsers() {
@@ -41,6 +43,11 @@ public class AdminController {
     @GetMapping("/post")
     public ResponseEntity<ApiResponse> getAllBoards() {
         List<AdminProductPostList> adminProductPostList = joinService.getAllBoards();
+
+        for (int i = 0; i < adminProductPostList.size(); i++) {
+            adminProductPostList.get(i).setImage(
+                    productPostService.parseAddress(adminProductPostList.get(i).getImage()).get(0));
+        }
 
         // 리스트가 비어있을 경우
         if (adminProductPostList.isEmpty())
@@ -64,7 +71,7 @@ public class AdminController {
             ProductPostVO productPostVO = productPostService.getPostDetails(adminPostUpdateReq.getPostId());
 
             return ResponseEntity.ok().body(ApiResponse.builder().status(200).message("게시글 상태 수정 성공").data(productPostVO).build());
-        }catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("게시글 상태 수정 실패").build());
         }
 

@@ -115,6 +115,12 @@ public class MyPageController {
     @GetMapping("/register/{userNo}")
     public ResponseEntity<ApiResponse> getRegisterPost(@PathVariable Long userNo) {
         List<ProductMypageResponse> registerPosts = joinService.findRegisterPostByUserNo(userNo);
+
+        for(int i = 0; i < registerPosts.size(); i++) {
+            registerPosts.get(i).setImage(
+                    productPostService.parseAddress(registerPosts.get(i).getImage()).get(0));
+        }
+
         if (registerPosts.isEmpty()) {
             return ResponseEntity.ok().body(new ApiResponse(200, "물품 등록 내역 0개", registerPosts));
         }
