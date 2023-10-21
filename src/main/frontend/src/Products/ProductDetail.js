@@ -172,7 +172,10 @@ const ProductDetail = () => {
             <p className="board-nickname">{productInfo.userNickname}</p>
             <p className="board-town">{productInfo.addressName}</p>
           </span>
-          <img className="grade" src="/assets/grade1.png" />
+          <img
+            className="grade"
+            src={`/assets/grade${productInfo.userGrade}.png`}
+          />
         </div>
         <hr />
         <div className="product-description">

@@ -71,7 +71,7 @@
                    ELSE NULL
                END AS userValidity
         FROM usertbl u
-        WHERE u.userNo >= 1;
+        WHERE u.userNo >= 1
     </select>
 
     <insert id="savePurchaseComp">

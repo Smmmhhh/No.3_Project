@@ -220,7 +220,10 @@ const MyPageEdit = (props) => {
       <div className="top-profile-info">
         <div className="profile-img-grade">
           <img src="/assets/profile_default.png" alt="profile-default-img" />
-          <img src="/assets/grade1.png" alt="grade-img" />
+          <img
+            src={`/assets/grade${userEditInfo.userGrade}.png`}
+            alt="grade-img"
+          />
         </div>
         <h2>{userEditInfo.userNickname}</h2>
       </div>
