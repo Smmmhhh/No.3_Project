@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 const MyPage = ({ showFooter }) => {
   const [userNo, setUserNo] = useState(0);
   const [userNickName, setUserNickName] = useState("");
+  const [userGrade, setUserGrade] = useState("");
 
   useEffect(() => {
     const userData = JSON.parse(sessionStorage.getItem("userData"));
@@ -12,6 +13,7 @@ const MyPage = ({ showFooter }) => {
     if (userData) {
       setUserNo(userData.data.userNo);
       setUserNickName(userData.data.userNickname);
+      setUserGrade(parseInt(userData.data.userGrade));
     }
   }, []);
 
@@ -25,7 +27,7 @@ const MyPage = ({ showFooter }) => {
             <div className="first_section_left">
               <img className="profile" src="/assets/profile_default.png" />
               <h2>{userNickName}</h2>
-              <img className="grade" src="/assets/grade1.png" />
+              <img className="grade" src={`/assets/grade${userGrade}.png`} />
             </div>
             <div className="first_section_right">
               <Link to="/mypage/users/">
