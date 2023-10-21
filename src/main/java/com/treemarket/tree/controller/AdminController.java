@@ -42,6 +42,11 @@ public class AdminController {
     public ResponseEntity<ApiResponse> getAllBoards() {
         List<AdminProductPostList> adminProductPostList = joinService.getAllBoards();
 
+        for (int i = 0; i < adminProductPostList.size(); i++) {
+            adminProductPostList.get(i).setImage(
+                    productPostService.parseAddress(adminProductPostList.get(i).getImage()).get(0));
+        }
+
         // 리스트가 비어있을 경우
         if (adminProductPostList.isEmpty())
             return ResponseEntity.ok().body(ApiResponse.builder().status(400).message("리스트없음").build());
