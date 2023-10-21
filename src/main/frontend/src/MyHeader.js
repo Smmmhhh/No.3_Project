@@ -41,6 +41,7 @@ const MyHeader = () => {
   };
   return (
     <header>
+      {/* 헤더 */}
       <div className="header_left">
         <Link to="/" style={{ width: "200px" }}>
           <img className="logo_img" src="/assets/logo.png" alt="로고" />
