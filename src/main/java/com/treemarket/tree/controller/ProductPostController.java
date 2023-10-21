@@ -184,8 +184,15 @@ public class ProductPostController {
     }
 
     @GetMapping("/app")
-    private List<ProductsAppResponse> getAllPostsForApp(){
-        return productPostService.getAllPostsForApp();
+    private List<ProductsAppResponse> getAllPostsForApp() {
+        List<ProductsAppResponse> productsAppResponses = productPostService.getAllPostsForApp();
+
+        for (int i = 0; i < productsAppResponses.size(); i++) {
+            productsAppResponses.get(i).setImage(
+                    productPostService.parseAddress(productsAppResponses.get(i).getImage()).get(0));
+        }
+
+        return productsAppResponses;
     }
 
     @GetMapping("/search")
