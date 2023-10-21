@@ -3,11 +3,13 @@ package com.treemarket.tree.dto.Productpost.res;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 
 @NoArgsConstructor
 @Getter
+@Setter
 public class AdminProductPostList {
 
     private Long postId;
