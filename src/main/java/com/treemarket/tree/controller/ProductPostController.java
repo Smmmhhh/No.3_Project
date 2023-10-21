@@ -105,6 +105,7 @@ public class ProductPostController {
                     .image(productPostService.parseAddress(productPostVOList.get(i).getImage()).get(0))
                     .productStatus(productPostVOList.get(i).getProductStatus())
                     .build();
+
             productAllBoardResponseList.add(productAllBoardResponse);
         }
 

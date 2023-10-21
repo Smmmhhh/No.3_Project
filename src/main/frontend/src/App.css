@@ -16,7 +16,7 @@
 @font-face {
   font-family: "SUITE-Bold";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2")
-  format("woff2");
+    format("woff2");
   font-weight: 600;
   font-style: normal;
 }
@@ -82,7 +82,7 @@ header {
   justify-content: right;
   font-family: "SUITE-Regular";
 }
-.greeting{
+.greeting {
   margin-top: 10px;
   margin-right: 40px;
   font-weight: bold;
@@ -109,7 +109,8 @@ a {
   color: black;
 }
 
-a :hover, .links-and-logout p:hover{
+a :hover,
+.links-and-logout p:hover {
   color: gray;
 }
 

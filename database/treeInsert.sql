@@ -805,41 +805,6 @@ INSERT INTO addresstbl VALUES (addresstbl_seq.nextval, '서울', '강동구', '�
 INSERT INTO addresstbl VALUES (addresstbl_seq.nextval, '서울', '강동구', '천호동', 37.543676, 127.131748);
 INSERT INTO addresstbl VALUES (addresstbl_seq.nextval, '서울', '강동구', '강일동', 37.569204, 127.17162);
 
-
-
-
--- usertbl에 더미 데이터 10개를 INSERT
-INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES (usertbl_seq.NEXTVAL, 'user1', 1, 'password1', '손흥민', 'Sonny', '010-1111-1111', '3', 1);
-
-INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES (usertbl_seq.NEXTVAL, 'user2', 1, 'password2', '기성용', 'Ki King', '010-1111-1112', '2', 1);
-
-INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES (usertbl_seq.NEXTVAL, 'user3', 1, 'password3', '이강인', 'Kangaroo', '010-1111-1113', '1', 1);
-
-INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user4', 1, 'password4', '황희찬', 'Goal-chan', '010-1111-1114', '3', 1);
-
-INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user5', 1, 'password5', '김민재', 'Min-God', '010-1111-1115', '2', 1);
-
-INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user6', 1, 'password6', '황의조', 'Ui-Goal', '010-1111-1116', '1', 1);
-
-INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user7', 1, 'password7', '권창훈', 'Chang-hoonaldo', '010-1111-1117', '3', 1);
-
-INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user8', 1, 'password8', '김영권', 'Gwonzilla', '010-1111-1118', '2', 1);
-
-INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user9', 1, 'password9', '조현우', 'Superman', '010-1111-1119', '1', 1);
-
-INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
-VALUES(usertbl_seq.NEXTVAL, 'user10', 1, 'password10', '이재성', 'Maestro', '010-1111-1120', '3', 1);
-
-
 -- ctgtbl에 더미 데이터 6개를 INSERT
 INSERT INTO ctgtbl (ctgID, ctgName) VALUES (ctgtbl_seq.NEXTVAL, '식품');
 INSERT INTO ctgtbl (ctgID, ctgName) VALUES (ctgtbl_seq.NEXTVAL, '전자기기');
@@ -848,30 +813,142 @@ INSERT INTO ctgtbl (ctgID, ctgName) VALUES (ctgtbl_seq.NEXTVAL, '의류');
 INSERT INTO ctgtbl (ctgID, ctgName) VALUES (ctgtbl_seq.NEXTVAL, '가구');
 INSERT INTO ctgtbl (ctgID, ctgName) VALUES (ctgtbl_seq.NEXTVAL, '잡화');
 
--- productPosttbl에 더미 데이터 12개를 INSERT
+-- 대한민국 국가대표 축구선수 더미 데이터
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'sonny12', 714, 'password1', '손흥민', 'Sonny', '010-1111-1111', '1', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'kwonyoung', 212, 'password2', '권창포', 'Ki King', '010-1111-1112', '2', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'leekangin', 787, 'password3', '이강인', 'Kangaroo', '010-1111-1113', '3', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'hwangheechan', 560, 'password4', '황희찬', 'Goal-chan', '010-1111-1114', '1', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'kimminjae', 759, 'password5', '김민재', 'Min-God', '010-1111-1115', '2', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'hwangeuijo', 803, 'password6', '황의조', 'Ui-Goal', '010-1111-1116', '3', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'kwonchanghoon', 714, 'password7', '권창훈', 'Chang-hoonaldo', '010-1111-1117', '1', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'kimyoungkwon', 212, 'password8', '김영권', 'Gwonzilla', '010-1111-1118', '2', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'jojinhoo', 787, 'password9', '조현우', 'Superman', '010-1111-1119', '3', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'leejaeseong', 560, 'password10', '이재성', 'Maestro', '010-1111-1120', '1', 1);
+
+-- UFC 파이터 더미 데이터
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'conormc', 714, 'password11', 'Conor McGregor', 'The Notorious', '010-2222-2222', '2', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'amandanu', 212, 'password12', 'Amanda Nunes', 'Lioness', '010-3333-3333', '3', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'israela', 787, 'password13', 'Israel Adesanya', 'The Last Stylebender', '010-4444-4444', '1', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'usman', 560, 'password14', 'Kamaru Usman', 'The Nigerian Nightmare', '010-5555-5555', '2', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'volkanovski', 759, 'password15', 'Alexander Volkanovski', 'The Great', '010-6666-6666', '3', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'miocic', 803, 'password16', 'Stipe Miocic', 'Stone', '010-7777-7777', '1', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'robertw', 714, 'password17', 'Robert Whittaker', 'The Reaper', '010-8888-8888', '2', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'valentina', 212, 'password18', 'Valentina Shevchenko', 'Bullet', '010-9999-9999', '3', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'maxh', 787, 'password19', 'Max Holloway', 'Blessed', '010-1010-1010', '1', 1);
+
+INSERT INTO usertbl (userNo, userID, userAddress, userPW, userName, userNickname, userPhoneNo, userGrade, userValidity)
+VALUES (usertbl_seq.NEXTVAL, 'dustinpoir', 560, 'password20', 'Dustin Poirier', 'The Diamond', '010-1111-1111', '2', 1);
+
+
+-- productPosttbl에 더미 데이터 24개를 INSERT
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 1, 1, 276, '상품1', 10000, '상품 1 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_1.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 1, 1, 714, '도시락 팝니다!', 35000, '8인분 도시락입니다! 얼른 사세요!', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_1.jpg,https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_25.jpg', 1);
+
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 2, 2, 277, '상품2', 15000, '상품 2 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_2.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 2, 1, 212, '아이패드 팝니다!', 600000, '아이패드 싸게 팝니다!', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_2.jpg,https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_26.jpg', 1);
+
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 3, 3, 278, '상품3', 20000, '상품 3 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_3.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 3, 1, 787, '야구 몽둥이 팝니다', 20000, '재민이 때리면 타격감이 좋아요!', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_3.jpg,https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_27.jpg', 1);
+
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 4, 4, 279, '상품4', 25000, '상품 4 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_4.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 4, 1, 560, '주황색 반팔 팝니다!', 13000, '요즘 트렌드입니다!', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_4.jpg,https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_28.jpg', 1);
+
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 5, 5, 280, '상품5', 30000, '상품 5 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_5.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 5, 2, 759, '침대팝니다!', 700000, '눕는순간 잠들어 버립니다.', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_5.jpg,https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_29.jpg', 1);
+
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 6, 6, 281, '상품6', 35000, '상품 6 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_6.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 6, 2, 803, '지갑팝니다!', 150000, '오래썼지만 유니크 합니다', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_6.jpg,https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_30.jpg', 1);
+
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 1, 7, 282, '상품7', 40000, '상품 7 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_7.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 1, 2, 714, '스팸팔아요!', 20000, '스팸 저렴하게 판매해여! 둘이먹다가 하나 죽어도 모를걸요?', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_7.jpg', 1);
+
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 2, 8, 283, '상품8', 45000, '상품 8 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_8.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 2, 2, 212, '애플워치 팝니다!', 150000, '애플워치 판매합니다 얼른사가세요!', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_8.jpg', 1);
+
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 3, 9, 284, '상품9', 50000, '상품 9 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_9.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 3, 3, 787, '푸쉬업바 팝니다', 5000, '튼튼해서 오래 쓸수있어요!! 잔기스는 조금 있습니다', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_9.jpg', 1);
+
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 4, 10, 285, '상품10', 55000, '상품 10 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_10.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 4, 3, 560, '하얀색 셔츠 팝니다', 23000, '구매후 사용안하고 보관만 했어요.', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_10.jpg', 1);
+
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 5, 1, 286, '상품11', 60000, '상품 11 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_11.jpg.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 5, 3, 759, '베이지색 3인용 쇼파 팝니다', 450000, '이시가는 집에 필요없게 되어서 판매해요', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_11.jpg', 1);
+
 INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
-VALUES (productPosttbl_seq.NEXTVAL, 6, 2, 287, '상품12', 65000, '상품 12 상세 설명', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_12.jpg', 1);
+VALUES (productPosttbl_seq.NEXTVAL, 6, 3, 803, '아기 차시트 판매합니다', 50000, '사진찍으려고 열어만 본 새상품 입니다', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_12.jpg', 1);
+
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 1, 4, 560, '라면 작은컵 묶음으로 팝니다', 24000, '라면이 싸서 샀는데 너무 질려서 거래 올립니다. 낱개 결제 안되고 17개 한번에 사가실분만 채팅 주세요', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_13.jpg', 1);
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 2, 4, 759, '아이폰', 842000, '아이폰 13인지 12인지 팝니다. 잔기스 없구요 궁금한 사항 있으면 채팅 주세요', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_14.jpg', 1);
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 3, 4, 803, '야구 빠다, 야구 헬멧 팝니다', 35000, '아들이 야구 하고싶다고 해서 사줬는데 안쓰네요... 1번 정도 밖에 사용 안했습니다... ', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_15.jpg', 1);
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 4, 4, 714, '가을 트렌치 코트 팔아요', 15000, '베이지색 트렌치 코트 팝니다. 옷장 정리해서 싸게 팝니다.', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_16.jpg', 1);
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 5, 2, 759, '싱글이랑 더블 사이즈 침대 팝니다.', 300000, '싱글이랑 더블 침대가 붙어있는 침대 팝니다. 남편이 코골이가 심하다면 아주 좋은 침대입니다.', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_17.jpg', 1);
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 6, 5, 803, '금 진주 팔찌 싸게 넘깁니다', 300000, '남편이랑 이혼한김에 물건 정리할라고 합니다. 상당히 좋은 제품인데 싸게 넘기니 언능 가져가세요! ', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_18.jpg', 1);
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 1, 5, 714, '제주산 귤 팝니다', 20000, '제주도에 사는 사촌동생이 귤을 20박스 보내줬는데 너무 많아서 나눠드립니다.', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_19.jpg', 1);
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 2, 5, 212, '에어팟 2세대 팝니다.', 250000, '에어팟 2세대 팝니다. 한쪽이 잘 안들리지만 쓸만합니다.', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_20.jpg', 1);
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 3, 6, 787, '배드민턴 라켓 팝니다.', 100000, '새 인생을 살라고 운동을 시작해볼라했지만 나태해져서 배드민턴을 포기했습니다. 가져가세요!', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_21.jpg', 1);
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 4, 6, 560, '갈색 셔츠 팝니다', 15000, '연애한 후에 살이 디룩디룩 쪄가지고 옷이 안맞아서 싸게 넘기겠습니다.', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_22.jpg', 1);
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 5, 6, 759, '전신거울 달린 옷장 팝니다.', 300000, '옷장에 전신거울이 달려있어 코디할때 편리한 옷장입니다.', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_23.jpg', 1);
+
+INSERT INTO productPosttbl (postID, ctgID, userNo, addressID, title, price, details, image, productStatus)
+VALUES (productPosttbl_seq.NEXTVAL, 6, 6, 803, '잔망루피 가방 팝니다 제발 가져가세요.', 80000, '친구가 제 생일에 쓸데 없는 선물을 사줬는데 쪽팔려서 들고 다니지 못합니다. 관심이 필요하신 분들한테는 아주 좋은 가방입니다.', 'https://treeimagebucket.s3.ap-northeast-2.amazonaws.com/image_24.jpg', 1);
+
 
 commit;

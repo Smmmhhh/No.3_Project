@@ -1,7 +1,6 @@
 import "./Admin.css";
 import Admin from "./Admin";
 import React, { useState, useEffect } from "react";
-import MyHeader from "../MyHeader";
 const AdminPost = () => {
   const [post, setPost] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState({});
@@ -65,7 +64,6 @@ const AdminPost = () => {
   };
   return (
     <div>
-      <MyHeader />
       <Admin />
       <div className="admin_product_nav">
         <p>
