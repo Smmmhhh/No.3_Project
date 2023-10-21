@@ -75,6 +75,32 @@ hr {
 .file_select_label p {
   font-size: 10px;
 }
+.productregister_town-info button {
+  background-color: #47ad49;
+  cursor: pointer;
+  margin-bottom: 10px;
+  background-color: #47ad49;
+  color: white;
+  border-radius: 20px;
+  width: 15%;
+  text-align: center;
+  font-size: 15px;
+  padding: 3px 0;
+  font-family: "SUITE-Regular";
+  border: none;
+}
+#productregister_userAddress {
+  width: 25%;
+  border: none;
+  border-radius: 7px;
+  background-color: #d9f3bc;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+  font-size: 15px;
+}
 .item {
   display: flex;
   flex-direction: column;

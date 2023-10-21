@@ -18,6 +18,7 @@ import MyPageRegister from "./MyPage/MyPageRegister";
 import MyPageLikes from "./MyPage/MyPageLikes";
 import ProductDetail from "./Products/ProductDetail";
 import Chatting from "./Chatting/Chatting";
+import ChatComponent from "./chat/ChatComponent";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/mypage/register/:userNo" element={<MyPageRegister />} />
         <Route path="/mypage/likes/:userNo" element={<MyPageLikes />} />
         <Route path="/products/detail/:getPostId" element={<ProductDetail />} />
+        <Route path="/chat/room" element={<ChatComponent />} />
         <Route path="/chat" element={<Chatting />} />
       </Routes>
     </BrowserRouter>
