@@ -7,21 +7,6 @@
 암사동 803
 */
 
-/* 위의 주소로 adressid 변경 */
-UPDATE productposttbl SET addressid = 714 WHERE postid = 1;
-UPDATE productposttbl SET addressid = 212 WHERE postid = 2;
-UPDATE productposttbl SET addressid = 787 WHERE postid = 3;
-UPDATE productposttbl SET addressid = 560 WHERE postid = 4;
-UPDATE productposttbl SET addressid = 759 WHERE postid = 5;
-UPDATE productposttbl SET addressid = 803 WHERE postid = 6;
-UPDATE productposttbl SET addressid = 714 WHERE postid = 7;
-UPDATE productposttbl SET addressid = 212 WHERE postid = 8;
-UPDATE productposttbl SET addressid = 787 WHERE postid = 9;
-UPDATE productposttbl SET addressid = 560 WHERE postid = 10;
-UPDATE productposttbl SET addressid = 759 WHERE postid = 11;
-UPDATE productposttbl SET addressid = 803 WHERE postid = 12;
-
-
 
 /* 테스트를 위해 userno가 1인 사람의 post로 변경 */
 UPDATE productPosttbl SET userno = 1 WHERE postid = 2;
