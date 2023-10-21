@@ -49,10 +49,7 @@ const MyHeader = () => {
           <h1 className="category">중고 거래</h1>
         </Link>
       </div>
-      <div className="search">
-        <input type="text" />
-        <img src="/assets/search_img.png" alt="검색" />
-      </div>
+
       <div className="header_right">
         {Login ? (
           <>
@@ -61,7 +58,7 @@ const MyHeader = () => {
               <Link to="/mypage">
                 <p className="my_page">마이페이지</p>
               </Link>
-              <Link to="/chat">
+              <Link to="/chat/room">
                 <p className="chat_list">채팅목록</p>
               </Link>
               <p onClick={handleLogout}>로그아웃</p>
